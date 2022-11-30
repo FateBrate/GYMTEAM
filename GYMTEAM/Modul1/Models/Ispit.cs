@@ -15,5 +15,6 @@ namespace FIT_Api_Example.Modul1.Models
         [ForeignKey("PredmetID")]//opcionalno --- strogo preporuceno
         public Predmet Predmet { get; set; }
         public int PredmetID { get; set; }
+        public int bodovi { get; set; }
     }
 }
