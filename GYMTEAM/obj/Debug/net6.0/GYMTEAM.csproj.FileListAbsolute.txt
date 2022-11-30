@@ -1,0 +1,6 @@
+C:\Users\drekf\OneDrive - Faculty of Information Technologies\Desktop\GymTeam\GYMTEAM\obj\Debug\net6.0\GYMTEAM.csproj.AssemblyReference.cache
+C:\Users\drekf\OneDrive - Faculty of Information Technologies\Desktop\GymTeam\GYMTEAM\obj\Debug\net6.0\GYMTEAM.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\drekf\OneDrive - Faculty of Information Technologies\Desktop\GymTeam\GYMTEAM\obj\Debug\net6.0\GYMTEAM.AssemblyInfoInputs.cache
+C:\Users\drekf\OneDrive - Faculty of Information Technologies\Desktop\GymTeam\GYMTEAM\obj\Debug\net6.0\GYMTEAM.AssemblyInfo.cs
+C:\Users\drekf\OneDrive - Faculty of Information Technologies\Desktop\GymTeam\GYMTEAM\obj\Debug\net6.0\GYMTEAM.csproj.CoreCompileInputs.cache
+C:\Users\drekf\OneDrive - Faculty of Information Technologies\Desktop\GymTeam\GYMTEAM\obj\Debug\net6.0\GYMTEAM.MvcApplicationPartsAssemblyInfo.cache

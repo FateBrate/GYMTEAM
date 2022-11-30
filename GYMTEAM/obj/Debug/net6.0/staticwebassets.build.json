@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "Hash": "beaUquD+YQBMpA06TsKyHphEnuueCoftzxP8T/EAjt8=",
+  "Source": "FIT_Api_Example",
+  "BasePath": "_content/FIT_Api_Example",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "FIT_Api_Example\\wwwroot",
+      "Source": "FIT_Api_Example",
+      "ContentRoot": "C:\\Users\\drekf\\OneDrive - Faculty of Information Technologies\\Desktop\\RS1_Trening\\Adil-repo\\FIT_Api_Examples\\FIT_Api_Example\\wwwroot\\",
+      "BasePath": "_content/FIT_Api_Example",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\drekf\\OneDrive - Faculty of Information Technologies\\Desktop\\RS1_Trening\\Adil-repo\\FIT_Api_Examples\\FIT_Api_Example\\wwwroot\\profile_images\\0e3d05f1-a543-4e81-b3b3-3b13c6fded19.png",
+      "SourceId": "FIT_Api_Example",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\drekf\\OneDrive - Faculty of Information Technologies\\Desktop\\RS1_Trening\\Adil-repo\\FIT_Api_Examples\\FIT_Api_Example\\wwwroot\\",
+      "BasePath": "_content/FIT_Api_Example",
+      "RelativePath": "profile_images/0e3d05f1-a543-4e81-b3b3-3b13c6fded19.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\profile_images\\0e3d05f1-a543-4e81-b3b3-3b13c6fded19.png"
+    },
+    {
+      "Identity": "C:\\Users\\drekf\\OneDrive - Faculty of Information Technologies\\Desktop\\RS1_Trening\\Adil-repo\\FIT_Api_Examples\\FIT_Api_Example\\wwwroot\\profile_images\\empty.png",
+      "SourceId": "FIT_Api_Example",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\drekf\\OneDrive - Faculty of Information Technologies\\Desktop\\RS1_Trening\\Adil-repo\\FIT_Api_Examples\\FIT_Api_Example\\wwwroot\\",
+      "BasePath": "_content/FIT_Api_Example",
+      "RelativePath": "profile_images/empty.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\profile_images\\empty.png"
+    }
+  ]
+}
