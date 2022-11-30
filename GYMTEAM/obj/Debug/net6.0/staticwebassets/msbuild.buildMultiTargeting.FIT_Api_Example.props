@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\FIT_Api_Example.props" />
-</Project>
