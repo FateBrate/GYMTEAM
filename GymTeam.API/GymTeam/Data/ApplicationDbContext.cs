@@ -1,4 +1,5 @@
-﻿using GymTeam.Moduls;
+﻿using GymTeam.Models;
+using GymTeam.Moduls;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymTeam.Data
@@ -7,6 +8,7 @@ namespace GymTeam.Data
     {
         public DbSet<Adresa> Adresa{ get; set; }
         public DbSet<Lokacija> Lokacija{ get; set; }
+        public DbSet<Korisnik> Korisnik { get; set; }  
 
         public ApplicationDbContext(
            DbContextOptions options) : base(options)
