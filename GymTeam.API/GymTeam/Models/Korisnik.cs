@@ -1,8 +1,21 @@
-﻿namespace GymTeam.Models
+﻿using GymTeam.Moduls;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace GymTeam.Models
 {
     public class Korisnik
     {
+        [Key]
         public int id { get; set; }
-        public string name { get; set; }
+        public string ime { get; set; }
+        public string prezime { get; set; }
+        public string lozinka { get; set;}
+        public string email { get; set; }
+        public string brojTelefona { get; set; }
+        public DateTime datumRodjenja { get; set; }
+        [ForeignKey("AdresaID")]
+        public int adresaID { get; set; }
+        public Adresa adresa { get; set; }
     }
 }
