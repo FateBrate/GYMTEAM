@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GymTeam.Models
 {
@@ -10,5 +11,7 @@ namespace GymTeam.Models
         [ForeignKey("placanjeID")]
         public int placanjeID { get; set; }
         public Placanje placanje { get; set; }
+        [Key]
+        public int id { get; set; }
     }
 }
