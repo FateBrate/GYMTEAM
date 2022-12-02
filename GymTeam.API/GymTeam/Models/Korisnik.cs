@@ -14,7 +14,7 @@ namespace GymTeam.Models
         public string email { get; set; }
         public string brojTelefona { get; set; }
         public DateTime datumRodjenja { get; set; }
-        [ForeignKey("AdresaID")]
+        [ForeignKey("adresaID")]
         public int adresaID { get; set; }
         public Adresa adresa { get; set; }
     }
