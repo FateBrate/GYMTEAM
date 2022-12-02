@@ -15,10 +15,28 @@ namespace GymTeam.Data
         public DbSet<Videozapis> Videozapis { get; set; }  
         public DbSet<Clanarina> Clanarina { get; set; }   
         public DbSet<Rezervacija> Rezervacija { get; set; }   
+        public DbSet<ClanarinaPlacanje> ClanarinaPlacanje { get; set; }   
+        public DbSet<Narudzba> Narudzba { get; set; }   
+        public DbSet<NarudzbaPlacanje> NarudzbaPlacanje { get; set; }   
+        public DbSet<Obavijest> Obavijest { get; set; }
+        public DbSet<Placanje> Placanje { get; set; }
+        public DbSet<PlanIshrane> PlanIshrane { get; set; }
+        public DbSet<PlanIshrane_PrehrambeniArtikal> planIshrane_PrehrambeniArtikal { get; set; }
+        public DbSet<PrivatniTrener> PrivatniTrener { get; set; }
+        public DbSet<Produkt> Produkt { get; set; }
+        public DbSet<ProduktNarudzba> ProduktNarudzba { get; set; }
+        public DbSet<Termin> Termin { get; set; }
+        public DbSet<PrehrambeniArtikal> PrehrambeniArtikal { get; set; }
+
+   
 
 
 
-        
+
+
+
+
+
 
         public ApplicationDbContext(
            DbContextOptions options) : base(options)
