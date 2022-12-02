@@ -2,7 +2,7 @@
 
 namespace GymTeam.Models
 {
-    public class PlanIshranecs
+    public class PlanIshrane
     {
         [Key]
         public int id { get; set; }
