@@ -4,6 +4,7 @@ using GymTeam.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymTeam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221203014405_ness")]
+    partial class ness
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -328,11 +331,19 @@ namespace GymTeam.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("privatniTrenerID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("privatniTrenerid")
+                        .HasColumnType("int");
+
                     b.Property<byte[]>("slika")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.HasKey("id");
+
+                    b.HasIndex("privatniTrenerid");
 
                     b.ToTable("PrivatniTrener");
                 });
@@ -625,6 +636,17 @@ namespace GymTeam.Migrations
                     b.Navigation("planIshrane");
 
                     b.Navigation("prehrambeniArtikal");
+                });
+
+            modelBuilder.Entity("GymTeam.Models.PrivatniTrener", b =>
+                {
+                    b.HasOne("GymTeam.Models.PrivatniTrener", "privatniTrener")
+                        .WithMany()
+                        .HasForeignKey("privatniTrenerid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("privatniTrener");
                 });
 
             modelBuilder.Entity("GymTeam.Models.ProduktNarudzba", b =>
