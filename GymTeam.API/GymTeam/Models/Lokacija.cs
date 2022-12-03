@@ -12,5 +12,6 @@ namespace GymTeam.Moduls
         [ForeignKey("adresaId")]
         public Adresa adresa { get; set; }
         public int adresaId { get; set; }
+        
     }
 }
