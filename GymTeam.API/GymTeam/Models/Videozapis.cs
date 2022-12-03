@@ -11,7 +11,7 @@ namespace GymTeam.Models
         public string opis{ get; set; }
 
         [ForeignKey("videoTreningId")]
-        public VideoTrening videoTreningId { get; set; }
+        public int videoTreningId { get; set; }
 
     }
 }
