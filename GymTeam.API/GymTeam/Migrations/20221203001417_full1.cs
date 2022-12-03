@@ -62,7 +62,7 @@ namespace GymTeam.Migrations
                         column: x => x.adresaID,
                         principalTable: "Adresa",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -147,7 +147,7 @@ namespace GymTeam.Migrations
                         column: x => x.privatniTrenerid,
                         principalTable: "PrivatniTrener",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -203,7 +203,7 @@ namespace GymTeam.Migrations
                         column: x => x.korisnikID,
                         principalTable: "Korisnik",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -223,7 +223,7 @@ namespace GymTeam.Migrations
                         column: x => x.korisnikId,
                         principalTable: "Korisnik",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -243,13 +243,13 @@ namespace GymTeam.Migrations
                         column: x => x.clanarinaID,
                         principalTable: "Clanarina",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_ClanarinaPlacanje_Placanje_placanjeID",
                         column: x => x.placanjeID,
                         principalTable: "Placanje",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -269,13 +269,13 @@ namespace GymTeam.Migrations
                         column: x => x.planIshraneID,
                         principalTable: "PlanIshrane",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_planIshrane_PrehrambeniArtikal_PrehrambeniArtikal_prehrambeniArtikalID",
                         column: x => x.prehrambeniArtikalID,
                         principalTable: "PrehrambeniArtikal",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -296,7 +296,7 @@ namespace GymTeam.Migrations
                         column: x => x.videoTreningId,
                         principalTable: "VideoTrening",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -316,13 +316,13 @@ namespace GymTeam.Migrations
                         column: x => x.narudzbaID,
                         principalTable: "Narudzba",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_NarudzbaPlacanje_Placanje_placanjeID",
                         column: x => x.placanjeID,
                         principalTable: "Placanje",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -343,13 +343,13 @@ namespace GymTeam.Migrations
                         column: x => x.narudzbaID,
                         principalTable: "Narudzba",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_ProduktNarudzba_Produkt_produktID",
                         column: x => x.produktID,
                         principalTable: "Produkt",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -371,13 +371,13 @@ namespace GymTeam.Migrations
                         column: x => x.lokacijaId,
                         principalTable: "Lokacija",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Termin_Rezervacija_rezervacijaId",
                         column: x => x.rezervacijaId,
                         principalTable: "Rezervacija",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymTeam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221203015615_armin444")]
-    partial class armin444
+    [Migration("20221203213546_fate1")]
+    partial class fate1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

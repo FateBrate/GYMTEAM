@@ -42,7 +42,7 @@ namespace GymTeam.Migrations
                         column: x => x.adresaId,
                         principalTable: "Adresa",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(

@@ -55,7 +55,7 @@ namespace GymTeam.Migrations
                 column: "privatniTrenerid",
                 principalTable: "PrivatniTrener",
                 principalColumn: "id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.NoAction);
         }
     }
 }

@@ -564,13 +564,13 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Models.Clanarina", "clanarina")
                         .WithMany()
                         .HasForeignKey("clanarinaID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("GymTeam.Models.Placanje", "placanje")
                         .WithMany()
                         .HasForeignKey("placanjeID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("clanarina");
@@ -583,7 +583,7 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Moduls.Adresa", "adresa")
                         .WithMany()
                         .HasForeignKey("adresaID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("adresa");
@@ -594,7 +594,7 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Models.Korisnik", "korisnik")
                         .WithMany()
                         .HasForeignKey("korisnikID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("korisnik");
@@ -605,13 +605,13 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Models.Narudzba", "narudzba")
                         .WithMany()
                         .HasForeignKey("narudzbaID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("GymTeam.Models.Placanje", "placanje")
                         .WithMany()
                         .HasForeignKey("placanjeID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("narudzba");
@@ -624,13 +624,13 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Models.PlanIshrane", "planIshrane")
                         .WithMany()
                         .HasForeignKey("planIshraneID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("GymTeam.Models.PrehrambeniArtikal", "prehrambeniArtikal")
                         .WithMany()
                         .HasForeignKey("prehrambeniArtikalID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("planIshrane");
@@ -643,7 +643,7 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Models.PrivatniTrener", "privatniTrener")
                         .WithMany()
                         .HasForeignKey("privatniTrenerid")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("privatniTrener");
@@ -654,13 +654,13 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Models.Narudzba", "narudzba")
                         .WithMany()
                         .HasForeignKey("narudzbaID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("GymTeam.Models.Produkt", "produkt")
                         .WithMany()
                         .HasForeignKey("produktID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("narudzba");
@@ -673,7 +673,7 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Models.Korisnik", "korisnik")
                         .WithMany()
                         .HasForeignKey("korisnikId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("korisnik");
@@ -684,13 +684,13 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Moduls.Lokacija", "lokacija")
                         .WithMany()
                         .HasForeignKey("lokacijaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("GymTeam.Models.Rezervacija", "rezervacija")
                         .WithMany()
                         .HasForeignKey("rezervacijaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("lokacija");
@@ -703,7 +703,7 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Models.VideoTrening", null)
                         .WithMany("videozapisi")
                         .HasForeignKey("videoTreningId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -712,7 +712,7 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Moduls.Adresa", "adresa")
                         .WithMany()
                         .HasForeignKey("adresaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("adresa");
