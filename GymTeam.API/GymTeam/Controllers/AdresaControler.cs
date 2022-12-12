@@ -1,5 +1,6 @@
 ﻿using GymTeam.Data;
 using GymTeam.Moduls;
+using GymTeam.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymTeam.Controllers
@@ -17,10 +18,19 @@ namespace GymTeam.Controllers
             this._dbcontext= dbcontext;
         }
         [HttpPost]
-      
-        public IActionResult Post(Adresa adresa)
+     public Adresa Add([FromBody]AdresaAddVM x)
         {
-            return Ok(_dbcontext.Adresa.Add(adresa));
+            var adresa = new Adresa
+            {
+                NazivUlice= x.NazivUlice,
+                nazivGrada= x.nazivGrada,
+                postanskiBroj= x.postanskiBroj,
+            };
+            _dbcontext.Add(adresa);
+            _dbcontext.SaveChanges();
+            return adresa;
         }
+   
+ 
     }
 }
