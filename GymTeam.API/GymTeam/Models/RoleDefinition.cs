@@ -6,6 +6,9 @@ namespace GymTeam.Models
     {
         Admin,
         Employee,
-        GuestUser
+        GuestUser,
+        
+
     }
+    
 }

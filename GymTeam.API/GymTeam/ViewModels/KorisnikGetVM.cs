@@ -1,4 +1,6 @@
-﻿namespace GymTeam.ViewModels
+﻿using GymTeam.Models;
+
+namespace GymTeam.ViewModels
 {
     public class KorisnikGetVM
     {
@@ -10,5 +12,6 @@
         public string brojTelefona { get; set; }
         public int adresaId { get; set; }
         public int roleId { get;set; }
+        public string role { get; set; }  
     }
 }
