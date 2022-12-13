@@ -9,5 +9,6 @@
         public string email { get; set; }
         public string brojTelefona { get; set; }
         public int adresaId { get; set; }
+        public int roleId { get;set; }
     }
 }

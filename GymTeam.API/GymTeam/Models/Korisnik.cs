@@ -17,5 +17,9 @@ namespace GymTeam.Models
         [ForeignKey("adresaID")]
         public int adresaID { get; set; }
         public Adresa adresa { get; set; }
+        [ForeignKey("roleId")]
+        public int roleId { get; set; }
+        public Role role { get; set; }
+        
     }
 }
