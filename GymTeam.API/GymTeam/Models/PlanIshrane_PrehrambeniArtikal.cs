@@ -7,6 +7,7 @@ namespace GymTeam.Models
     {
         [Key]
         public int id { get; set; }
+        public int kolicina { get; set; }
         [ForeignKey("prehrambeniArtiaklID")]
         public int prehrambeniArtikalID { get; set; }
         public PrehrambeniArtikal prehrambeniArtikal { get; set; }

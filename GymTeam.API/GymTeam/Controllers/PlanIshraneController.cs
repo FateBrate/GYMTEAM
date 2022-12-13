@@ -9,8 +9,7 @@ namespace GymTeam.Controllers
     [Route("api/[controller]")]
 
     [ApiController]
-    public class PlanIshraneController : Controller
-    {
+  
        
 
         public class PlanIshraneControler : ControllerBase
@@ -45,4 +44,4 @@ namespace GymTeam.Controllers
             }
         }
     }
-}
+
