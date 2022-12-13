@@ -30,7 +30,18 @@ namespace GymTeam.Controllers
             _dbcontext.SaveChanges();
             return adresa;
         }
-   
+        [HttpGet]
+        public ActionResult GetAll()
+        {
+            var data = _dbcontext.Adresa.OrderBy(a => a.id).Select(a => new AdresaGetVM()
+            {
+                id = a.id,
+                nazivGrada = a.nazivGrada,
+                NazivUlice = a.NazivUlice,
+                postanskiBroj = a.postanskiBroj
+            }).Take(100);
+            return Ok(data.ToList());
+        }
  
     }
 }
