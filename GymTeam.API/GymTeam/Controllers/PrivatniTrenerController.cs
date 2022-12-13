@@ -31,5 +31,20 @@ namespace GymTeam.Controllers
             _dbcontext.SaveChanges();
             return privatniTrener;
         }
+        [HttpGet]
+        public ActionResult GetAll()
+        {
+            var podaci = _dbcontext.PrivatniTrener.OrderBy(g => g.ime).Select(g => new PrivatniTrenerGetVM()
+            {
+                id= g.id,
+                ime= g.ime,
+                prezime= g.prezime,
+                slika= g.slika,
+                email= g.email,
+                brojTelefona= g.brojTelefona,
+                adresa= g.adresa,
+            }).Take(100);
+            return Ok(podaci.ToList());
+        }
     }
 }

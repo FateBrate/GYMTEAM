@@ -31,5 +31,19 @@ namespace GymTeam.Controllers
             _dbcontext.SaveChanges();
             return narudzba;
         }
+        [HttpGet]
+        public ActionResult GetAll()
+        {
+            var podaci = _dbcontext.Narudzba.OrderBy(g => g.brojNarudzbe).Select(g => new NarudzbaGetVM()
+            {
+               id= g.id,
+               brojNarudzbe= g.brojNarudzbe,
+               datumNarudzbe=g.datumNarudzbe,
+               popust=g.popust,
+               cijena=g.cijena,
+               korisnikID=g.korisnikID,
+            }).Take(100);
+            return Ok(podaci.ToList());
+        }
     }
 }
