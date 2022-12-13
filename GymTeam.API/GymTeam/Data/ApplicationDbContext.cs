@@ -27,6 +27,7 @@ namespace GymTeam.Data
         public DbSet<ProduktNarudzba> ProduktNarudzba { get; set; }
         public DbSet<Termin> Termin { get; set; }
         public DbSet<PrehrambeniArtikal> PrehrambeniArtikal { get; set; }
+        public DbSet<Role> Role { get; set; }
 
    
 

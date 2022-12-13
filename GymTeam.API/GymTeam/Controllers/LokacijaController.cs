@@ -31,7 +31,8 @@ namespace GymTeam.Controllers
         [HttpGet]
         public ActionResult GetAll()
         {
-            var data = _dbcontext.Lokacija.OrderBy(s => s.naziv).Select(s => new LokacijaGetVM()
+            var data = _dbcontext.Lokacija.OrderBy(s => s.naziv)
+                .Select(s => new LokacijaGetVM()
             {
                 id = s.id,
                 naziv = s.naziv,
