@@ -4,6 +4,7 @@ using GymTeam.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymTeam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221214124356_afterlocation")]
+    partial class afterlocation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,7 +119,7 @@ namespace GymTeam.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("lokacijaId")
+                    b.Property<int>("lokacijaId")
                         .HasColumnType("int");
 
                     b.Property<string>("lozinka")
@@ -619,7 +622,9 @@ namespace GymTeam.Migrations
                 {
                     b.HasOne("GymTeam.Moduls.Lokacija", "lokacija")
                         .WithMany()
-                        .HasForeignKey("lokacijaId");
+                        .HasForeignKey("lokacijaId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("GymTeam.Models.Role", "role")
                         .WithMany()

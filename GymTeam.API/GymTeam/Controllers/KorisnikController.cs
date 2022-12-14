@@ -19,6 +19,7 @@ namespace GymTeam.Controllers
         [HttpPost]
         public Korisnik Add([FromBody]KorisnikAddVM x)
         {
+
             var korisnik = new Korisnik
             {
                 ime = x.ime,
@@ -27,10 +28,16 @@ namespace GymTeam.Controllers
                 lozinka=x.lozinka,
                 datumRodjenja = x.datumRodjenja,
                 brojTelefona=x.brojTelefona,
-                adresaID = x.adresaId,
+               lokacijaId=x.lokacijaId,
                 roleId = x.roleID,
                 putanjaSlike=x.putanjaSlike
             };
+        
+                if(korisnik.roleId!=2)
+                {
+                korisnik.lokacijaId = null;
+                }
+            
             _dbcontext.Add(korisnik);
             _dbcontext.SaveChanges();
             return korisnik;
@@ -38,14 +45,15 @@ namespace GymTeam.Controllers
         [HttpGet]
         public ActionResult GetAll()
         {
+
             var data = _dbcontext.Korisnik.OrderBy(k => k.id).Select(k => new KorisnikGetVM()
             {
                 id = k.id,
                 ime = k.ime,
                 prezime = k.prezime,
                 email = k.email,
-                brojTelefona = k.brojTelefona,
-                adresaId=k.adresaID,
+                brojTelefona = k.brojTelefona,              
+                lokacijaId= k.lokacijaId,
                 roleId=k.roleId,
                 role=k.role.ToString()
 

@@ -1,6 +1,7 @@
 ﻿using GymTeam.Moduls;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 
 namespace GymTeam.Models
 {
@@ -14,13 +15,14 @@ namespace GymTeam.Models
         public string email { get; set; }
         public string brojTelefona { get; set; }
         public DateTime? datumRodjenja { get; set; }
-        [ForeignKey("adresaID")]
-        public int adresaID { get; set; }
-        public Adresa adresa { get; set; }
+        [ForeignKey("lokacijaId")]
+        public int? lokacijaId{ get; set; }
+        public Lokacija? lokacija { get; set; }
         [ForeignKey("roleId")]
         public int roleId { get; set; }
         public Role role { get; set; }
         public string? putanjaSlike { get; set; }
         
+   
     }
 }
