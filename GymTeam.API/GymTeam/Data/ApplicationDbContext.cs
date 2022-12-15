@@ -1,4 +1,5 @@
-﻿using GymTeam.Models;
+﻿using GymTeam.LoginModels;
+using GymTeam.Models;
 using GymTeam.Moduls;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,9 +29,9 @@ namespace GymTeam.Data
         public DbSet<Termin> Termin { get; set; }
         public DbSet<PrehrambeniArtikal> PrehrambeniArtikal { get; set; }
         public DbSet<Role> Role { get; set; }
-
+        public DbSet<AutentifikacijaToken> AutentifikacijaToken { get; set; }  
    
-
+        public DbSet<KorisnickiNalog> KorisnickiNalog { get; set; }
 
 
 
