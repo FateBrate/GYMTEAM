@@ -48,5 +48,38 @@ namespace GymTeam.Controllers
             return Ok(podaci.ToList());
         }
 
+        [HttpPut]
+        public Produkt Edit(ProduktUVM produkt, int id)
+        {
+            var model = _dbcontext.Produkt.Find(id);
+            if (model != null)
+            {
+                model.sifraProdukta = produkt.sifraProdukta;
+                model.naziv = produkt.naziv;
+                model.cijena = produkt.cijena;
+                model.zemljaPorijekla = produkt.zemljaPorijekla;
+                model.masa = produkt.masa;
+                model.kategorija = produkt.kategorija;
+                _dbcontext.Produkt.Update(model);
+                _dbcontext.SaveChanges();
+                return model;
+
+            }
+            throw new Exception("Produkt sa tim id-em ne postoji");
+        }
+
+        [HttpDelete]
+        public ActionResult DeleteById(int id)
+        {
+            var model = _dbcontext.Produkt.Find(id);
+            if (model != null)
+            {
+                _dbcontext.Produkt.Remove(model);
+                _dbcontext.SaveChanges();
+                return Ok("Produkt je obrisan");
+            }
+            throw new Exception("Produkt sa tim id-em ne postoji");
+        }
+
     }
 }
