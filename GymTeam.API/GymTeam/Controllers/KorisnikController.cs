@@ -61,6 +61,40 @@ namespace GymTeam.Controllers
             return Ok(data.ToList());
 
         }
+        [HttpPut]
+        public Korisnik Edit(KorisnikUVM korisnik,int id)
+        {
+            var thiskorisnik=_dbcontext.Korisnik.Find(id);
+            if(thiskorisnik!=null)
+            {
+                thiskorisnik.ime = korisnik.ime;
+                thiskorisnik.prezime = korisnik.prezime;
+                thiskorisnik.email = korisnik.email;
+                thiskorisnik.lozinka = korisnik.lozinka;
+                thiskorisnik.datumRodjenja = korisnik.datumRodjenja;
+                thiskorisnik.brojTelefona = korisnik.brojTelefona;
+                thiskorisnik.roleId = korisnik.roleID;
+                thiskorisnik.putanjaSlike = korisnik.putanjaSlike;
+                _dbcontext.Korisnik.Update(thiskorisnik);
+                _dbcontext.SaveChanges();
+                return thiskorisnik;
+
+            }
+            throw new Exception("Korisnik sa tim id-em ne postoji");
+        }
+        [HttpDelete]
+        public ActionResult DeleteById(int id)
+        {
+            var thiskorisnik = _dbcontext.Korisnik.Find(id);
+            if(thiskorisnik != null)
+            {
+                _dbcontext.Korisnik.Remove(thiskorisnik);
+                _dbcontext.SaveChanges();
+                return Ok("Korisnik je obrisan");
+            }
+            throw new Exception("Korisnik sa tim id-em ne postoji");
+        }
+
 
     }
 }
