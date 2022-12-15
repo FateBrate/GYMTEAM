@@ -4,6 +4,7 @@ using GymTeam.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymTeam.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221215151749_fate1617")]
+    partial class fate1617
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,7 @@ namespace GymTeam.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("korisnikId")
+                    b.Property<int>("korisnickiNalogId")
                         .HasColumnType("int");
 
                     b.Property<string>("vrijednost")
@@ -46,7 +49,7 @@ namespace GymTeam.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("korisnikId");
+                    b.HasIndex("korisnickiNalogId");
 
                     b.ToTable("AutentifikacijaToken");
                 });
@@ -646,13 +649,13 @@ namespace GymTeam.Migrations
 
             modelBuilder.Entity("GymTeam.LoginModels.AutentifikacijaToken", b =>
                 {
-                    b.HasOne("GymTeam.Models.Korisnik", "korisnik")
+                    b.HasOne("GymTeam.LoginModels.KorisnickiNalog", "korisnickiNalog")
                         .WithMany()
-                        .HasForeignKey("korisnikId")
+                        .HasForeignKey("korisnickiNalogId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("korisnik");
+                    b.Navigation("korisnickiNalog");
                 });
 
             modelBuilder.Entity("GymTeam.LoginModels.KorisnickiNalog", b =>
