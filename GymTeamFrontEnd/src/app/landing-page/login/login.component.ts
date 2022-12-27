@@ -7,25 +7,20 @@ import { IUser } from 'src/app/service/models/user';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit{
-  forma:FormGroup= new FormGroup({
-    email:new FormControl(''),
-    lozinka:new FormControl('')
+export class LoginComponent implements OnInit {
+  forma: FormGroup = new FormGroup({
+    email: new FormControl(''),
+    lozinka: new FormControl(''),
   });
-  constructor(private authService:AuthService) {
-  }
-  ngOnInit(): void {
-  }
+  constructor(private authService: AuthService, private ruter: Router) {}
+  ngOnInit(): void {}
 
-
-  loginUser({email,lozinka}:Partial<IUser>){
-    if(!!email && !!lozinka){
-      const loginUspjesan = this.authService.login({email,lozinka})
-      if(loginUspjesan){
-
-      }
+  loginUser({ email, lozinka }: Partial<IUser>) {
+    if (!!email && !!lozinka) {
+      this.authService.login({ email, lozinka });
+      this.ruter.navigate(['admin/home']);
     }
   }
 }
