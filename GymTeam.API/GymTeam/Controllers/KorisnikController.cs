@@ -61,6 +61,15 @@ namespace GymTeam.Controllers
             return Ok(data.ToList());
 
         }
+        [HttpGet("GetById")]
+        public ActionResult GetById(int id)
+        {
+            var korisnik = _dbcontext.Korisnik.Find(id);
+            if (korisnik != null)
+                return Ok(korisnik);
+            else throw new Exception("Korisnik sa tim id-em ne postoji"); 
+        }
+
         [HttpPut]
         public Korisnik Edit(KorisnikUVM korisnik,int id)
         {

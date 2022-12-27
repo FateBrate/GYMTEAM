@@ -1,0 +1,32 @@
+<nav id="sidebar" *ngIf="korisnik != null">
+  <div class="navi p-4 pt-5">
+    <a
+      class="img logo rounded-circle mb-5"
+      style="background-image: url(..//../assets/user_empty.jpg)"
+    ></a>
+    <h2 style="color: white">{{ korisnik.ime }} {{ korisnik.prezime }}</h2>
+    <ul class="list-unstyled components mb-5">
+      <li class="active">
+        <a
+          href="#homeSubmenu"
+          data-toggle="collapse"
+          aria-expanded="false"
+          class="dropdown-toggle"
+          >Home</a
+        >
+      </li>
+      <li>
+        <a>Lokacije</a>
+      </li>
+      <li>
+        <a>Osoblje</a>
+      </li>
+      <li>
+        <a routerLink="info">Račun</a>
+      </li>
+    </ul>
+    <div class="footer">
+      <p>Copyright &copy; All rights reserved</p>
+    </div>
+  </div>
+</nav>

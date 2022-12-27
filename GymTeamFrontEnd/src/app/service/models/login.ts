@@ -1,15 +1,15 @@
-import { IUser } from "./user";
+import { IUser } from './user';
 
-interface IAuth{
-    id:number;
-    ipAdresa:string;
-    korisnik:Partial<IUser>;
-    korisnikId:number;
-    vrijednost:string;
-    vrijemeEvidentiranja:string;
+export interface IAuth {
+  id: number;
+  ipAdresa: string;
+  korisnik: Partial<IUser>;
+  korisnikId: number;
+  vrijednost: string;
+  vrijemeEvidentiranja: string;
 }
 
-export interface ILoginResponse{
-    autentifikacijaToken:IAuth
-    isLogiran:boolean
+export interface ILoginResponse {
+  autentifikacijaToken: IAuth;
+  isLogiran: boolean;
 }
