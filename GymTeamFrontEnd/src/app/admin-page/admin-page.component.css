@@ -5,16 +5,20 @@ body{
 
   height: 100%;
   width: 100%;
-background-color: green;
+
 }
 .sidemenu{
   height: 100%;
-  background-color: red;
+position: fixed;
+
 }
 .wrapper{
-  background-color: red;
+
   height: 100%;
 }
 .right{
   width: 100%;
+  min-height: 100vh;
+  
+
 }

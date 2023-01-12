@@ -77,11 +77,7 @@ h5,
     font-size: 18px;
 }
 
-.img {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-}
+
 
 .navbar {
     padding: 15px 10px;
@@ -187,6 +183,7 @@ router-outlet + * {
             background-image: url("../../../assets/background_content.jpg");
    width: 100%;
          color:  #f8b739;
+        background-size: cover;
 }
 .infocontent h4{
     color:  #f8b739;

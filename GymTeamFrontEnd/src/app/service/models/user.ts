@@ -6,6 +6,7 @@ export interface IUser {
   prezime: string;
   putanjaSlike: string;
   roleId: number;
+  role: string;
   brojTelefona: string;
   datumRodjenja: string;
 }

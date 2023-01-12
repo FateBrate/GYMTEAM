@@ -8,7 +8,7 @@ namespace GymTeam.Models
         [Key]
         public int id { get; set; }
         public string sadržaj { get; set; }
-
+       
         public DateTime datumObjave { get; set; }
 
         [ForeignKey("korisnikId")]

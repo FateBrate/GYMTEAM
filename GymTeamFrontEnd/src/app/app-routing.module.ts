@@ -10,6 +10,7 @@ import { CjenovnikPageComponent } from './landing-page/Cjenovnik/cjenovnik-page.
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { AdminHomeComponent } from './admin-page/admin-home/admin-home.component';
 import { AdminInfoComponent } from './admin-page/admin-info/admin-info.component';
+import { AdminEmployeeComponent } from './admin-page/admin-employee/admin-employee.component';
 
 const routes: Routes = [
   { 
@@ -45,6 +46,10 @@ const routes: Routes = [
       {
         path: 'info',
         component: AdminInfoComponent,
+      },
+      {
+        path: 'employee',
+        component: AdminEmployeeComponent,
       },
     ],
   },
