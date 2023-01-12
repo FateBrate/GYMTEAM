@@ -13,6 +13,5 @@ export class SideMenuComponent implements OnInit {
   korisnik?: IUser;
   ngOnInit(): void {
     this.korisnik = JSON.parse(this.cookie.get(COOKIE_USER_DATA));
-    console.log(this.korisnik);
   }
 }

@@ -7,22 +7,19 @@
     <h2 style="color: white">{{ korisnik.ime }} {{ korisnik.prezime }}</h2>
     <ul class="list-unstyled components mb-5">
       <li class="active">
-        <a
-          href="#homeSubmenu"
-          data-toggle="collapse"
-          aria-expanded="false"
-          class="dropdown-toggle"
-          >Home</a
-        >
+        <a routerLink="home">Home</a>
       </li>
       <li>
         <a>Lokacije</a>
       </li>
       <li>
-        <a>Osoblje</a>
+        <a routerLink="employee">Osoblje</a>
       </li>
       <li>
         <a routerLink="info">Račun</a>
+      </li>
+      <li>
+        <a>Odjavi se</a>
       </li>
     </ul>
     <div class="footer">

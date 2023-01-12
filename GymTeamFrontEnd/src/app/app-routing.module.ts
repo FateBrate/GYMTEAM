@@ -6,6 +6,7 @@ import { LoginComponent } from './landing-page/login/login.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { AdminHomeComponent } from './admin-page/admin-home/admin-home.component';
 import { AdminInfoComponent } from './admin-page/admin-info/admin-info.component';
+import { AdminEmployeeComponent } from './admin-page/admin-employee/admin-employee.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: 'info',
         component: AdminInfoComponent,
+      },
+      {
+        path: 'employee',
+        component: AdminEmployeeComponent,
       },
     ],
   },

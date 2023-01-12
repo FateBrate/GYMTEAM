@@ -1,0 +1,90 @@
+<div class="employeeContent">
+  <nav class="navbar navbar-expand-lg" style="margin-left: 25%">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="nav navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Lokacije</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Osoblje</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Info</a>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="noviBtn"
+        type="button"
+        style="
+          color: white;
+          padding: 1%;
+          background-color: #f8b739;
+          border-radius: 7px;
+          margin-right: 10%;
+        "
+        (click)="openAddUserForm()"
+      >
+        Dodaj novog korisnika
+      </div>
+    </div>
+  </nav>
+  <div class="cards" style="margin-left: 25%">
+    <!-- <div class="card" style="width: 14rem">
+      <img
+        src="../../../assets/user_empty.jpg"
+        class="card-img-top"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text"></p>
+        <a href="#" class="btn btn-primary">Više</a>
+      </div> -->
+    <div class="employee" *ngFor="let radnik of employee">
+      <div class="box">
+        <img
+          src="../../../assets/user_empty.jpg"
+          alt=""
+          width="250px"
+          style="border-top-right-radius: 10px; border-top-left-radius: 10px"
+        />
+        <h5 style="margin-top: 5%; text-align: center">
+          {{ radnik.ime }} {{ radnik.prezime }}
+        </h5>
+        <p>{{ radnik.lokacijaid }}</p>
+        <div class="buttons" style="width: 100%">
+          <a
+            class="bi bi-info-circle"
+            (click)="openForm(radnik)"
+            type="button"
+            style="
+              background-color: #f8b739;
+              color: white;
+              padding: 8px 16px;
+              margin: 10%;
+              border-radius: 10%;
+            "
+          ></a>
+
+          <a
+            class="bi bi-trash3"
+            (click)="Obrisi(radnik.id)"
+            type="button"
+            style="
+              background-color: red;
+              color: white;
+              padding: 8px 16px;
+              margin: 10%;
+              border-radius: 10%;
+            "
+          ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

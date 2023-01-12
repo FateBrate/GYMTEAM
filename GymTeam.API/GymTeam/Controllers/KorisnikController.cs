@@ -99,7 +99,7 @@ namespace GymTeam.Controllers
             {
                 _dbcontext.Korisnik.Remove(thiskorisnik);
                 _dbcontext.SaveChanges();
-                return Ok("Korisnik je obrisan");
+                return Ok(true);
             }
             throw new Exception("Korisnik sa tim id-em ne postoji");
         }

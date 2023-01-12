@@ -26,8 +26,16 @@ export class AuthService {
           if (!!response) {
             const { korisnik, korisnikId, ...token } =
               response.autentifikacijaToken;
-            this.setSessionStorage(token);
-            this.setFeCookie(korisnik);
+            const cookieSettings = {
+              domain: 'localhost',
+              path: '/',
+              secure: true,
+              expiry: 7,
+            };
+            this.cookie.set(COOKIE_USER_DATA, JSON.stringify(korisnik), {
+              ...cookieSettings,
+            });
+            sessionStorage.setItem(TOKEN_DATA, JSON.stringify(token));
           }
         });
     } catch (error) {
@@ -36,10 +44,5 @@ export class AuthService {
     }
   }
 
-  setFeCookie(korisnik: Partial<IUser>) {
-    this.cookie.set(COOKIE_USER_DATA, JSON.stringify(korisnik));
-  }
-  setSessionStorage(autentifikacijaToken: Partial<IAuth>) {
-    sessionStorage.setItem(TOKEN_DATA, JSON.stringify(autentifikacijaToken));
-  }
+  setSessionStorage(autentifikacijaToken: Partial<IAuth>) {}
 }
