@@ -11,10 +11,12 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { AdminHomeComponent } from './admin-page/admin-home/admin-home.component';
 import { AdminInfoComponent } from './admin-page/admin-info/admin-info.component';
 import { AdminEmployeeComponent } from './admin-page/admin-employee/admin-employee.component';
+import { AdminLocationComponent } from './admin-page/admin-location/admin-location.component';
 
 const routes: Routes = [
-  { 
-    path: '', component: LandingPageComponent,
+  {
+    path: '',
+    component: LandingPageComponent,
     children: [
       {
         path: 'about',
@@ -33,7 +35,7 @@ const routes: Routes = [
         component: CjenovnikPageComponent,
       },
     ],
-   },
+  },
   { path: 'login', component: LoginComponent },
   {
     path: 'admin',
@@ -50,6 +52,10 @@ const routes: Routes = [
       {
         path: 'employee',
         component: AdminEmployeeComponent,
+      },
+      {
+        path: 'locations',
+        component: AdminLocationComponent,
       },
     ],
   },

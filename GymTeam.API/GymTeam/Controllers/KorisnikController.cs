@@ -82,7 +82,7 @@ namespace GymTeam.Controllers
                 thiskorisnik.lozinka = korisnik.lozinka;
                 thiskorisnik.datumRodjenja = korisnik.datumRodjenja;
                 thiskorisnik.brojTelefona = korisnik.brojTelefona;
-                thiskorisnik.roleId = korisnik.roleID;
+                //thiskorisnik.roleId = korisnik.roleID;
                 thiskorisnik.putanjaSlike = korisnik.putanjaSlike;
                 _dbcontext.Korisnik.Update(thiskorisnik);
                 _dbcontext.SaveChanges();

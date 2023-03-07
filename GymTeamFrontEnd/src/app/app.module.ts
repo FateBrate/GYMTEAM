@@ -19,6 +19,7 @@ import { EmployeedataComponent } from './admin-page/admin-employee/employeedata/
 import { AddUserComponent } from './admin-page/admin-employee/add-user/add-user.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { AdminLocationComponent } from './admin-page/admin-location/admin-location.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { MatSelectModule } from '@angular/material/select';
     AdminEmployeeComponent,
     EmployeedataComponent,
     AddUserComponent,
+    AdminLocationComponent,
   ],
   imports: [
     BrowserModule,
