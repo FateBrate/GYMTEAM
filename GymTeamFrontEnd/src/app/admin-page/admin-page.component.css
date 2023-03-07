@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    overflow-x: hidden;
+}
+body{
+
+  height: 100%;
+  width: 100%;
+
+}
+.sidemenu{
+  height: 100%;
+position: fixed;
+
+}
+.wrapper{
+
+  height: 100%;
+}
+.right{
+  width: 100%;
+  min-height: 100vh;
+  
+
+}

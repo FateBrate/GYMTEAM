@@ -1,0 +1,125 @@
+<div class="infocontent" style="padding-top: 3%" *ngIf="korisnik != null">
+  <div id="content">
+    <div class="container rounded bg-transparent mt-3 mb-3">
+      <div class="row" style="margin-left: 23%">
+        <div
+          class="main"
+          style="
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: space-evenly;
+          "
+        >
+          <div class="col-md-3 border-right">
+            <div
+              class="d-flex flex-column align-items-center text-center p-3 py-5"
+            >
+              <img
+                class="rounded-circle mt-5"
+                width="150px"
+                src="../../../assets/user_empty.jpg"
+              /><span class="font-weight-bold"
+                >{{ korisnik.ime }} {{ korisnik.prezime }}</span
+              ><span class="text- #f8b739-50">{{ korisnik.email }}</span
+              ><span> </span>
+            </div>
+          </div>
+          <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+              <div
+                class="d-flex justify-content-between align-items-center mb-3"
+              >
+                <h4 class="text-right">Postavke profila</h4>
+              </div>
+              <div class="row mt-2">
+                <div class="col-md-6">
+                  <label class="labels">Ime</label
+                  ><input
+                    [(ngModel)]="korisnik.ime"
+                    type="text"
+                    class="form-control"
+                    (ngModelChange)="changeData = true"
+                    value="{{ korisnik.ime }}"
+                    [disabled]="!enableEdit"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label class="labels">Prezime</label
+                  ><input
+                    [(ngModel)]="korisnik.prezime"
+                    type="text"
+                    class="form-control"
+                    (ngModelChange)="changeData = true"
+                    value="{{ korisnik.prezime }}"
+                    [disabled]="!enableEdit"
+                  />
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <label class="labels">Broj telefona</label
+                  ><input
+                    [(ngModel)]="korisnik.brojTelefona"
+                    type="text"
+                    class="form-control"
+                    (ngModelChange)="changeData = true"
+                    value="{{ korisnik.brojTelefona }}"
+                    [disabled]="!enableEdit"
+                  />
+                </div>
+                <div class="col-md-12">
+                  <label class="labels">Email</label
+                  ><input
+                    type="text"
+                    [(ngModel)]="korisnik.email"
+                    class="form-control"
+                    (ngModelChange)="changeData = true"
+                    value="{{ korisnik.email }}"
+                    [disabled]="!enableEdit"
+                  />
+                </div>
+                <div class="col-md-12">
+                  <label class="labels">Uloga</label
+                  ><input
+                    type="text"
+                    class="form-control"
+                    value="Admin"
+                    disabled
+                  />
+                </div>
+
+                <div class="col-md-12">
+                  <label class="labels">Lozinka</label
+                  ><input
+                    [type]="changetype ? 'password' : 'text'"
+                    class="form-control"
+                    [(ngModel)]="korisnik.lozinka"
+                    (ngModelChange)="changeData = true"
+                    value="{{ korisnik.lozinka }}"
+                    [disabled]="!enableEdit"
+                  />
+                  <input
+                    type="checkbox"
+                    id="sifra"
+                    (click)="PrikaziSifru()"
+                  />Prikazi šifru
+                </div>
+              </div>
+              <div class="mt-5 text-center">
+                <button
+                  class="btn btn-primary profile-button"
+                  type="button"
+                  [ngClass]="{ clicked: enableEdit }"
+                  (click)="editData()"
+                >
+                  <i class="bi bi-pencil"></i>
+                  {{ buttonName }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

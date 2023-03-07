@@ -1,0 +1,114 @@
+<div
+  class="container rounded"
+  style="background-color: #1d1919; color: #f8b739"
+>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    style="
+      background-color: #f8b739;
+      margin-left: 96%;
+      margin-top: 2%;
+      margin-top: 2%;
+    "
+    (click)="popUpRef.close()"
+  ></button>
+  <div class="row" style="margin-left: 5%">
+    <div class="col-md-3 border-right">
+      <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+        <img
+          class="rounded-circle mt-5"
+          width="150px"
+          src="../../../assets/user_empty.jpg"
+        /><span> </span>
+      </div>
+    </div>
+    <div class="col-md-8 border-right">
+      <div class="kolone">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="text-right">Podaci o korisniku</h4>
+        </div>
+        <form [formGroup]="forma" (ngSubmit)="saveUser(forma.value)">
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <label class="labels">Ime</label
+              ><input type="text" class="form-control" formControlName="ime" />
+            </div>
+            <div class="col-md-6">
+              <label class="labels">Prezime</label
+              ><input
+                type="text"
+                class="form-control"
+                formControlName="prezime"
+              />
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label class="labels">Broj telefona</label
+              ><input
+                type="text"
+                class="form-control"
+                formControlName="brojTelefona"
+              />
+            </div>
+            <div class="col-md-12">
+              <label class="labels">Email</label
+              ><input
+                type="text"
+                class="form-control"
+                formControlName="email"
+              />
+            </div>
+            <div class="col-md-12">
+              <label class="labels">Lozinka</label
+              ><input
+                type="password"
+                class="form-control"
+                formControlName="lozinka"
+              />
+            </div>
+            <div class="col-md-12 d-flex flex-column" style="width: 100%">
+              <label class="labels">Uloga</label>
+              <select
+                name="bilosta"
+                id=""
+                formControlName="roleId"
+                style="border-radius: 6px; height: 40px"
+              >
+                <option [value]="role.GuestUser">Gost</option>
+                <option [value]="role.Admin">Admin</option>
+                <option [value]="role.Employee">Radnik</option>
+              </select>
+            </div>
+            <div class="col-md-12">
+              <label class="labels">Datum rođenja</label
+              ><input
+                type="date"
+                class="form-control"
+                formControlName="datumRodjenja"
+              />
+            </div>
+            <div class="col-md-12">
+              <button
+                class="btnSave"
+                style="
+                  padding: 5px;
+                  background-color: #f8b739;
+                  color: white;
+                  text-align: center;
+                  margin: 5% 30% 5% 30%;
+                  border-radius: 7px;
+                "
+                type="submit"
+              >
+                <i class="bi bi-check-circle"></i> Spremi
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -75,7 +75,7 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Moduls.Adresa", "adresa")
                         .WithMany()
                         .HasForeignKey("adresaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("adresa");
