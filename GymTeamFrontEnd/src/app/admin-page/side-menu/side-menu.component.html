@@ -4,22 +4,26 @@
       class="img logo rounded-circle mb-5"
       style="background-image: url(..//../assets/user_empty.jpg)"
     ></a>
-    <h2 style="color: white">{{ korisnik.ime }} {{ korisnik.prezime }}</h2>
+    <h2 style="color: #f8b739">{{ korisnik.ime }} {{ korisnik.prezime }}</h2>
     <ul class="list-unstyled components mb-5">
-      <li class="active">
-        <a routerLink="home">Home</a>
+      <li>
+        <a routerLink="home"><i class="bi bi-house-exclamation"></i> Home</a>
       </li>
       <li>
-        <a>Lokacije</a>
+        <a routerLink="locations"><i class="bi bi-geo-alt"></i> Lokacije</a>
       </li>
       <li>
-        <a routerLink="employee">Osoblje</a>
+        <a routerLink="employee"
+          ><i class="bi bi-person-plus"></i> Osoblje/Članovi</a
+        >
       </li>
       <li>
-        <a routerLink="info">Račun</a>
+        <a routerLink="info"><i class="bi bi-person-vcard"></i> Račun</a>
       </li>
       <li>
-        <a>Odjavi se</a>
+        <a (click)="logout()" style="cursor: pointer"
+          ><i class="bi bi-box-arrow-left"></i> Odjavi se</a
+        >
       </li>
     </ul>
     <div class="footer">

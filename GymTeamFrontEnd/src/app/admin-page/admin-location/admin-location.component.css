@@ -1,4 +1,3 @@
-
 body {
     font-family: "Poppins", Arial, sans-serif;
     font-size: 14px;
@@ -6,7 +5,7 @@ body {
     font-weight: normal;
     background: #fafafa;
     color: gray;
-    overflow: hidden;
+   
 }
 
 a {
@@ -77,6 +76,13 @@ h5,
     font-size: 18px;
 }
 
+.img {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+
 
 .line {
     width: 100%;
@@ -104,15 +110,7 @@ a[data-toggle="collapse"] {
     position: relative;
 }
 
-.dropdown-toggle::after {
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: 0;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-}
+
 
 @media (max-width: 991.98px) {
     #sidebarCollapse span {
@@ -128,20 +126,20 @@ a[data-toggle="collapse"] {
     -o-transition: all 0.3s;
     transition: all 0.3s;
     text-decoration: none;
-
-   
+    background-image: url("../../../assets/background_content.jpg");
+    background-size: cover;
 }
 
 .btn.btn-primary {
     background: #f8b739;
     border-color: #f8b739;
 }
-.btn.btn-primary.clicked{
-    background-color: green;
-    border-color: green;
-       
-}
 
+.btn.btn-primary:hover,
+.btn.btn-primary:focus {
+    background: #f8b739 !important;
+    border-color: #f8b739 !important;
+}
 
 .footer p {
     color: rgba(255, 255, 255, 0.5);
@@ -153,18 +151,37 @@ a[data-toggle="collapse"] {
 p {
     color: white;
 }
-router-outlet + * {
-    width: 100%;
-    margin: 0;
-    height: 100%;
-}
-.infocontent{
+.card img {
+    width: 400px;
+    height: 300px;
+    
 
-            background-image: url("../../../assets/background_content.jpg");
-   width: 100%;
-         color:  #f8b739;
-        background-size: cover;
 }
-.infocontent h4{
-    color:  #f8b739;
+
+.lokacije{
+
+display: grid;
+grid-template-columns: 1fr 1fr ;
+grid-gap: 50px;
+padding-right: 2%;
+padding-left: 5%;
+background-color: rgba(0, 0, 0, 0.5);
+margin-right: 20%;
+margin-left: 1%;
+padding-top: 4%;
+padding-bottom: 2%;
+}
+.lokBox img{
+    height: 300px;
+    width: 400px;
+
+}
+.lokBox{
+align-self: normal;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+        height: 300px;
+            width: 400px;
+          
 }

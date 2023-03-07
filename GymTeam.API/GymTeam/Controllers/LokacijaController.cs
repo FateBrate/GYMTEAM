@@ -21,6 +21,7 @@ namespace GymTeam.Controllers
             Lokacija lokacija = new Lokacija
             {
                 naziv = x.naziv,
+               putanjaSlike= x.putanjaSlike,
                 adresaId = x.adresaId,
             };
             _dbcontext.Add(lokacija);
@@ -36,9 +37,30 @@ namespace GymTeam.Controllers
             {
                 id = s.id,
                 naziv = s.naziv,
+                putanjaSlike=s.putanjaSlike,
                 adresaId = s.adresaId,
             }).Take(10);
             return Ok(data.ToList());
+        }
+        [HttpGet("GetbyId")]
+        public ActionResult GetById(int id)
+        {
+            var lokacija = _dbcontext.Lokacija.Find(id);
+            if (lokacija != null)
+                return Ok(lokacija);
+            else throw new Exception("Lokacija sa tim id-em ne postoji");
+        }
+        [HttpDelete]
+        public ActionResult DeleteById(int id)
+        {
+            var lokacija = _dbcontext.Lokacija.Find(id);
+            if (lokacija != null)
+            {
+                _dbcontext.Lokacija.Remove(lokacija);
+                _dbcontext.SaveChanges();
+                return Ok(true);
+            }
+            throw new Exception("Lokacija sa tim id-em ne postoji");
         }
     }
 }

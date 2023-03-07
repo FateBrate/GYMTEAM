@@ -52,8 +52,8 @@ a:focus {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap:40px;
-  padding-bottom: 30px;
-  padding-right: 60px;
+  padding: 3%  ;
+  margin-right: 5%;
 }
 .employee {
   align-self: normal;
