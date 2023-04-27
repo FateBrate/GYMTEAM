@@ -1,19 +1,125 @@
-<div id="content" class="p-4 p-md-5" style="margin-left: 20%">
-  <h2 class="mb-4">News</h2>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </p>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </p>
+<div id="content" class="p-4 p-md-5" style="margin-left: 18%">
+  <button
+    class="btn btn-success"
+    style="position: fixed; top: 7%; right: 7.5%"
+    (click)="openClose()"
+  >
+    <i class="bi bi-plus-circle"></i>
+    Add Article
+  </button>
+  <h2 class="mb-4" style="margin-left: 1%; width: fit-content">News</h2>
+  <div class="news">
+    <div
+      class="newsBox"
+      *ngFor="let o of obavijesti"
+      [style.background-image]="'url(' + getSliku(o.id) + ')'"
+    >
+      <button class="btn btn-primary" style="float: right">Read more</button>
+      <h4
+        class="news-title"
+        style="
+          color: orange;
+          background-color: rgba(0, 0, 0, 0.7);
+          width: fit-content;
+          padding: 1px;
+        "
+      >
+        {{ o.tip }}
+      </h4>
+      <p
+        class="news-content"
+        style="
+          color: white;
+          background-color: rgba(0, 0, 0, 0.7);
+          margin-top: 20%;
+          padding: 1%;
+        "
+      >
+        {{ o.sadrzaj.substr(0, 190) }}...
+      </p>
+    </div>
+  </div>
+  <div
+    class="modal fade show"
+    id="exampleModalLive"
+    tabindex="-1"
+    role="dialog"
+    aria-modal="true"
+    style="display: block"
+    *ngIf="!!success"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-black" id="exampleModalLabel">
+            Nova obavijest
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="openClose()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <!-- Form to add new article -->
+          <form>
+            <div class="mb-3">
+              <label for="article-title" class="form-label">Title</label>
+              <input
+                type="text"
+                class="form-control"
+                id="article-title"
+                [(ngModel)]="title"
+                [ngModelOptions]="{ standalone: true }"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="article-type" class="form-label">Tip</label>
+              <input
+                class="form-control"
+                type="text"
+                id="article-type"
+                [(ngModel)]="type"
+                [ngModelOptions]="{ standalone: true }"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="article-content" class="form-label">Content</label>
+              <textarea
+                class="form-control"
+                id="article-content"
+                rows="3"
+                [(ngModel)]="content"
+                [ngModelOptions]="{ standalone: true }"
+              ></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="article-photo" class="form-label">Slika</label>
+              <input
+                type="file"
+                class="form-control"
+                id="article-photo"
+                (change)="onFileChange($event)"
+              />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="openClose()">
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            type="submit"
+            (click)="addNew()"
+          >
+            Save changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

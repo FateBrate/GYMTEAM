@@ -12,6 +12,7 @@ import { AdminHomeComponent } from './admin-page/admin-home/admin-home.component
 import { AdminInfoComponent } from './admin-page/admin-info/admin-info.component';
 import { AdminEmployeeComponent } from './admin-page/admin-employee/admin-employee.component';
 import { AdminLocationComponent } from './admin-page/admin-location/admin-location.component';
+import { PriceListComponent } from './admin-page/price-list/price-list.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,10 @@ const routes: Routes = [
       {
         path: 'locations',
         component: AdminLocationComponent,
+      },
+      {
+        path: 'price-list',
+        component: PriceListComponent,
       },
     ],
   },
