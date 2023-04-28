@@ -1,11 +1,11 @@
 <div id="content" class="p-4 p-md-5" style="margin-left: 18%">
   <button
     class="btn btn-success"
-    style="position: fixed; top: 7%; right: 7.5%"
+    style="position: absolute; top: 7%; right: 7.5%"
     (click)="openClose()"
   >
     <i class="bi bi-plus-circle"></i>
-    Add Article
+    Dodaj obavijest
   </button>
   <h2 class="mb-4" style="margin-left: 1%; width: fit-content">News</h2>
   <div class="news">
@@ -14,7 +14,13 @@
       *ngFor="let o of obavijesti"
       [style.background-image]="'url(' + getSliku(o.id) + ')'"
     >
-      <button class="btn btn-primary" style="float: right">Read more</button>
+      <button
+        class="btn btn-primary"
+        (click)="readFullContent(o.id)"
+        style="float: right"
+      >
+        Pročitaj više...
+      </button>
       <h4
         class="news-title"
         style="
@@ -118,6 +124,54 @@
           >
             Save changes
           </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Procitaj vise -->
+  <div
+    class="modal fade show"
+    id="showNews"
+    tabindex="-1"
+    aria-modal="true"
+    *ngIf="!!showMore"
+    style="display: block"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content" style="background-color: #1d1919">
+        <div class="modal-header border-0">
+          <h5 class="modal-title text-white" id="exampleModalLabel">
+            {{ picked.naslov }}
+          </h5>
+
+          <button
+            type="button"
+            class="btn-close"
+            aria-label="Close"
+            (click)="show()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <h6 class="text-white">
+            Datum objave: {{ picked.datumObjave | date : "dd/MM/yyyy" }}
+          </h6>
+          <img
+            src="{{ getSliku(picked.id) }}"
+            class="img-fluid mb-3"
+            alt="Article Image"
+          />
+          <p class="text-white">
+            {{ picked.sadrzaj }}
+          </p>
+          <div class="modal-footer border-0">
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="deletePicked(picked.id)"
+            >
+              Obriši
+            </button>
+          </div>
         </div>
       </div>
     </div>
