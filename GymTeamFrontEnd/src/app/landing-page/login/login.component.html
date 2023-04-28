@@ -1,22 +1,32 @@
-<section class="h-100 gradient-form" style="background-color: #eee">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-xl-10">
+<section class="gradient-form" style="background-color: #070404">
+  <div class="container py-5">
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="sadrzaj" style="width: 80%; height: 25%">
         <div class="card rounded-3 text-black">
           <div class="row g-0">
-            <div class="col-lg-6">
+            <div
+              class="col-lg-6"
+              style="
+                background-image: url('../../../assets/leftLogin.jpg');
+                background-size: cover;
+                color: #f8b739;
+                font-weight: bold;
+              "
+            >
               <div class="card-body p-md-5 mx-md-4">
                 <div class="text-center">
                   <img
-                    src="assets/loginpic_1.jpg"
-                    style="width: 185px"
+                    src="assets/loginLogo.png"
+                    style="width: 120px"
                     alt="logo"
                   />
                   <h4 class="mt-1 mb-5 pb-1">We are Gym Team</h4>
                 </div>
 
                 <form [formGroup]="forma" (ngSubmit)="loginUser(forma.value)">
-                  <p>Please login to your account</p>
+                  <p style="background-color: #070404; width: fit-content">
+                    Please login to your account
+                  </p>
 
                   <div class="form-outline mb-4">
                     <input
@@ -44,8 +54,13 @@
 
                   <div class="text-center pt-1 mb-5 pb-1">
                     <button
-                      class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
+                      class="btn btn-primary btn-block"
                       type="submit"
+                      style="
+                        background-color: #f8b739;
+                        color: black;
+                        border: black;
+                      "
                     >
                       Log in
                     </button>
@@ -53,10 +68,16 @@
                 </form>
               </div>
             </div>
-            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
-              <div class="text-black px-3 py-4 p-md-5 mx-md-4">
+            <div
+              class="col-lg-6 d-flex align-items-center gradient-custom-2"
+              style="
+                background-image: url('../../../assets/loginGYMTEAM.jpg');
+                background-size: cover;
+              "
+            >
+              <div class="px-3 py-4 p-md-5 mx-md-4" style="color: #f8b739">
                 <h4 class="mb-4">We are more than just a company</h4>
-                <p class="small mb-0">Postani dio velike Gym Team familije</p>
+                <h2 class="small mb-0">Postani dio velike Gym Team familije</h2>
               </div>
             </div>
           </div>

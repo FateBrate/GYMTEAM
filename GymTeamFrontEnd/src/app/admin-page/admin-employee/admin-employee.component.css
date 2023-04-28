@@ -5,15 +5,7 @@ body {
   justify-content: center;
   align-items: center;
 }
-.navbar {
-  padding: 15px 10px;
-  background-color: transparent;
-  border: none;
-  border-radius: 0;
-  margin-bottom: 40px;
-  -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-}
+
 .employeeContent {
   background-image: url("../../../assets/background_content.jpg");
   color: #f8b739;
