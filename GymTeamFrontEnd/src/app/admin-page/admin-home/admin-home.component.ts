@@ -15,6 +15,8 @@ export class AdminHomeComponent implements OnInit {
   content: string = '';
   photo: any;
   success: boolean = false;
+  showMore: boolean = false;
+  picked: any;
   constructor(private httpClient: HttpClient, private snackbar: MatSnackBar) {}
   loadNews() {
     this.httpClient.get(routerpath + '/api/Obavijest').subscribe((res: any) => {
@@ -26,21 +28,6 @@ export class AdminHomeComponent implements OnInit {
   getSliku(id: number) {
     return `${routerpath}/api/Obavijest/GetSlikaById?id=${id}`;
   }
-  // fileToBase64 = (file: File) => {
-  //   return new Promise<string>((resolve, reject) => {
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(file);
-  //     reader.onload = () => {
-  //       const base64 = reader.result?.toString().split(',')[1];
-  //       if (base64) {
-  //         resolve(base64);
-  //       } else {
-  //         reject('Failed to convert file to base64');
-  //       }
-  //     };
-  //     reader.onerror = (error) => reject(error);
-  //   });
-  // };
   onFileChange(event: any) {
     const reader = new FileReader();
 
@@ -83,8 +70,31 @@ export class AdminHomeComponent implements OnInit {
       });
     console.log('3');
   }
+  readFullContent(id: number) {
+    this.httpClient
+      .get(`${routerpath}/api/Obavijest/GetById?id=${id}`)
+      .subscribe((res) => {
+        this.picked = res;
+        this.show();
+      });
+  }
   openClose() {
     this.success = !this.success;
+  }
+  deletePicked(id: number) {
+    this.httpClient
+      .delete(`${routerpath}/api/Obavijest?id=${id}`)
+      .subscribe((res) => {
+        this.show();
+        this.loadNews();
+        this.snackbar.open('Uspjesno obrisana obavijest', 'X', {
+          duration: 3000,
+          panelClass: ['cacin-caca'],
+        });
+      });
+  }
+  show() {
+    this.showMore = !this.showMore;
   }
   ngOnInit() {
     this.loadNews();
