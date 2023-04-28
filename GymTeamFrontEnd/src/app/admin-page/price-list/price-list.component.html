@@ -1,0 +1,85 @@
+<div class="priceContent">
+  <h1 class="mb-4 text-white" style="margin-left: 5%">Cjenovnik</h1>
+  <div class="pricelist" *ngFor="let p of priceList">
+    <div style="position: relative">
+      <h2 class="title">
+        {{ p.nazivStavke }}
+      </h2>
+      <i
+        class="bi bi-pencil-square"
+        (click)="editList(p.id)"
+        (click)="show()"
+      ></i>
+    </div>
+    <div class="d-flex justify-content-between">
+      <span>
+        {{ p.opis.slice(0, 2) + p.opis.slice(2).split("-").join("\n-") }}</span
+      >
+      <h2 class="price">{{ p.cijena }} KM</h2>
+    </div>
+  </div>
+  <div
+    class="modal fade show"
+    id="exampleModalLive"
+    tabindex="-1"
+    role="dialog"
+    aria-modal="true"
+    style="display: block"
+    *ngIf="!!showEdit"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content" style="background-color: black">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLiveLabel">
+            Uredi članarinu
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            aria-label="Close"
+            (click)="show()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">Naziv plana</label>
+            <input class="form-control" [(ngModel)]="picked.nazivStavke" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Detalji</label>
+            <textarea
+              class="form-control"
+              name="detalji"
+              [(ngModel)]="picked.opis"
+              rows="{{ rows }}"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Cijena</label>
+            <div class="input-group">
+              <input
+                class="form-control"
+                type="number"
+                [(ngModel)]="picked.cijena"
+              />
+              <span class="input-group-addon">KM</span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-dismiss="modal"
+            (click)="show()"
+          >
+            Odustani
+          </button>
+          <button type="button" class="btn btn-primary" (click)="SaveChanges()">
+            Spremi
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

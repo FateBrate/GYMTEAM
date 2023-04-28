@@ -1,9 +1,11 @@
-.gradient-custom-2 {
+body{
+    background-color: #1d1919;
+}
+
    
 
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, #582626, #893738, #b67547, #440a08);
-}
+
 
 @media (min-width: 768px) {
     .gradient-form {

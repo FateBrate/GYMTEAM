@@ -2,9 +2,11 @@
 {
     public class CjenovnikAddVM
     {
-        public string sadržaj { get; set; }
-
-        public DateTime datumObjave { get; set; }
+        public int id { get; set; }
+        public string nazivStavke { get; set; }
+        public string opis { get; set; }
+        public float cijena { get; set; }
+        public int korisnikId { get; set; }
 
     }
 }

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './landing-page/login/login.component';
@@ -20,7 +19,7 @@ import { AddUserComponent } from './admin-page/admin-employee/add-user/add-user.
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { AdminLocationComponent } from './admin-page/admin-location/admin-location.component';
-
+import { PriceListComponent } from './admin-page/price-list/price-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +33,7 @@ import { AdminLocationComponent } from './admin-page/admin-location/admin-locati
     EmployeedataComponent,
     AddUserComponent,
     AdminLocationComponent,
+    PriceListComponent,
   ],
   imports: [
     BrowserModule,
