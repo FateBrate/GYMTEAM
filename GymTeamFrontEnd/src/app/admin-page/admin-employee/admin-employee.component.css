@@ -43,8 +43,8 @@ a:focus {
 .cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap:40px;
-  padding: 3%  ;
+  grid-gap: 40px;
+  padding: 3%;
   margin-right: 5%;
 }
 .employee {
@@ -61,4 +61,14 @@ a:focus {
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+.btn {
+  margin-left: 25%;
+}
+input.form-control {
+  float: right;
+  padding: 7px;
+  border-radius: 7px;
+  width: 20%;
+  margin-right: 5%;
 }
