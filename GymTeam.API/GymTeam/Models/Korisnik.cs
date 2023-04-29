@@ -21,7 +21,7 @@ namespace GymTeam.Models
         [ForeignKey("roleId")]
         public int roleId { get; set; }
         public Role role { get; set; }
-        public string? putanjaSlike { get; set; }
+        public byte[]? slika { get; set; }
         
    
     }

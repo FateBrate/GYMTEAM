@@ -1,41 +1,28 @@
 <div class="employeeContent" style="padding-top: 3%">
-  <div
-    class="noviBtn"
+  <button
+    class="btn btn-warning me-4 mb-2"
     type="button"
-    style="
-      color: white;
-      padding: 1%;
-      background-color: #f8b739;
-      border-radius: 7px;
-      margin-right: 10%;
-      width: 15%;
-      margin-left: 25%;
-      margin-bottom: 2%;
-    "
     (click)="openAddUserForm()"
   >
     <i class="bi bi-plus-circle"></i>
     Dodaj novog korisnika
-  </div>
+  </button>
+  <input
+    class="form-control"
+    type="text"
+    placeholder="Search..."
+    [(ngModel)]="ime_prezime"
+    (ngModelChange)="Filtriraj()"
+  />
+
   <div
     class="cards"
     style="margin-left: 25%; background-color: rgba(0, 0, 0, 0.5)"
   >
-    <!-- <div class="card" style="width: 14rem">
-      <img
-        src="../../../assets/user_empty.jpg"
-        class="card-img-top"
-        alt="..."
-      />
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text"></p>
-        <a href="#" class="btn btn-primary">Više</a>
-      </div> -->
     <div class="employee" *ngFor="let radnik of employee">
       <div class="box">
         <img
-          src="../../../assets/user_empty.jpg"
+          src="{{ getSliku(radnik.id) }}"
           alt=""
           width="250px"
           style="border-top-right-radius: 10px; border-top-left-radius: 10px"

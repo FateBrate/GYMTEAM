@@ -1,4 +1,5 @@
 ﻿using GymTeam.Data;
+using GymTeam.Helper;
 using GymTeam.Models;
 using GymTeam.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -28,12 +29,17 @@ namespace GymTeam.Controllers
                 lozinka=x.lozinka,
                 datumRodjenja = x.datumRodjenja,
                 brojTelefona=x.brojTelefona,
-               lokacijaId=x.lokacijaId,
+                lokacijaId=x.lokacijaId,
                 roleId = x.roleID,
-                putanjaSlike=x.putanjaSlike
+               
             };
-        
-                if(korisnik.roleId!=2)
+            if (x.slika == null)
+            {
+                byte[] imageByte = x.slika.GetImage();
+                korisnik.slika = imageByte;
+            }
+
+            if (korisnik.roleId!=2)
                 {
                 korisnik.lokacijaId = null;
                 }
@@ -43,22 +49,17 @@ namespace GymTeam.Controllers
             return korisnik;
         }
         [HttpGet]
-        public ActionResult GetAll()
+        public ActionResult<List<Korisnik>> GetAll(string? ime_prezime)
         {
 
-            var data = _dbcontext.Korisnik.OrderBy(k => k.id).Select(k => new KorisnikGetVM()
-            {
-                id = k.id,
-                ime = k.ime,
-                prezime = k.prezime,
-                email = k.email,
-                brojTelefona = k.brojTelefona,              
-                lokacijaId= k.lokacijaId,
-                roleId=k.roleId,
-                role=k.role.ToString()
+            var data = _dbcontext.Korisnik.Where(korisnik => (
+             string.IsNullOrEmpty(ime_prezime) ||
+             (korisnik.ime + " " + korisnik.prezime).ToLower().StartsWith(ime_prezime.ToLower()) ||
+             (korisnik.prezime + " " + korisnik.ime).ToLower().StartsWith(ime_prezime.ToLower())))
+              .OrderByDescending(k => k.id)
+              .AsQueryable();
 
-            }).Take(100);
-            return Ok(data.ToList());
+            return data.Take(50).ToList();
 
         }
         [HttpGet("GetById")]
@@ -69,7 +70,33 @@ namespace GymTeam.Controllers
                 return Ok(korisnik);
             else throw new Exception("Korisnik sa tim id-em ne postoji"); 
         }
+        [HttpGet("GetSlikaById")]
+        public ActionResult GetNewsImage(int id)
+        {
+            byte[]? slika = _dbcontext.Korisnik.Find(id)?.slika;
 
+            if (slika == null)
+                return BadRequest();
+
+            return File(slika, "image/*");
+        }
+        [HttpPut("ChangePhoto")]
+        public ActionResult<Korisnik> editPhoto(string  file,int id)
+        {
+            var thiskorisnik=_dbcontext.Korisnik.Find(id);
+            if (thiskorisnik != null)
+            {
+                if (file != null)
+                    thiskorisnik.slika = file.GetImage();
+                else throw new Exception("Greška neispravan file");
+            }
+            else throw new Exception("Greska sa id-em korisnika");
+            _dbcontext.Korisnik.Update(thiskorisnik);
+            _dbcontext.SaveChanges();
+            return Ok(thiskorisnik);
+            
+
+        }
         [HttpPut]
         public Korisnik Edit(KorisnikUVM korisnik,int id)
         {
@@ -81,13 +108,10 @@ namespace GymTeam.Controllers
                 thiskorisnik.email = korisnik.email;
                 thiskorisnik.lozinka = korisnik.lozinka;
                 thiskorisnik.datumRodjenja = korisnik.datumRodjenja;
-                thiskorisnik.brojTelefona = korisnik.brojTelefona;
-                //thiskorisnik.roleId = korisnik.roleID;
-                thiskorisnik.putanjaSlike = korisnik.putanjaSlike;
+                thiskorisnik.brojTelefona = korisnik.brojTelefona;              
                 _dbcontext.Korisnik.Update(thiskorisnik);
                 _dbcontext.SaveChanges();
                 return thiskorisnik;
-
             }
             throw new Exception("Korisnik sa tim id-em ne postoji");
         }
