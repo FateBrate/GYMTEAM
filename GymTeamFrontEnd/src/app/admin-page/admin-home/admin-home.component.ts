@@ -41,7 +41,6 @@ export class AdminHomeComponent implements OnInit {
     }
   }
   addNew() {
-    console.log('1');
     const body = {
       naslov: this.title,
       tip: this.type,
@@ -53,8 +52,6 @@ export class AdminHomeComponent implements OnInit {
       .post(routerpath + '/api/Obavijest', body)
       .subscribe((res) => {
         if (!!res) {
-          console.log('2');
-
           console.log(res);
           this.snackbar.open('Uspjesno dodana nova obavijest', 'X', {
             duration: 3000,
@@ -68,7 +65,6 @@ export class AdminHomeComponent implements OnInit {
             panelClass: ['error-snack'],
           });
       });
-    console.log('3');
   }
   readFullContent(id: number) {
     this.httpClient

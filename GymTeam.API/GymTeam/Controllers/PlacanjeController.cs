@@ -30,9 +30,9 @@ namespace GymTeam.Controllers
             [HttpGet]
             public ActionResult GetAll()
         {
-            var podaci = _dbcontext.Placanje.OrderBy(g => g.tip).Select(g => new PlacanjeGetVM()
+            var podaci = _dbcontext.Placanje.OrderBy(g => g.tip).Select(g => new PlacanjeAddVM()
             {
-                id = g.id,
+                
                 tip = g.tip,
                 iznos = g.iznos,
             }).Take(100);
