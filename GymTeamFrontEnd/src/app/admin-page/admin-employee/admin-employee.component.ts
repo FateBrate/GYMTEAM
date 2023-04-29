@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -6,6 +6,7 @@ import { from } from 'rxjs';
 import { AdminInfoComponent } from '../admin-info/admin-info.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { EmployeedataComponent } from './employeedata/employeedata.component';
+import { routerpath } from 'src/app/constants/deafult';
 
 @Component({
   selector: 'app-admin-employee',
@@ -17,7 +18,7 @@ export class AdminEmployeeComponent implements OnInit {
   prezime: string = '';
   lokacijaid: number = 0;
   employee: any;
-  api_url: string = 'http://localhost:5164';
+  ime_prezime: string = '';
   constructor(
     private httpClient: HttpClient,
     private snackbar: MatSnackBar,
@@ -25,19 +26,23 @@ export class AdminEmployeeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.FetchEmployees();
+    this.FetchEmployees(this.ime_prezime);
   }
-
-  FetchEmployees(): void {
-    console.log('hahah');
-    this.httpClient.get(this.api_url + '/api/Korisnik').subscribe((x) => {
-      this.employee = x;
-    });
+  Filtriraj() {
+    this.FetchEmployees(this.ime_prezime);
+  }
+  FetchEmployees(ime_prezime?: string): void {
+    this.httpClient
+      .get(`${routerpath}/api/Korisnik?ime_prezime=${ime_prezime}`)
+      .subscribe((res) => {
+        console.log(this.employee);
+        if (!!res) this.employee = res;
+      });
   }
   Obrisi(id: number): void {
     try {
       this.httpClient
-        .delete(`${this.api_url}/api/Korisnik?id=${id}`)
+        .delete(`${routerpath}/api/Korisnik?id=${id}`)
         .subscribe((res) => {
           if (res) this.FetchEmployees();
         });
@@ -63,5 +68,8 @@ export class AdminEmployeeComponent implements OnInit {
       })
       .afterClosed()
       .subscribe(() => this.FetchEmployees());
+  }
+  getSliku(id: number) {
+    return `${routerpath}/api/Korisnik/GetSlikaById?id=${id}`;
   }
 }

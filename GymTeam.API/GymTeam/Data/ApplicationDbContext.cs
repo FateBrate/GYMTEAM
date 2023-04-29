@@ -13,7 +13,6 @@ namespace GymTeam.Data
         public DbSet<Cjenovnik> Cjenovnik { get; set; }  
         public DbSet<VideoTrening>VideoTrening { get; set; }  
         
-        public DbSet<Videozapis> Videozapis { get; set; }  
         public DbSet<Clanarina> Clanarina { get; set; }   
         public DbSet<Rezervacija> Rezervacija { get; set; }   
         public DbSet<ClanarinaPlacanje> ClanarinaPlacanje { get; set; }   

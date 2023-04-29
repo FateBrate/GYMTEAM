@@ -2,7 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CookieService } from 'ngx-cookie-service';
-import { COOKIE_USER_DATA, TOKEN_DATA } from 'src/app/constants/deafult';
+import {
+  COOKIE_USER_DATA,
+  TOKEN_DATA,
+  routerpath,
+} from 'src/app/constants/deafult';
 import { IUser } from 'src/app/service/models/user';
 
 @Component({
@@ -18,13 +22,8 @@ export class AdminInfoComponent implements OnInit {
   api_url: string = 'http://localhost:5164';
   counter: number = 1;
   userId: number = 0;
-  // ime: string = '';
-  // prezime: string = '';
-  // lozinka: string = '';
-  // brojTelefona: string = '';
-  // email: string = '';
   newKorisnik: any;
-
+  showBtn: boolean = false;
   editUser: any;
   PrikaziSifru() {
     this.changetype = !this.changetype;
@@ -56,7 +55,7 @@ export class AdminInfoComponent implements OnInit {
     }
   }
   saveChanges() {
-    const url = this.api_url + '/api/Korisnik?id=';
+    const url = routerpath + '/api/Korisnik?id=';
     console.log('uslo');
     this.editUser = {
       ime: this.korisnik?.ime,
@@ -101,5 +100,8 @@ export class AdminInfoComponent implements OnInit {
       duration: 3000,
       panelClass: ['cacin-caca'],
     });
+  }
+  getSliku(id: number) {
+    return `${routerpath}/api/Korisnik/GetSlikaById?id=${id}`;
   }
 }

@@ -6,14 +6,13 @@ import { Uloga } from 'src/app/service/models/role';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdminEmployeeComponent } from '../../admin-employee/./admin-employee.component';
+import { routerpath } from 'src/app/constants/deafult';
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.css'],
 })
 export class AddUserComponent implements OnInit {
-  api_url: string = 'http://localhost:5164';
-
   forma: FormGroup = new FormGroup({
     ime: new FormControl('', Validators.required),
     prezime: new FormControl('', Validators.required),
@@ -40,7 +39,7 @@ export class AddUserComponent implements OnInit {
       const objekat = { lokacijaId: 0, putanjaSlike: '' };
       data = { ...data, ...objekat };
       this.klijent
-        .post(`${this.api_url}/api/Korisnik`, { ...data })
+        .post(`${routerpath}/api/Korisnik`, { ...data })
         .subscribe((response) => {
           if (!!response) {
             this.snackbar.open('Korisnik uspjesno dodan', 'X', {

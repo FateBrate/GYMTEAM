@@ -17,11 +17,16 @@
               <img
                 class="rounded-circle mt-5"
                 width="150px"
-                src="../../../assets/user_empty.jpg"
-              /><span class="font-weight-bold"
-                >{{ korisnik.ime }} {{ korisnik.prezime }}</span
-              ><span class="text- #f8b739-50">{{ korisnik.email }}</span
-              ><span> </span>
+                src="{{ getSliku(korisnik.id) }}"
+              />
+              <input type="file" name="profilePicture" accept="image/*" />
+              <button
+                id="saveBtn"
+                class="btn btn-primary mt-2"
+                *ngIf="!!showBtn"
+              >
+                Save
+              </button>
             </div>
           </div>
           <div class="col-md-5 border-right">
