@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { IUser } from '../service/models/user';
 import { IAuth } from '../service/models/login';
 import { CookieService } from 'ngx-cookie-service';
-import { COOKIE_USER_DATA } from '../constants/deafult';
+import { COOKIE_USER_DATA, routerpath } from '../constants/deafult';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin-page',
@@ -10,9 +11,19 @@ import { COOKIE_USER_DATA } from '../constants/deafult';
   styleUrls: ['./admin-page.component.css'],
 })
 export class AdminPageComponent implements OnInit {
-  constructor(private cookie: CookieService) {}
-  korisnik?: IUser;
+  constructor(private cookie: CookieService, private httpClient: HttpClient) {}
+  korisnik: any;
   ngOnInit(): void {
-    this.korisnik = JSON.parse(this.cookie.get(COOKIE_USER_DATA));
+    const cookieValue = this.cookie.get(COOKIE_USER_DATA);
+    if (cookieValue) {
+      let userId = JSON.parse(cookieValue);
+      this.httpClient
+        .get(`${routerpath}/api/Korisnik/GetById?id=${userId}`)
+        .subscribe((res) => {
+          if (!!res) {
+            this.korisnik = res;
+          }
+        });
+    }
   }
 }
