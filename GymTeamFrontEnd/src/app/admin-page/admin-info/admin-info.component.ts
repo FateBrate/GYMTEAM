@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CookieService } from 'ngx-cookie-service';
+
 import {
   COOKIE_USER_DATA,
   TOKEN_DATA,
@@ -25,6 +26,9 @@ export class AdminInfoComponent implements OnInit {
   newKorisnik: any;
   showBtn: boolean = false;
   editUser: any;
+  photo: any;
+  newPhotoString: any;
+  NewPhotoFile: any;
   PrikaziSifru() {
     this.changetype = !this.changetype;
   }
@@ -33,14 +37,22 @@ export class AdminInfoComponent implements OnInit {
     private httpClient: HttpClient,
     private snackbar: MatSnackBar
   ) {}
-  korisnik?: IUser;
+  korisnik: any;
   ngOnInit(): void {
     this.loadUser();
+    this.photo = this.getSliku(this.korisnik?.id);
   }
   loadUser() {
-    this.korisnik = JSON.parse(this.cookie.get(COOKIE_USER_DATA));
-    if (this.korisnik != null) {
-      this.userId = this.korisnik.id;
+    const cookieValue = this.cookie.get(COOKIE_USER_DATA);
+    if (cookieValue) {
+      let userId = JSON.parse(cookieValue);
+      this.httpClient
+        .get(`${routerpath}/api/Korisnik/GetById?id=${userId}`)
+        .subscribe((res) => {
+          if (!!res) {
+            this.korisnik = res;
+          }
+        });
     }
   }
   editData() {
@@ -48,7 +60,6 @@ export class AdminInfoComponent implements OnInit {
     if (this.enableEdit == true) this.buttonName = 'Spremi';
     else this.buttonName = 'Uredi podatke';
     this.counter++;
-    console.log('radi');
     console.log(this.counter);
     if (this.counter == 3) {
       this.saveChanges();
@@ -56,7 +67,6 @@ export class AdminInfoComponent implements OnInit {
   }
   saveChanges() {
     const url = routerpath + '/api/Korisnik?id=';
-    console.log('uslo');
     this.editUser = {
       ime: this.korisnik?.ime,
       email: this.korisnik?.email,
@@ -65,11 +75,9 @@ export class AdminInfoComponent implements OnInit {
       brojTelefona: this.korisnik?.brojTelefona,
     };
     if ((this.changeData = true)) {
-      console.log('promjena');
     }
 
     if (!this.enableEdit && !!this.changeData) {
-      console.log('updateovano');
       const cookieSettings = {
         domain: 'localhost',
         path: '/',
@@ -103,5 +111,27 @@ export class AdminInfoComponent implements OnInit {
   }
   getSliku(id: number) {
     return `${routerpath}/api/Korisnik/GetSlikaById?id=${id}`;
+  }
+  onFileChange(event: any) {
+    this.showBtn = true;
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.newPhotoString = reader.result?.toString().split(',')[1];
+      this.NewPhotoFile = reader.result;
+    };
+  }
+  updateProfileImage() {
+    const url = `${routerpath}/api/Korisnik/ChangePhoto?id=${this.korisnik.id}`;
+    const body = this.NewPhotoFile;
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    console.log(this.newPhotoString);
+    console.log(this.NewPhotoFile);
+    this.httpClient.put(url, body, { headers }).subscribe((res) => {
+      if (!!res) {
+        console.log('proslo');
+      }
+    });
   }
 }

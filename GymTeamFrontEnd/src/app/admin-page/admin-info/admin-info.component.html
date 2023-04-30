@@ -17,13 +17,20 @@
               <img
                 class="rounded-circle mt-5"
                 width="150px"
-                src="{{ getSliku(korisnik.id) }}"
+                height="150px"
+                [src]="showBtn ? NewPhotoFile : getSliku(korisnik.id)"
               />
-              <input type="file" name="profilePicture" accept="image/*" />
+              <input
+                type="file"
+                name="profilePicture"
+                accept="image/*"
+                (change)="onFileChange($event)"
+              />
               <button
                 id="saveBtn"
                 class="btn btn-primary mt-2"
                 *ngIf="!!showBtn"
+                (click)="updateProfileImage()"
               >
                 Save
               </button>

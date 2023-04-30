@@ -81,7 +81,7 @@ namespace GymTeam.Controllers
             return File(slika, "image/*");
         }
         [HttpPut("ChangePhoto")]
-        public ActionResult<Korisnik> editPhoto(string  file,int id)
+        public ActionResult<Korisnik> editPhoto([FromBody] string  file,int id)
         {
             var thiskorisnik=_dbcontext.Korisnik.Find(id);
             if (thiskorisnik != null)
