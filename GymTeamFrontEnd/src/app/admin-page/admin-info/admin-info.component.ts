@@ -114,15 +114,43 @@ export class AdminInfoComponent implements OnInit {
   }
   onFileChange(event: any) {
     this.showBtn = true;
-    const file = event.target.files[0];
+    // const file = event.target.files[0];
+    // const reader = new FileReader();
+    // reader.readAsDataURL(file);
+    // reader.onload = () => {
+    //   this.newPhotoString = reader.result?.toString().split(',')[1];
+    //   this.NewPhotoFile = reader.result;
+    //   if (reader.result !== null) {
+    //     const blob = new Blob([reader.result], { type: file.type });
+    //     this.NewPhotoFile = blob;
+    //   }
     const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      this.newPhotoString = reader.result?.toString().split(',')[1];
-      this.NewPhotoFile = reader.result;
-    };
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.NewPhotoFile = reader.result;
+      };
+    }
   }
+
   updateProfileImage() {
+    // const url = `${routerpath}/api/Korisnik/ChangePhoto?id=${this.korisnik.id}`;
+    // const formData = new FormData();
+    // formData.append('file', this.NewPhotoFile, this.NewPhotoFile.name);
+    // const headers = new HttpHeaders().set(
+    //   'Content-Type',
+    //   'multipart/form-data/json'
+    // );
+    // console.log(this.newPhotoString);
+    // console.log(this.NewPhotoFile);
+    // this.httpClient.put(url, formData, { headers }).subscribe((res) => {
+    //   if (!!res) {
+    //     console.log('proslo');
+    //   }
+    // });
     const url = `${routerpath}/api/Korisnik/ChangePhoto?id=${this.korisnik.id}`;
     const body = this.NewPhotoFile;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
