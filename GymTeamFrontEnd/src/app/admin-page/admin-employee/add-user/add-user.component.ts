@@ -23,6 +23,7 @@ export class AddUserComponent implements OnInit {
     datumRodjenja: new FormControl('', Validators.required),
   });
   role = Uloga;
+  selected: boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
