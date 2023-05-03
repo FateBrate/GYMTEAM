@@ -4,6 +4,7 @@ using GymTeam.Models;
 using GymTeam.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata;
 
 namespace GymTeam.Controllers
 {
@@ -81,9 +82,9 @@ namespace GymTeam.Controllers
             return File(slika, "image/*");
         }
         [HttpPut("ChangePhoto")]
-        public ActionResult<Korisnik> editPhoto([FromBody] string  file,int id)
+        public ActionResult<Korisnik> editPhoto([FromForm] IFormFile file,int id)
         {
-            var thiskorisnik=_dbcontext.Korisnik.Find(id);
+            var thiskorisnik = _dbcontext.Korisnik.Find(id);
             if (thiskorisnik != null)
             {
                 if (file != null)
@@ -93,10 +94,9 @@ namespace GymTeam.Controllers
             else throw new Exception("Greska sa id-em korisnika");
             _dbcontext.Korisnik.Update(thiskorisnik);
             _dbcontext.SaveChanges();
-            return Ok(thiskorisnik);
-            
-
+            return Ok();
         }
+
         [HttpPut]
         public Korisnik Edit(KorisnikUVM korisnik,int id)
         {

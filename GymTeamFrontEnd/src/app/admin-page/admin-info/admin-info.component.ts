@@ -27,8 +27,7 @@ export class AdminInfoComponent implements OnInit {
   showBtn: boolean = false;
   editUser: any;
   photo: any;
-  newPhotoString: any;
-  NewPhotoFile: any;
+  uploadedFile: any;
   PrikaziSifru() {
     this.changetype = !this.changetype;
   }
@@ -114,49 +113,17 @@ export class AdminInfoComponent implements OnInit {
   }
   onFileChange(event: any) {
     this.showBtn = true;
-    // const file = event.target.files[0];
-    // const reader = new FileReader();
-    // reader.readAsDataURL(file);
-    // reader.onload = () => {
-    //   this.newPhotoString = reader.result?.toString().split(',')[1];
-    //   this.NewPhotoFile = reader.result;
-    //   if (reader.result !== null) {
-    //     const blob = new Blob([reader.result], { type: file.type });
-    //     this.NewPhotoFile = blob;
-    //   }
-    const reader = new FileReader();
-
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      reader.readAsDataURL(file);
-
-      reader.onload = () => {
-        this.NewPhotoFile = reader.result;
-      };
-    }
+    this.uploadedFile = event.target.files[0];
   }
 
   updateProfileImage() {
-    // const url = `${routerpath}/api/Korisnik/ChangePhoto?id=${this.korisnik.id}`;
-    // const formData = new FormData();
-    // formData.append('file', this.NewPhotoFile, this.NewPhotoFile.name);
-    // const headers = new HttpHeaders().set(
-    //   'Content-Type',
-    //   'multipart/form-data/json'
-    // );
-    // console.log(this.newPhotoString);
-    // console.log(this.NewPhotoFile);
-    // this.httpClient.put(url, formData, { headers }).subscribe((res) => {
-    //   if (!!res) {
-    //     console.log('proslo');
-    //   }
-    // });
+    const formData = new FormData();
+    formData.append('file', this.uploadedFile);
+
     const url = `${routerpath}/api/Korisnik/ChangePhoto?id=${this.korisnik.id}`;
-    const body = this.NewPhotoFile;
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    console.log(this.newPhotoString);
-    console.log(this.NewPhotoFile);
-    this.httpClient.put(url, body, { headers }).subscribe((res) => {
+    const headers = new HttpHeaders();
+
+    this.httpClient.put(url, formData, { headers }).subscribe((res) => {
       if (!!res) {
         console.log('proslo');
       }
