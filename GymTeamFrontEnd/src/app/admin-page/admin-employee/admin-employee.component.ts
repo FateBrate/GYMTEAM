@@ -35,7 +35,6 @@ export class AdminEmployeeComponent implements OnInit {
     this.httpClient
       .get(`${routerpath}/api/Korisnik?ime_prezime=${ime_prezime}`)
       .subscribe((res) => {
-        console.log(this.employee);
         if (!!res) this.employee = res;
       });
   }
