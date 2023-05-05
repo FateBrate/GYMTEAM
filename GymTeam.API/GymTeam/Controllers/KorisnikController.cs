@@ -94,7 +94,7 @@ namespace GymTeam.Controllers
             else throw new Exception("Greska sa id-em korisnika");
             _dbcontext.Korisnik.Update(thiskorisnik);
             _dbcontext.SaveChanges();
-            return Ok();
+            return Ok(thiskorisnik);
         }
 
         [HttpPut]

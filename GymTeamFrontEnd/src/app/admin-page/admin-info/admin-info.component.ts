@@ -1,14 +1,14 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable } from 'rxjs';
 
 import {
   COOKIE_USER_DATA,
   TOKEN_DATA,
   routerpath,
 } from 'src/app/constants/deafult';
-import { IUser } from 'src/app/service/models/user';
 
 @Component({
   selector: 'app-admin-info',
@@ -28,6 +28,9 @@ export class AdminInfoComponent implements OnInit {
   editUser: any;
   photo: any;
   uploadedFile: any;
+  selectedImage: any;
+  @Output() refreshUser: EventEmitter<void> = new EventEmitter<void>();
+
   PrikaziSifru() {
     this.changetype = !this.changetype;
   }
@@ -37,23 +40,11 @@ export class AdminInfoComponent implements OnInit {
     private snackbar: MatSnackBar
   ) {}
   korisnik: any;
+
   ngOnInit(): void {
     this.loadUser();
-    this.photo = this.getSliku(this.korisnik?.id);
   }
-  loadUser() {
-    const cookieValue = this.cookie.get(COOKIE_USER_DATA);
-    if (cookieValue) {
-      let userId = JSON.parse(cookieValue);
-      this.httpClient
-        .get(`${routerpath}/api/Korisnik/GetById?id=${userId}`)
-        .subscribe((res) => {
-          if (!!res) {
-            this.korisnik = res;
-          }
-        });
-    }
-  }
+
   editData() {
     this.enableEdit = !this.enableEdit;
     if (this.enableEdit == true) this.buttonName = 'Spremi';
@@ -108,25 +99,67 @@ export class AdminInfoComponent implements OnInit {
       panelClass: ['cacin-caca'],
     });
   }
-  getSliku(id: number) {
-    return `${routerpath}/api/Korisnik/GetSlikaById?id=${id}`;
+  getSliku(id: number): string {
+    return `${routerpath}/api/Korisnik/GetSlikaById?id=${id}&timestamp=${new Date().getTime()}`;
   }
+
   onFileChange(event: any) {
     this.showBtn = true;
     this.uploadedFile = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.selectedImage = e.target.result;
+    };
+    reader.readAsDataURL(this.uploadedFile);
+  }
+  loadUser(): Promise<void> {
+    console.log('loadi');
+    const cookieValue = this.cookie.get(COOKIE_USER_DATA);
+    if (cookieValue) {
+      const userId = JSON.parse(cookieValue);
+      const observable = this.httpClient.get(
+        `${routerpath}/api/Korisnik/GetById?id=${userId}`
+      );
+      return observable.toPromise().then((res) => {
+        if (!!res) {
+          this.korisnik = res;
+          this.selectedImage = this.getSliku(this.korisnik.id);
+        }
+      });
+    }
+    console.log(this.korisnik);
+    return Promise.resolve();
   }
 
-  updateProfileImage() {
+  updateProfileImage(): any {
     const formData = new FormData();
     formData.append('file', this.uploadedFile);
 
     const url = `${routerpath}/api/Korisnik/ChangePhoto?id=${this.korisnik.id}`;
     const headers = new HttpHeaders();
 
-    this.httpClient.put(url, formData, { headers }).subscribe((res) => {
-      if (!!res) {
-        console.log('proslo');
-      }
-    });
+    this.httpClient
+      .put(url, formData, { headers })
+      .toPromise()
+      .then(async (res) => {
+        console.log(res);
+        if (!!res) {
+          this.showBtn = false;
+
+          this.selectedImage = this.selectedImage = this.getSliku(
+            this.korisnik.id
+          );
+
+          this.loadUser();
+          this.updateProfileImage().then(() => {
+            this.refreshUser.emit();
+          });
+          this.snackbar.open('Uspješno izmjenjena slika profila', 'X', {
+            duration: 3000,
+            panelClass: ['cacin-caca'],
+          });
+        }
+      });
+    return true;
   }
 }
