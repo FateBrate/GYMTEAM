@@ -1,0 +1,17 @@
+body{
+    min-height: 1;
+    display: flex;
+    width: 100%;
+}
+.about-info{
+    height: 100vh;
+    width:100%;
+}
+.about-info-header{
+    background-image: url("../../../assets/teretana.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    color: red;
+}

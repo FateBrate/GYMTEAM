@@ -1,9 +1,17 @@
-<div class="landing-navigation">
-    <a routerLink="/lokacije">lokacije</a>
-    <a routerLink="/about">about</a>
-    <a routerLink="/shop">shop</a>
-    <a routerLink="/cjenovnik">cjenovnik</a>
-</div>
-
+<ul class="nav justify-content-end"id="navbar">
+  <h3 id="logo"class="col-md-6 order-first">GymTeam</h3>
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" routerLink="/lokacije">lokacije</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="about"><p>about</p></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/shop">shop</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" routerLink="/cjenovnik">cjenovnik</a>
+      </li>
+  </ul>
 
 <router-outlet></router-outlet>
