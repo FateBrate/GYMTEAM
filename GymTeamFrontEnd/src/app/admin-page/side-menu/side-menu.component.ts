@@ -5,6 +5,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { COOKIE_USER_DATA, routerpath } from '../../constants/deafult';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 @Component({
   selector: 'app-side-menu',
   templateUrl: './side-menu.component.html',
@@ -18,6 +20,14 @@ export class SideMenuComponent implements OnInit {
   ) {}
   korisnik: any;
   ngOnInit(): void {
+    this.loadUserData();
+  }
+  logout() {
+    this.router.navigate(['login']);
+    this.cookie.delete;
+    sessionStorage.clear;
+  }
+  loadUserData() {
     const cookieValue = this.cookie.get(COOKIE_USER_DATA);
     if (cookieValue) {
       let userId = JSON.parse(cookieValue);
@@ -29,11 +39,6 @@ export class SideMenuComponent implements OnInit {
           }
         });
     }
-  }
-  logout() {
-    this.router.navigate(['login']);
-    this.cookie.delete;
-    sessionStorage.clear;
   }
   getSliku(id: number) {
     return `${routerpath}/api/Korisnik/GetSlikaById?id=${id}`;
