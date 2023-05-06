@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { IAuth } from 'src/app/service/models/login';
 import { IUser } from 'src/app/service/models/user';
 import { CookieService } from 'ngx-cookie-service';
@@ -11,6 +11,8 @@ import { Subject } from 'rxjs';
   selector: 'app-side-menu',
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.css'],
+  template:
+    '`<app-admin-info (refreshUser)="loadUserData()"></app-admin-info>`',
 })
 export class SideMenuComponent implements OnInit {
   constructor(
@@ -19,6 +21,7 @@ export class SideMenuComponent implements OnInit {
     private httpClient: HttpClient
   ) {}
   korisnik: any;
+
   ngOnInit(): void {
     this.loadUserData();
   }
