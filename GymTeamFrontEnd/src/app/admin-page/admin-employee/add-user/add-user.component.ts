@@ -14,10 +14,19 @@ import { routerpath } from 'src/app/constants/deafult';
 })
 export class AddUserComponent implements OnInit {
   forma: FormGroup = new FormGroup({
-    ime: new FormControl('', Validators.required),
-    prezime: new FormControl('', Validators.required),
-    brojTelefona: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
+    ime: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[a-zA-Z ]*$'),
+    ]),
+    prezime: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[a-zA-Z ]*$'),
+    ]),
+    brojTelefona: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[0-9]*$'),
+    ]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     lozinka: new FormControl('', Validators.required),
     roleId: new FormControl(Uloga.GuestUser, Validators.required),
     datumRodjenja: new FormControl('', Validators.required),
