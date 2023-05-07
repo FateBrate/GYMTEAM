@@ -3,12 +3,8 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
-
-import {
-  COOKIE_USER_DATA,
-  TOKEN_DATA,
-  routerpath,
-} from 'src/app/constants/deafult';
+import { DataService } from 'src/app/service/data.service';
+import { COOKIE_USER_DATA, routerpath } from 'src/app/constants/deafult';
 
 @Component({
   selector: 'app-admin-info',
@@ -29,12 +25,12 @@ export class AdminInfoComponent implements OnInit {
   photo: any;
   uploadedFile: any;
   selectedImage: any;
-  @Output() refreshUser: EventEmitter<void> = new EventEmitter<void>();
 
   PrikaziSifru() {
     this.changetype = !this.changetype;
   }
   constructor(
+    private dataService: DataService,
     private cookie: CookieService,
     private httpClient: HttpClient,
     private snackbar: MatSnackBar
@@ -113,7 +109,6 @@ export class AdminInfoComponent implements OnInit {
     reader.readAsDataURL(this.uploadedFile);
   }
   loadUser(): Promise<void> {
-    console.log('loadi');
     const cookieValue = this.cookie.get(COOKIE_USER_DATA);
     if (cookieValue) {
       const userId = JSON.parse(cookieValue);
@@ -141,7 +136,7 @@ export class AdminInfoComponent implements OnInit {
     this.httpClient
       .put(url, formData, { headers })
       .toPromise()
-      .then(async (res) => {
+      .then((res) => {
         console.log(res);
         if (!!res) {
           this.showBtn = false;
@@ -151,15 +146,14 @@ export class AdminInfoComponent implements OnInit {
           );
 
           this.loadUser();
-          this.updateProfileImage().then(() => {
-            this.refreshUser.emit();
-          });
+
+          this.dataService.userUpdated.emit();
+
           this.snackbar.open('Uspješno izmjenjena slika profila', 'X', {
             duration: 3000,
             panelClass: ['cacin-caca'],
           });
         }
       });
-    return true;
   }
 }
