@@ -2,7 +2,9 @@
   <div class="navi p-4 pt-5">
     <a
       class="img logo rounded-circle mb-5"
-      [style.background-image]="'url(' + getSliku(korisnik.id) + ')'"
+      [style.background-image]="
+        slika ? 'url(' + slika + ')' : 'url(' + getSliku(korisnik.id) + '))'
+      "
     ></a>
     <h2 style="color: #f8b739">{{ korisnik.ime }} {{ korisnik.prezime }}</h2>
     <ul class="list-unstyled components mb-5">

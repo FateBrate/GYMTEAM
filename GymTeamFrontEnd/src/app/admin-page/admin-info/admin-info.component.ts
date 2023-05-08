@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { DataService } from 'src/app/service/data.service';
 import { COOKIE_USER_DATA, routerpath } from 'src/app/constants/deafult';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-admin-info',
@@ -122,38 +123,36 @@ export class AdminInfoComponent implements OnInit {
         }
       });
     }
-    console.log(this.korisnik);
+
     return Promise.resolve();
   }
 
-  updateProfileImage(): any {
+  async updateProfileImage(): Promise<any> {
     const formData = new FormData();
     formData.append('file', this.uploadedFile);
 
     const url = `${routerpath}/api/Korisnik/ChangePhoto?id=${this.korisnik.id}`;
     const headers = new HttpHeaders();
 
-    this.httpClient
-      .put(url, formData, { headers })
-      .toPromise()
-      .then((res) => {
-        console.log(res);
-        if (!!res) {
-          this.showBtn = false;
+    try {
+      const res = await this.httpClient
+        .put(url, formData, { headers })
+        .toPromise();
 
-          this.selectedImage = this.selectedImage = this.getSliku(
-            this.korisnik.id
-          );
+      if (!!res) {
+        this.showBtn = false;
 
-          this.loadUser();
-
-          this.dataService.userUpdated.emit();
-
-          this.snackbar.open('Uspješno izmjenjena slika profila', 'X', {
-            duration: 3000,
-            panelClass: ['cacin-caca'],
-          });
-        }
-      });
+        this.snackbar.open('Uspješno izmjenjena slika profila', 'X', {
+          duration: 3000,
+          panelClass: ['cacin-caca'],
+        });
+        await this.dataService.updateKorisnik();
+        const korisnik = await this.dataService.updateKorisnik();
+        this.selectedImage = this.getSliku(this.korisnik.id);
+        this.dataService.user$.next(korisnik);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 }

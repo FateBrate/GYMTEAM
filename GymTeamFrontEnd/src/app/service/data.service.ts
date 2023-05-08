@@ -2,38 +2,41 @@ import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { COOKIE_USER_DATA, routerpath } from '../constants/deafult';
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  public userUpdated = new EventEmitter<any>();
-
+  private prosliejdi = new BehaviorSubject<any>(null);
+  public user$ = this.prosliejdi;
   constructor(
     private httpClient: HttpClient,
     private cookieService: CookieService
-  ) {}
+  ) {
+    this.loadUserData();
+  }
   korisnik: any;
   getUserUpdatedListener() {
     // console.log('servis');
-    return this.userUpdated.asObservable();
+    return this.prosliejdi.asObservable();
   }
 
   async loadUserData() {
-    console.log('service');
     const cookieValue = this.cookieService.get(COOKIE_USER_DATA);
     if (cookieValue) {
       let userId = JSON.parse(cookieValue);
-      await this.httpClient
+      this.httpClient
         .get(`${routerpath}/api/Korisnik/GetById?id=${userId}`)
-        .toPromise()
-        .then((res) => {
-          this.korisnik = res;
-          // this.userUpdated.next(res);
-          console.log('dobavljam', this.korisnik);
-          return this.korisnik;
+        .subscribe((res: any) => {
+          if (!!res) {
+            this.korisnik = res;
+            this.prosliejdi.next(res);
+          }
         });
     }
+  }
+  async updateKorisnik() {
+    await this.loadUserData();
   }
 }
