@@ -28,61 +28,23 @@ export class SideMenuComponent implements OnInit {
   ) {}
 
   korisnik: any;
-
+  slika: any;
   ngOnInit(): void {
-    // this.dataService.getUserUpdatedListener().subscribe((user: any) => {
-    //   this.korisnik = user;
-    //   console.log('user', user);
-    // });
-    // this.loadUserData();
-    this.allNighz();
+    this.loadAll();
   }
-
-  allNighz() {
-    // this.dataService.getUserUpdatedListener().subscribe((user: any) => {
-    //   console.log(user, 'hahahah');
-    //   // this.korisnik = user;
-    // });
-    this.loadUserData();
+  loadAll() {
+    this.dataService.user$.subscribe((user) => {
+      this.korisnik = user;
+      this.slika = this.getSliku(this.korisnik?.id);
+    });
   }
-
   logout() {
     this.router.navigate(['login']);
     this.cookie.delete;
     sessionStorage.clear();
   }
-  // loadUserData() {
-  //   const cookieValue = this.cookie.get(COOKIE_USER_DATA);
-  //   if (cookieValue) {
-  //     let userId = JSON.parse(cookieValue);
-  //     this.httpClient
-  //       .get(`${routerpath}/api/Korisnik/GetById?id=${userId}`)
-  //       .subscribe((res) => {
-  //         if (!!res) {
-  //           this.korisnik = res;
-  //         }
-  //       });
-  //   }
-  // }
-  async loadUserData() {
-    this.dataService.userUpdated.emit();
-    console.log('ja ba');
-    this.korisnik = await this.dataService.loadUserData();
-    console.log(this.korisnik, 'halo');
-    console.log(this.korisnik, 'sidemenu loadUserData');
-    const cookieValue = this.cookie.get(COOKIE_USER_DATA);
-    if (cookieValue) {
-      let userId = JSON.parse(cookieValue);
-      this.httpClient
-        .get(`${routerpath}/api/Korisnik/GetById?id=${userId}`)
-        .subscribe((res: any) => {
-          if (!!res) {
-            this.korisnik = res;
-          }
-        });
-    }
-  }
+
   getSliku(id: number) {
-    return `${routerpath}/api/Korisnik/GetSlikaById?id=${id}`;
+    return `${routerpath}/api/Korisnik/GetSlikaById?id=${id}&timestamp=${new Date().getTime()}`;
   }
 }
