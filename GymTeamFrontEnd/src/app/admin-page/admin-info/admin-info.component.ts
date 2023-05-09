@@ -3,12 +3,9 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
-
-import {
-  COOKIE_USER_DATA,
-  TOKEN_DATA,
-  routerpath,
-} from 'src/app/constants/deafult';
+import { DataService } from 'src/app/service/data.service';
+import { COOKIE_USER_DATA, routerpath } from 'src/app/constants/deafult';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-admin-info',
@@ -29,12 +26,12 @@ export class AdminInfoComponent implements OnInit {
   photo: any;
   uploadedFile: any;
   selectedImage: any;
-  @Output() refreshUser: EventEmitter<void> = new EventEmitter<void>();
 
   PrikaziSifru() {
     this.changetype = !this.changetype;
   }
   constructor(
+    private dataService: DataService,
     private cookie: CookieService,
     private httpClient: HttpClient,
     private snackbar: MatSnackBar
@@ -113,7 +110,6 @@ export class AdminInfoComponent implements OnInit {
     reader.readAsDataURL(this.uploadedFile);
   }
   loadUser(): Promise<void> {
-    console.log('loadi');
     const cookieValue = this.cookie.get(COOKIE_USER_DATA);
     if (cookieValue) {
       const userId = JSON.parse(cookieValue);
@@ -127,39 +123,36 @@ export class AdminInfoComponent implements OnInit {
         }
       });
     }
-    console.log(this.korisnik);
+
     return Promise.resolve();
   }
 
-  updateProfileImage(): any {
+  async updateProfileImage(): Promise<any> {
     const formData = new FormData();
     formData.append('file', this.uploadedFile);
 
     const url = `${routerpath}/api/Korisnik/ChangePhoto?id=${this.korisnik.id}`;
     const headers = new HttpHeaders();
 
-    this.httpClient
-      .put(url, formData, { headers })
-      .toPromise()
-      .then(async (res) => {
-        console.log(res);
-        if (!!res) {
-          this.showBtn = false;
+    try {
+      const res = await this.httpClient
+        .put(url, formData, { headers })
+        .toPromise();
 
-          this.selectedImage = this.selectedImage = this.getSliku(
-            this.korisnik.id
-          );
+      if (!!res) {
+        this.showBtn = false;
 
-          this.loadUser();
-          this.updateProfileImage().then(() => {
-            this.refreshUser.emit();
-          });
-          this.snackbar.open('Uspješno izmjenjena slika profila', 'X', {
-            duration: 3000,
-            panelClass: ['cacin-caca'],
-          });
-        }
-      });
-    return true;
+        this.snackbar.open('Uspješno izmjenjena slika profila', 'X', {
+          duration: 3000,
+          panelClass: ['cacin-caca'],
+        });
+        await this.dataService.updateKorisnik();
+        const korisnik = await this.dataService.updateKorisnik();
+        this.selectedImage = this.getSliku(this.korisnik.id);
+        this.dataService.user$.next(korisnik);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 }

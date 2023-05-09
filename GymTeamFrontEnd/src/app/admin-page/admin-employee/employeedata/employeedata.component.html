@@ -1,26 +1,20 @@
-<div
-  class="container rounded"
-  style="background-color: #1d1919; color: #f8b739"
->
+<div class="container rounded text-black pb-4" style="background-color: #fff">
   <button
     type="button"
     class="btn-close"
     aria-label="Close"
-    style="
-      background-color: #f8b739;
-      margin-left: 96%;
-      margin-top: 2%;
-      margin-top: 2%;
-    "
+    style="margin-left: 96%; margin-top: 2%; margin-top: 2%"
     (click)="popUpRef.close()"
   ></button>
   <div class="row" style="margin-left: 5%">
     <div class="col-md-3 border-right">
       <div class="d-flex flex-column align-items-center text-center p-3 py-5">
         <img
-          class="rounded-circle mt-5"
+          *ngIf="radnik != null"
+          class="rounded-circle mt-3 border border-dark"
           width="150px"
-          src="../../../assets/user_empty.jpg"
+          height="150px"
+          [src]="radnik.id ? getSliku(radnik.id) : ''"
         /><span class="font-weight-bold"
           >{{ radnik.ime }} {{ radnik.prezime }}</span
         ><span class="text- #f8b739-50">{{ radnik.email }}</span
@@ -76,7 +70,7 @@
             ><input
               type="text"
               class="form-control"
-              value="{{ radnik.role }}"
+              value="{{ ulogaString }}"
               disabled
             />
           </div>

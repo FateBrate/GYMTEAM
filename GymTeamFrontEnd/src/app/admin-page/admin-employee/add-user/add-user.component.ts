@@ -33,7 +33,8 @@ export class AddUserComponent implements OnInit {
   });
   role = Uloga;
   selected: boolean = false;
-
+  photo: any;
+  fileChange: boolean = false;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogref: MatDialogRef<AddUserComponent>,
@@ -43,10 +44,21 @@ export class AddUserComponent implements OnInit {
   ) {}
 
   ngOnInit() {}
+  onFileChange(event: any) {
+    const reader = new FileReader();
 
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.photo = reader.result;
+      };
+    }
+  }
   saveUser(data: Partial<IUser>) {
     if (this.forma.valid) {
-      const objekat = { lokacijaId: 0, putanjaSlike: '' };
+      const objekat = { lokacijaId: 0, slika: this.photo };
       data = { ...data, ...objekat };
       this.klijent
         .post(`${routerpath}/api/Korisnik`, { ...data })
