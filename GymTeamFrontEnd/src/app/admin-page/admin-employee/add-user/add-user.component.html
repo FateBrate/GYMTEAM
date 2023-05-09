@@ -1,24 +1,29 @@
-<div class="container rounded bg-dark text-light">
+<div class="container rounded text-black h-100">
   <button
     type="button"
-    class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+    class="btn-close btn-close-black position-absolute top-0 end-0 m-3"
     aria-label="Close"
     (click)="popUpRef.close()"
   ></button>
   <div class="row justify-content-center">
-    <div class="col-md-3 border-end">
+    <div class="col-md-3 border-end border-black">
       <div class="d-flex flex-column align-items-center text-center p-3 py-5">
         <img
           class="rounded-circle mt-5"
           width="150"
-          src="../../../assets/user_empty.jpg"
+          [src]="fileChange ? photo : '../../../assets/user_empty.jpg'"
         />
         <span></span>
-        <input type="file" style="margin-top: 10px" />
+        <input
+          class="form-control"
+          type="file"
+          (change)="onFileChange($event)"
+          style="margin-top: 10px; margin-left: 50px"
+        />
       </div>
     </div>
     <div class="col-md-8">
-      <div class="py-5">
+      <div class="py-4">
         <h4 class="text-center">Podaci o korisniku</h4>
         <form [formGroup]="forma" (ngSubmit)="saveUser(forma.value)">
           <div class="row mt-2">

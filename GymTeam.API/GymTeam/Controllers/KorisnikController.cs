@@ -34,7 +34,7 @@ namespace GymTeam.Controllers
                 roleId = x.roleID,
                
             };
-            if (x.slika == null)
+            if (x.slika != null)
             {
                 byte[] imageByte = x.slika.GetImage();
                 korisnik.slika = imageByte;
