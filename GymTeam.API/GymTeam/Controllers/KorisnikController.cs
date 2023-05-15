@@ -1,4 +1,5 @@
-﻿using GymTeam.Data;
+﻿using Azure;
+using GymTeam.Data;
 using GymTeam.Helper;
 using GymTeam.Models;
 using GymTeam.ViewModels;
@@ -49,20 +50,55 @@ namespace GymTeam.Controllers
             _dbcontext.SaveChanges();
             return korisnik;
         }
+        //[HttpGet]
+        //public ActionResult<List<Korisnik>> GetAll(string? ime_prezime)
+        //{
+
+        //    var data = _dbcontext.Korisnik.Where(korisnik => (
+        //     string.IsNullOrEmpty(ime_prezime) ||
+        //     (korisnik.ime + " " + korisnik.prezime).ToLower().StartsWith(ime_prezime.ToLower()) ||
+        //     (korisnik.prezime + " " + korisnik.ime).ToLower().StartsWith(ime_prezime.ToLower())))
+        //      .OrderByDescending(k => k.id)
+        //      .AsQueryable();
+
+        //    return data.Take(50).ToList();
+
+        //}
         [HttpGet]
-        public ActionResult<List<Korisnik>> GetAll(string? ime_prezime)
+        public ActionResult<object> GetAll(string? ime_prezime, int page = 1, int pageSize = 5)
         {
 
-            var data = _dbcontext.Korisnik.Where(korisnik => (
-             string.IsNullOrEmpty(ime_prezime) ||
-             (korisnik.ime + " " + korisnik.prezime).ToLower().StartsWith(ime_prezime.ToLower()) ||
-             (korisnik.prezime + " " + korisnik.ime).ToLower().StartsWith(ime_prezime.ToLower())))
-              .OrderByDescending(k => k.id)
-              .AsQueryable();
+            var data = _dbcontext.Korisnik.Where(korisnik =>
+                 string.IsNullOrEmpty(ime_prezime) ||
+                 (korisnik.ime + " " + korisnik.prezime).ToLower().StartsWith(ime_prezime.ToLower()) ||
+                 (korisnik.prezime + " " + korisnik.ime).ToLower().StartsWith(ime_prezime.ToLower())
+             )
+             .OrderByDescending(k => k.id)
+             .AsQueryable();
 
-            return data.Take(50).ToList();
+            int totalCount = data.Count();
+            int totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
 
+            // Validate page number and adjust if necessary
+            if (page < 1)
+                page = 1;
+            else if (page > totalPages)
+                page = totalPages;
+
+            // Apply pagination
+            data = data.Skip((page - 1) * pageSize).Take(pageSize);
+
+            var result =new
+            {
+                TotalCount = totalCount,
+                TotalPages = totalPages,
+                CurrentPage = page,
+                PageSize = pageSize,
+                Data = data.ToList()
+            };
+            return result;
         }
+
         [HttpGet("GetById")]
         public ActionResult GetById(int id)
         {

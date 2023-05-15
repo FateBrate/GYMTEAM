@@ -72,3 +72,9 @@ input.form-control {
   width: 20%;
   margin-right: 5%;
 }
+.btn.btn-sm.btn-primary {
+  margin-left: 0;
+}
+.pagination.buttons {
+  margin-left: 19%;
+}

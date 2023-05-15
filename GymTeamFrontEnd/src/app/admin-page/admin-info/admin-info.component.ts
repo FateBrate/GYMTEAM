@@ -1,11 +1,9 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
 import { DataService } from 'src/app/service/data.service';
 import { COOKIE_USER_DATA, routerpath } from 'src/app/constants/deafult';
-import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-admin-info',
