@@ -1,12 +1,11 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { from } from 'rxjs';
-import { AdminInfoComponent } from '../admin-info/admin-info.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { EmployeedataComponent } from './employeedata/employeedata.component';
 import { routerpath } from 'src/app/constants/deafult';
+import { UserData } from '../../service/models/usersData';
 
 @Component({
   selector: 'app-admin-employee',
@@ -19,6 +18,9 @@ export class AdminEmployeeComponent implements OnInit {
   lokacijaid: number = 0;
   employee: any;
   ime_prezime: string = '';
+  page: number = 1;
+  numberOfPages: number = 0;
+  pageSize: number = 6;
   constructor(
     private httpClient: HttpClient,
     private snackbar: MatSnackBar,
@@ -31,11 +33,25 @@ export class AdminEmployeeComponent implements OnInit {
   Filtriraj() {
     this.FetchEmployees(this.ime_prezime);
   }
-  FetchEmployees(ime_prezime?: string): void {
+  // FetchEmployees(ime_prezime?: string): void {
+  // this.httpClient
+  //   .get(`${routerpath}/api/Korisnik?ime_prezime=${ime_prezime}`)
+  //   .subscribe((res) => {
+  //     if (!!res) this.employee = res;
+  //   });
+
+  // }
+  FetchEmployees(ime_prezime?: string, page = 1, pageSize = 6): void {
     this.httpClient
-      .get(`${routerpath}/api/Korisnik?ime_prezime=${ime_prezime}`)
+      .get<UserData>(
+        `${routerpath}/api/Korisnik?ime_prezime=${ime_prezime}&page=${page}&pageSize=${pageSize}`
+      )
       .subscribe((res) => {
-        if (!!res) this.employee = res;
+        if (!!res) {
+          this.employee = res.data;
+          this.numberOfPages = res.totalPages;
+          // You can access pagination metadata here, such as res.totalCount, res.totalPages, res.currentPage, and res.pageSize
+        }
       });
   }
   Obrisi(id: number): void {
@@ -43,7 +59,7 @@ export class AdminEmployeeComponent implements OnInit {
       this.httpClient
         .delete(`${routerpath}/api/Korisnik?id=${id}`)
         .subscribe((res) => {
-          if (res) this.FetchEmployees();
+          if (res) this.FetchEmployees(this.ime_prezime);
         });
     } catch (error) {
       console.error(error);
@@ -66,9 +82,21 @@ export class AdminEmployeeComponent implements OnInit {
         panelClass: ['addUser'],
       })
       .afterClosed()
-      .subscribe(() => this.FetchEmployees());
+      .subscribe(() => this.FetchEmployees(this.ime_prezime));
   }
   getSliku(id: number) {
     return `${routerpath}/api/Korisnik/GetSlikaById?id=${id}`;
+  }
+  previousPage() {
+    if (this.page > 1) {
+      this.page--;
+      this.FetchEmployees(this.ime_prezime, this.page, 6);
+    }
+  }
+  nextPage() {
+    if (this.page < this.numberOfPages) {
+      this.page++;
+      this.FetchEmployees(this.ime_prezime, this.page, 6);
+    }
   }
 }

@@ -1,4 +1,4 @@
-<div class="container rounded text-black h-100">
+<div class="container rounded text-black h-90">
   <button
     type="button"
     class="btn-close btn-close-black position-absolute top-0 end-0 m-3"
@@ -11,14 +11,15 @@
         <img
           class="rounded-circle mt-5"
           width="150"
-          [src]="fileChange ? photo : '../../../assets/user_empty.jpg'"
+          height="150"
+          [src]="fileChange ? photoshow : '../../../assets/user_empty.jpg'"
         />
         <span></span>
         <input
           class="form-control"
           type="file"
           (change)="onFileChange($event)"
-          style="margin-top: 10px; margin-left: 50px"
+          style="margin-top: 10px"
         />
       </div>
     </div>
