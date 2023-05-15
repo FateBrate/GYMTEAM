@@ -34,6 +34,7 @@ export class AddUserComponent implements OnInit {
   role = Uloga;
   selected: boolean = false;
   photo: any;
+  photoshow: any;
   fileChange: boolean = false;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -46,12 +47,13 @@ export class AddUserComponent implements OnInit {
   ngOnInit() {}
   onFileChange(event: any) {
     const reader = new FileReader();
-
+    this.fileChange = true;
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       reader.readAsDataURL(file);
 
-      reader.onload = () => {
+      reader.onload = (e: any) => {
+        this.photoshow = e.target.result;
         this.photo = reader.result;
       };
     }
