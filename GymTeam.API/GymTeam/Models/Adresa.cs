@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System.ComponentModel.DataAnnotations;
 
 namespace GymTeam.Moduls
 {
@@ -9,6 +10,10 @@ namespace GymTeam.Moduls
         public string nazivGrada { get; set; }
         public string NazivUlice { get; set; }
         public int postanskiBroj { get; set; }
+        public string toString()
+        {
+            return nazivGrada + " " + NazivUlice + " " + postanskiBroj;
+        }
 
     }
 }

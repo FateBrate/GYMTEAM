@@ -1,4 +1,5 @@
 ﻿using GymTeam.Data;
+using GymTeam.Helper;
 using GymTeam.Moduls;
 using GymTeam.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -21,9 +22,15 @@ namespace GymTeam.Controllers
             Lokacija lokacija = new Lokacija
             {
                 naziv = x.naziv,
-               putanjaSlike= x.putanjaSlike,
                 adresaId = x.adresaId,
+                latitude= x.latitude,   
+                longitude=x.longitude
             };
+               if(x.slika!=null)
+            {
+                byte[] imageByte = x.slika.GetImage();
+                lokacija.slika = imageByte;
+            }
             _dbcontext.Add(lokacija);
             _dbcontext.SaveChanges();
             return lokacija;
@@ -37,7 +44,9 @@ namespace GymTeam.Controllers
             {
                 id = s.id,
                 naziv = s.naziv,
-                putanjaSlike=s.putanjaSlike,
+                latitude=s.latitude,
+                longitude=s.longitude,
+                slika=Convert.ToBase64String(s.slika),
                 adresaId = s.adresaId,
             }).Take(10);
             return Ok(data.ToList());
