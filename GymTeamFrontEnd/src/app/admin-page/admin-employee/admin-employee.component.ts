@@ -33,14 +33,7 @@ export class AdminEmployeeComponent implements OnInit {
   Filtriraj() {
     this.FetchEmployees(this.ime_prezime);
   }
-  // FetchEmployees(ime_prezime?: string): void {
-  // this.httpClient
-  //   .get(`${routerpath}/api/Korisnik?ime_prezime=${ime_prezime}`)
-  //   .subscribe((res) => {
-  //     if (!!res) this.employee = res;
-  //   });
 
-  // }
   FetchEmployees(ime_prezime?: string, page = 1, pageSize = 6): void {
     this.httpClient
       .get<UserData>(
@@ -50,7 +43,6 @@ export class AdminEmployeeComponent implements OnInit {
         if (!!res) {
           this.employee = res.data;
           this.numberOfPages = res.totalPages;
-          // You can access pagination metadata here, such as res.totalCount, res.totalPages, res.currentPage, and res.pageSize
         }
       });
   }
