@@ -386,6 +386,13 @@ FodyWeavers.xsd
 
 # Local History for Visual Studio Code
 .history/
+# Mapbox cache
+.mapbox/
+
+# Mapbox cache files
+.cache/
+# Mapbox configuration file
+/src/app/service/mapbox.config.ts
 
 # Windows Installer files from build outputs
 *.cab

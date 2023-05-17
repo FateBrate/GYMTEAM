@@ -16,34 +16,40 @@
     Dodaj novu lokaciju
   </div>
   <div class="lokacije">
-    <!-- <div class="lokBox" *ngFor="let x of lokacija"> -->
-    <div class="lokBox">
-      <img src="../../../assets/LocMo.jpg" />
-      <h5 class="naziv" style="color: #f8b739; font-weight: bold">
-        <!-- {{ x.naziv }} -->
-        GymTeam Mostar
+    <div class="lokBox" *ngFor="let x of locations">
+      <img src="{{ getImage(x.id) }}" />
+      <h5
+        class="naziv"
+        (click)="viewMore(x.id)"
+        style="color: #f8b739; font-weight: bold; cursor: pointer"
+      >
+        {{ x.naziv }}
       </h5>
     </div>
-    <div class="lokBox">
-      <img src="../../../assets/locSa.jpg" />
-      <h5 class="naziv" style="color: #f8b739; font-weight: bold">
-        <!-- {{ x.naziv }} -->
-        GymTeam Sarajevo
-      </h5>
-    </div>
-    <div class="lokBox">
-      <img src="../../../assets/LocZE.jpg" />
-      <h5 class="naziv" style="color: #f8b739; font-weight: bold">
-        <!-- {{ x.naziv }} -->
-        GymTeam Zenica
-      </h5>
-    </div>
-    <div class="lokBox">
-      <img src="../../../assets/LocTuz.jpg" style="height: 270px" />
-      <h5 class="naziv" style="color: #f8b739; font-weight: bold">
-        <!-- {{ x.naziv }} -->
-        GymTeam Tuzla
-      </h5>
+  </div>
+  <div
+    class="modal mt-5"
+    id="mapModal"
+    tabindex="-1"
+    style="display: block"
+    *ngIf="!!showMore"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-black" id="mapModalLabel">
+            {{ selectedLocation.naziv }}
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            (click)="openClose()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div id="map"></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

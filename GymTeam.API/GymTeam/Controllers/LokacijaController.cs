@@ -37,19 +37,24 @@ namespace GymTeam.Controllers
         
         }
         [HttpGet]
-        public ActionResult GetAll()
+        public ActionResult<IEnumerable<LokacijaGetVM>> GetAll()
         {
-            var data = _dbcontext.Lokacija.OrderBy(s => s.naziv)
-                .Select(s => new LokacijaGetVM()
-            {
-                id = s.id,
-                naziv = s.naziv,
-                latitude=s.latitude,
-                longitude=s.longitude,
-                slika=Convert.ToBase64String(s.slika),
-                adresaId = s.adresaId,
-            }).Take(10);
-            return Ok(data.ToList());
+            var data = _dbcontext.Lokacija
+                .Where(s => s.slika != null)
+                .OrderBy(s => s.naziv)
+                .Select(s => new LokacijaGetVM
+                {
+                    id = s.id,
+                    naziv = s.naziv,
+                    latitude = s.latitude,
+                    longitude = s.longitude,
+                    slika = Convert.ToBase64String(s.slika),
+                    adresaId = s.adresaId
+                })
+                .Take(10)
+                .ToList();
+
+            return Ok(data);
         }
         [HttpGet("GetbyId")]
         public ActionResult GetById(int id)
@@ -58,6 +63,16 @@ namespace GymTeam.Controllers
             if (lokacija != null)
                 return Ok(lokacija);
             else throw new Exception("Lokacija sa tim id-em ne postoji");
+        }
+        [HttpGet("GetSlikaById")]
+        public ActionResult GetNewsImage(int id)
+        {
+            byte[]? slika = _dbcontext.Lokacija.Find(id)?.slika;
+
+            if (slika == null)
+                return BadRequest();
+
+            return File(slika, "image/*");
         }
         [HttpDelete]
         public ActionResult DeleteById(int id)
