@@ -14,6 +14,9 @@ export class AdminLocationComponent implements OnInit {
   locations: any;
   selectedLocation: any;
   showMore: boolean = false;
+  openNew: boolean = false;
+  name: string = '';
+  photo: any;
   constructor(private httpClient: HttpClient) {}
 
   ngOnInit(): void {
@@ -31,6 +34,7 @@ export class AdminLocationComponent implements OnInit {
   openClose() {
     this.showMore = !this.showMore;
   }
+
   viewMore(id: number) {
     this.openClose();
     this.httpClient
@@ -54,4 +58,48 @@ export class AdminLocationComponent implements OnInit {
         }
       });
   }
+  onFileChange(event: any) {
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.photo = reader.result;
+      };
+    }
+  }
+  addNew() {
+    this.openNew = true;
+    let lati = 0;
+    let long = 0;
+    setTimeout(() => {
+      const map = new Map({
+        accessToken: MAPBOX_ACCESS_TOKEN,
+        container: 'mapAdd',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [17.8357, 44.1623],
+        zoom: 12,
+      });
+      const clickListener = (e: any) => {
+        lati = e.lngLat.lat;
+        long = e.lngLat.lng;
+
+        const marker = new mapboxgl.Marker().setLngLat([long, lati]).addTo(map);
+
+        map.off('click', clickListener);
+      };
+
+      map.on('click', clickListener);
+    }, 0);
+    const body = {
+      naziv: this.name,
+      adresaId: 2,
+      latitude: lati,
+      longitude: long,
+      slika: this.photo,
+    };
+  }
+  saveChanges() {}
 }
