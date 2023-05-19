@@ -52,7 +52,6 @@ export class AdminHomeComponent implements OnInit {
       .post(routerpath + '/api/Obavijest', body)
       .subscribe((res) => {
         if (!!res) {
-          console.log(res);
           this.snackbar.open('Uspjesno dodana nova obavijest', 'X', {
             duration: 3000,
             panelClass: ['cacin-caca'],

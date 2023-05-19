@@ -1,49 +1,105 @@
 <div id="content" class="p-4 p-md-5" style="margin-left: 18%">
-  <div
-    class="noviBtn"
-    type="button"
-    style="
-      color: white;
-      padding: 1%;
-      background-color: #f8b739;
-      border-radius: 7px;
-      margin-bottom: 2%;
-      width: 15%;
-      margin-left: 1%;
-    "
-  >
+  <div class="btn btn-success" type="button" (click)="addNew()">
     <i class="bi bi-plus-circle"></i>
     Dodaj novu lokaciju
   </div>
   <div class="lokacije">
-    <!-- <div class="lokBox" *ngFor="let x of lokacija"> -->
-    <div class="lokBox">
-      <img src="../../../assets/LocMo.jpg" />
-      <h5 class="naziv" style="color: #f8b739; font-weight: bold">
-        <!-- {{ x.naziv }} -->
-        GymTeam Mostar
+    <div class="lokBox" *ngFor="let x of locations">
+      <img src="{{ getImage(x.id) }}" class="lokImg" />
+      <h5
+        class="naziv"
+        (click)="viewMore(x.id)"
+        style="color: #f8b739; font-weight: bold; cursor: pointer"
+      >
+        {{ x.naziv }}
       </h5>
     </div>
-    <div class="lokBox">
-      <img src="../../../assets/locSa.jpg" />
-      <h5 class="naziv" style="color: #f8b739; font-weight: bold">
-        <!-- {{ x.naziv }} -->
-        GymTeam Sarajevo
-      </h5>
+  </div>
+  <div
+    class="modal mt-5"
+    id="mapModal"
+    tabindex="-1"
+    style="display: block"
+    *ngIf="!!showMore"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-black" id="mapModalLabel">
+            {{ selectedLocation?.naziv }}
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            (click)="openClose()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div id="map"></div>
+        </div>
+      </div>
     </div>
-    <div class="lokBox">
-      <img src="../../../assets/LocZE.jpg" />
-      <h5 class="naziv" style="color: #f8b739; font-weight: bold">
-        <!-- {{ x.naziv }} -->
-        GymTeam Zenica
-      </h5>
-    </div>
-    <div class="lokBox">
-      <img src="../../../assets/LocTuz.jpg" style="height: 270px" />
-      <h5 class="naziv" style="color: #f8b739; font-weight: bold">
-        <!-- {{ x.naziv }} -->
-        GymTeam Tuzla
-      </h5>
+  </div>
+  <!-- addNEW -->
+  <div
+    class="modal mt-5"
+    id="mapModal"
+    tabindex="-1"
+    style="display: block"
+    *ngIf="!!openNew"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-black" id="mapModalLabel">
+            Dodaj novu lokaciju
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            (click)="openNew = false"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label class="form-label">Naziv objekta</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="name"
+                [ngModelOptions]="{ standalone: true }"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Slika</label>
+              <input
+                type="file"
+                class="form-control"
+                (change)="onFileChange($event)"
+              />
+            </div>
+            <div id="mapAdd"></div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            tyle="button"
+            class="btn btn-secondary"
+            (click)="openNew = false"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            type="submit"
+            (click)="saveChanges()"
+          >
+            Save
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

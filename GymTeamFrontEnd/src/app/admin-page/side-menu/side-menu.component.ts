@@ -5,8 +5,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { IAuth } from 'src/app/service/models/login';
-import { IUser } from 'src/app/service/models/user';
+
 import { CookieService } from 'ngx-cookie-service';
 import { COOKIE_USER_DATA, routerpath } from '../../constants/deafult';
 import { Router } from '@angular/router';
