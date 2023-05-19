@@ -78,3 +78,7 @@ input.form-control {
 .pagination.buttons {
   margin-left: 19%;
 }
+.btn.btn-warning {
+  background-color: #198754;
+  border: none;
+}

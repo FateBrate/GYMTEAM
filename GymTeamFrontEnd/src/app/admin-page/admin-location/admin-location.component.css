@@ -7,15 +7,6 @@ body {
   color: gray;
 }
 
-a {
-  -webkit-transition: 0.3s all ease;
-  -o-transition: 0.3s all ease;
-  transition: 0.3s all ease;
-  color: #f8b739;
-  text-decoration: none;
-  font-size: 20px;
-}
-
 a:hover,
 a:focus {
   text-decoration: none !important;
@@ -52,23 +43,6 @@ h5,
   font-weight: 400;
   font-family: "Poppins", Arial, sans-serif;
   color: white;
-}
-
-.ftco-section {
-  padding: 7em 0;
-}
-
-.ftco-no-pt {
-  padding-top: 0;
-}
-
-.ftco-no-pb {
-  padding-bottom: 0;
-}
-
-.heading-section {
-  font-size: 28px;
-  color: #000;
 }
 
 .heading-section small {
@@ -124,53 +98,28 @@ a[data-toggle="collapse"] {
   background-size: cover;
 }
 
-.btn.btn-primary {
-  background: #f8b739;
-  border-color: #f8b739;
-}
-
-.btn.btn-primary:hover,
-.btn.btn-primary:focus {
-  background: #f8b739 !important;
-  border-color: #f8b739 !important;
-}
-
 .footer p {
   color: rgba(255, 255, 255, 0.5);
   text-align: center;
-}
-
-p {
-  color: white;
-}
-.card img {
-  width: 400px;
-  height: 300px;
 }
 
 .lokacije {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 50px;
-  padding-right: 2%;
-  padding-left: 5%;
   background-color: rgba(0, 0, 0, 0.5);
   margin-right: 20%;
   margin-left: 1%;
   padding-top: 4%;
   padding-bottom: 2%;
 }
-.lokBox img {
-  height: 300px;
-  width: 400px;
-}
+
 .lokBox {
   align-self: normal;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 300px;
-  width: 400px;
 }
 #map {
   width: 100%;
@@ -187,5 +136,14 @@ p {
   border-radius: 7px;
   margin-bottom: 2%;
   width: 15%;
+  margin-left: 1%;
+}
+.lokBox .lokImg {
+  width: 400px;
+  height: 260px;
+  object-fit: cover;
+}
+.btn.btn-success {
+  margin-bottom: 1%;
   margin-left: 1%;
 }

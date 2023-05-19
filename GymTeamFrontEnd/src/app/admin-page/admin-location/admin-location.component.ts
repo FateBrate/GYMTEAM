@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Map } from 'mapbox-gl';
 import * as mapboxgl from 'mapbox-gl';
 
@@ -17,7 +18,10 @@ export class AdminLocationComponent implements OnInit {
   openNew: boolean = false;
   name: string = '';
   photo: any;
-  constructor(private httpClient: HttpClient) {}
+  latitude: number = 0;
+  longitude: number = 0;
+
+  constructor(private httpClient: HttpClient, private snackbar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.GetLocations();
@@ -72,8 +76,7 @@ export class AdminLocationComponent implements OnInit {
   }
   addNew() {
     this.openNew = true;
-    let lati = 0;
-    let long = 0;
+
     setTimeout(() => {
       const map = new Map({
         accessToken: MAPBOX_ACCESS_TOKEN,
@@ -83,23 +86,39 @@ export class AdminLocationComponent implements OnInit {
         zoom: 12,
       });
       const clickListener = (e: any) => {
-        lati = e.lngLat.lat;
-        long = e.lngLat.lng;
+        this.latitude = e.lngLat.lat;
+        this.longitude = e.lngLat.lng;
 
-        const marker = new mapboxgl.Marker().setLngLat([long, lati]).addTo(map);
+        const marker = new mapboxgl.Marker()
+          .setLngLat([this.longitude, this.latitude])
+          .addTo(map);
 
         map.off('click', clickListener);
       };
 
       map.on('click', clickListener);
     }, 0);
+  }
+  saveChanges() {
     const body = {
       naziv: this.name,
       adresaId: 2,
-      latitude: lati,
-      longitude: long,
+      latitude: this.latitude,
+      longitude: this.longitude,
       slika: this.photo,
     };
+    this.httpClient
+      .post(routerpath + '/api/Lokacija', body)
+      .subscribe((res) => {
+        if (!!res) {
+          console.log(res);
+          this.snackbar.open('Uspjesno dodana nova obavijest', 'X', {
+            duration: 3000,
+            panelClass: ['cacin-caca'],
+          });
+          this.openNew = false;
+          this.GetLocations();
+        }
+      });
   }
-  saveChanges() {}
 }
