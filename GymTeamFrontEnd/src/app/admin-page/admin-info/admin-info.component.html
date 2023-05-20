@@ -101,20 +101,28 @@
                 </div>
 
                 <div class="col-md-12">
-                  <label class="labels">Lozinka</label
-                  ><input
-                    [type]="changetype ? 'password' : 'text'"
-                    class="form-control"
-                    [(ngModel)]="korisnik.lozinka"
-                    (ngModelChange)="changeData = true"
-                    value="{{ korisnik.lozinka }}"
-                    [disabled]="!enableEdit"
-                  />
-                  <input
-                    type="checkbox"
-                    id="sifra"
-                    (click)="PrikaziSifru()"
-                  />Prikazi šifru
+                  <label class="labels">Lozinka</label>
+                  <div class="input-group">
+                    <input
+                      [type]="changetype ? 'password' : 'text'"
+                      class="form-control"
+                      [(ngModel)]="korisnik.lozinka"
+                      (ngModelChange)="changeData = true"
+                      value="{{ korisnik.lozinka }}"
+                      [disabled]="!enableEdit"
+                    />
+                    <div class="input-group-append">
+                      <span class="input-group-text" (click)="PrikaziSifru()">
+                        <i
+                          class="bi bi-eye"
+                          [ngClass]="{
+                            'bi-eye-slash': !changetype,
+                            'bi-eye': changetype
+                          }"
+                        ></i>
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="mt-5 text-center">
