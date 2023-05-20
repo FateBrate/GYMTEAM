@@ -37,6 +37,14 @@
         <div class="modal-body">
           <div id="map"></div>
         </div>
+        <div class="modal-footer">
+          <button
+            class="btn btn-danger"
+            (click)="deleteLocation(selectedLocation?.id)"
+          >
+            Obriši lokaciju
+          </button>
+        </div>
       </div>
     </div>
   </div>

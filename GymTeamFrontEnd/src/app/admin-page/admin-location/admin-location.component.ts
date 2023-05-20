@@ -27,7 +27,6 @@ export class AdminLocationComponent implements OnInit {
     this.GetLocations();
   }
   GetLocations(): void {
-    console.log('radi');
     this.httpClient.get(routerpath + '/api/Lokacija').subscribe((res) => {
       if (!!res) this.locations = res;
     });
@@ -118,6 +117,20 @@ export class AdminLocationComponent implements OnInit {
           });
           this.openNew = false;
           this.GetLocations();
+        }
+      });
+  }
+  deleteLocation(id: number) {
+    this.httpClient
+      .delete(`${routerpath}/api/Lokacija?id=${id}`)
+      .subscribe((res) => {
+        if (!!res) {
+          this.GetLocations();
+          this.openClose();
+          this.snackbar.open('Uspjesno obrisana lokacija', 'X', {
+            duration: 3000,
+            panelClass: ['cacin-caca'],
+          });
         }
       });
   }

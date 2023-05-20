@@ -25,9 +25,6 @@ export class AdminInfoComponent implements OnInit {
   uploadedFile: any;
   selectedImage: any;
 
-  PrikaziSifru() {
-    this.changetype = !this.changetype;
-  }
   constructor(
     private dataService: DataService,
     private cookie: CookieService,
@@ -35,6 +32,23 @@ export class AdminInfoComponent implements OnInit {
     private snackbar: MatSnackBar
   ) {}
   korisnik: any;
+  loadUser(): Promise<void> {
+    const cookieValue = this.cookie.get(COOKIE_USER_DATA);
+    if (cookieValue) {
+      this.userId = JSON.parse(cookieValue);
+      const observable = this.httpClient.get(
+        `${routerpath}/api/Korisnik/GetById?id=${this.userId}`
+      );
+      return observable.toPromise().then((res) => {
+        if (!!res) {
+          this.korisnik = res;
+          this.selectedImage = this.getSliku(this.korisnik.id);
+        }
+      });
+    }
+
+    return Promise.resolve();
+  }
 
   ngOnInit(): void {
     this.loadUser();
@@ -45,7 +59,6 @@ export class AdminInfoComponent implements OnInit {
     if (this.enableEdit == true) this.buttonName = 'Spremi';
     else this.buttonName = 'Uredi podatke';
     this.counter++;
-    console.log(this.counter);
     if (this.counter == 3) {
       this.saveChanges();
     }
@@ -65,25 +78,14 @@ export class AdminInfoComponent implements OnInit {
     if (!this.enableEdit && !!this.changeData) {
       const cookieSettings = {
         domain: 'localhost',
-        path: '/',
-        secure: true,
-        expiry: 7,
       };
       this.httpClient
         .put(`${url}${this.userId}`, this.editUser)
         .subscribe((res) => {
           if (!!res) {
             this.newKorisnik = res;
-            console.log(res);
-            this.cookie.delete(COOKIE_USER_DATA);
-            sessionStorage.clear();
-            this.cookie.set(
-              COOKIE_USER_DATA,
-              JSON.stringify(this.newKorisnik),
-              {
-                ...cookieSettings,
-              }
-            );
+            this.dataService.updateKorisnik();
+            this.dataService.user$.next(this.newKorisnik);
           }
           this.loadUser();
           this.counter = 1;
@@ -107,23 +109,6 @@ export class AdminInfoComponent implements OnInit {
     };
     reader.readAsDataURL(this.uploadedFile);
   }
-  loadUser(): Promise<void> {
-    const cookieValue = this.cookie.get(COOKIE_USER_DATA);
-    if (cookieValue) {
-      const userId = JSON.parse(cookieValue);
-      const observable = this.httpClient.get(
-        `${routerpath}/api/Korisnik/GetById?id=${userId}`
-      );
-      return observable.toPromise().then((res) => {
-        if (!!res) {
-          this.korisnik = res;
-          this.selectedImage = this.getSliku(this.korisnik.id);
-        }
-      });
-    }
-
-    return Promise.resolve();
-  }
 
   async updateProfileImage(): Promise<any> {
     const formData = new FormData();
@@ -139,7 +124,6 @@ export class AdminInfoComponent implements OnInit {
 
       if (!!res) {
         this.showBtn = false;
-
         this.snackbar.open('Uspješno izmjenjena slika profila', 'X', {
           duration: 3000,
           panelClass: ['cacin-caca'],
@@ -152,5 +136,8 @@ export class AdminInfoComponent implements OnInit {
     } catch (error) {
       console.error(error);
     }
+  }
+  PrikaziSifru() {
+    this.changetype = !this.changetype;
   }
 }
