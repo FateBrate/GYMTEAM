@@ -1,5 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IUser } from 'src/app/service/models/user';
 import { Uloga } from 'src/app/service/models/role';
@@ -36,15 +41,19 @@ export class AddUserComponent implements OnInit {
   photo: any;
   photoshow: any;
   fileChange: boolean = false;
+  randomId: string = '';
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogref: MatDialogRef<AddUserComponent>,
     public popUpRef: MatDialogRef<AdminEmployeeComponent>,
     private klijent: HttpClient,
     private snackbar: MatSnackBar
-  ) {}
+  ) {
+    this.randomId = Math.random().toString(36).substring(2);
+  }
 
   ngOnInit() {}
+
   onFileChange(event: any) {
     const reader = new FileReader();
     this.fileChange = true;
@@ -68,7 +77,7 @@ export class AddUserComponent implements OnInit {
           if (!!response) {
             this.snackbar.open('Korisnik uspjesno dodan', 'X', {
               duration: 3000,
-              panelClass: ['cacin-caca'],
+              panelClass: ['success-snack'],
             });
             this.dialogref.close();
             return;
@@ -81,7 +90,7 @@ export class AddUserComponent implements OnInit {
           }
         });
     } else {
-      this.snackbar.open('Unesite svako polje', 'X', {
+      this.snackbar.open('Popunite ispravno svako polje', 'X', {
         duration: 3000,
         panelClass: ['error-snack'],
       });
