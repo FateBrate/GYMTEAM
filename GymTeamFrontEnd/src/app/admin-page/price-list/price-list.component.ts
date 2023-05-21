@@ -59,7 +59,7 @@ export class PriceListComponent implements OnInit {
           this.show();
           this.snackbar.open('Izmjene su ažurirane', 'X', {
             duration: 3000,
-            panelClass: ['cacin-caca'],
+            panelClass: ['success-snack'],
           });
           this.loadPriceList();
         }

@@ -93,7 +93,7 @@ export class AdminInfoComponent implements OnInit {
     }
     this.snackbar.open('Uspješno promjenjeni podaci', 'X', {
       duration: 3000,
-      panelClass: ['cacin-caca'],
+      panelClass: ['success-snack'],
     });
   }
   getSliku(id: number): string {
@@ -126,7 +126,7 @@ export class AdminInfoComponent implements OnInit {
         this.showBtn = false;
         this.snackbar.open('Uspješno izmjenjena slika profila', 'X', {
           duration: 3000,
-          panelClass: ['cacin-caca'],
+          panelClass: ['success-snack'],
         });
         await this.dataService.updateKorisnik();
         const korisnik = await this.dataService.updateKorisnik();

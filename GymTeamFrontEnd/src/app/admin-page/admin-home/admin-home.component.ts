@@ -54,7 +54,7 @@ export class AdminHomeComponent implements OnInit {
         if (!!res) {
           this.snackbar.open('Uspjesno dodana nova obavijest', 'X', {
             duration: 3000,
-            panelClass: ['cacin-caca'],
+            panelClass: ['success-snack'],
           });
           this.loadNews();
           this.success = false;
@@ -84,7 +84,7 @@ export class AdminHomeComponent implements OnInit {
         this.loadNews();
         this.snackbar.open('Uspjesno obrisana obavijest', 'X', {
           duration: 3000,
-          panelClass: ['cacin-caca'],
+          panelClass: ['success-snack'],
         });
       });
   }

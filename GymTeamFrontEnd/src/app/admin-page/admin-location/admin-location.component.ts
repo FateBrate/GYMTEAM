@@ -113,7 +113,7 @@ export class AdminLocationComponent implements OnInit {
           console.log(res);
           this.snackbar.open('Uspjesno dodana nova obavijest', 'X', {
             duration: 3000,
-            panelClass: ['cacin-caca'],
+            panelClass: ['success-snack'],
           });
           this.openNew = false;
           this.GetLocations();
@@ -129,7 +129,7 @@ export class AdminLocationComponent implements OnInit {
           this.openClose();
           this.snackbar.open('Uspjesno obrisana lokacija', 'X', {
             duration: 3000,
-            panelClass: ['cacin-caca'],
+            panelClass: ['success-snack'],
           });
         }
       });

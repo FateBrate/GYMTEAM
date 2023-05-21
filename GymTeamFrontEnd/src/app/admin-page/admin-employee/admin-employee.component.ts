@@ -58,7 +58,7 @@ export class AdminEmployeeComponent implements OnInit {
     } finally {
       this.snackbar.open('Korisnik uspjesno obrisan', 'X', {
         duration: 3000,
-        panelClass: ['cacin-caca'],
+        panelClass: ['success-snack'],
       });
     }
   }
