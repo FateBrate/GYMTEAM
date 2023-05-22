@@ -15,7 +15,6 @@ export class AdminInfoComponent implements OnInit {
   enableEdit: boolean = false;
   buttonName: string = 'Uredi podatke';
   changeData: boolean = false;
-  api_url: string = 'http://localhost:5164';
   counter: number = 1;
   userId: number = 0;
   newKorisnik: any;

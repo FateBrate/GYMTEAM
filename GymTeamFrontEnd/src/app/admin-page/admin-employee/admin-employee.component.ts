@@ -47,6 +47,13 @@ export class AdminEmployeeComponent implements OnInit {
       });
   }
   Obrisi(id: number): void {
+    const confirmed = confirm(
+      'Da li ste sigurni da želite obrisati ovog korisnika?'
+    );
+    if (!confirmed) {
+      return;
+    }
+
     try {
       this.httpClient
         .delete(`${routerpath}/api/Korisnik?id=${id}`)
