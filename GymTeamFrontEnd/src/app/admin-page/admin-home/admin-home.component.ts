@@ -77,6 +77,13 @@ export class AdminHomeComponent implements OnInit {
     this.success = !this.success;
   }
   deletePicked(id: number) {
+    const confirmed = confirm(
+      'Da li ste sigurni da želite obrisati obavijest?'
+    );
+    if (!confirmed) {
+      return;
+    }
+
     this.httpClient
       .delete(`${routerpath}/api/Obavijest?id=${id}`)
       .subscribe((res) => {

@@ -1,17 +1,10 @@
-import {
-  Component,
-  EventEmitter,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { CookieService } from 'ngx-cookie-service';
 import { COOKIE_USER_DATA, routerpath } from '../../constants/deafult';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+
 import { DataService } from 'src/app/service/data.service';
 @Component({
   selector: 'app-side-menu',
@@ -38,8 +31,18 @@ export class SideMenuComponent implements OnInit {
     });
   }
   logout() {
+    this.httpClient
+      .post(routerpath + '/Autentifikacija/Logout', null)
+      .subscribe(
+        () => {
+          console.log('Logged out successfully');
+        },
+        (error) => {
+          console.error('Logout failed:', error);
+        }
+      );
     this.router.navigate(['login']);
-    this.cookie.delete;
+    this.cookie.delete('COOKIE_USER_DATA');
     sessionStorage.clear();
   }
 

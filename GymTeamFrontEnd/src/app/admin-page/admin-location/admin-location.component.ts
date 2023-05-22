@@ -121,6 +121,13 @@ export class AdminLocationComponent implements OnInit {
       });
   }
   deleteLocation(id: number) {
+    const confirmed = confirm(
+      'Da li ste sigurni da želite obrisati ovu lokaciju?'
+    );
+    if (!confirmed) {
+      return;
+    }
+
     this.httpClient
       .delete(`${routerpath}/api/Lokacija?id=${id}`)
       .subscribe((res) => {
