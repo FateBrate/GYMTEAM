@@ -111,7 +111,7 @@ export class AdminLocationComponent implements OnInit {
       .subscribe((res) => {
         if (!!res) {
           console.log(res);
-          this.snackbar.open('Uspjesno dodana nova obavijest', 'X', {
+          this.snackbar.open('Uspjesno dodana nova lokacija', 'X', {
             duration: 3000,
             panelClass: ['success-snack'],
           });
