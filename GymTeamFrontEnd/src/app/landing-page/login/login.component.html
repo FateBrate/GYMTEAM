@@ -9,18 +9,19 @@
               style="
                 background-image: url('../../../assets/leftLogin.jpg');
                 background-size: cover;
-                color: #f8b739;
+                color: #ff0000;
                 font-weight: bold;
               "
             >
               <div class="card-body p-md-5 mx-md-4">
                 <div class="text-center">
-                  <img
-                    src="assets/loginLogo.png"
-                    style="width: 120px"
-                    alt="logo"
-                  />
-                  <h4 class="mt-1 mb-5 pb-1">We are Gym Team</h4>
+                  <img src="assets/logo.png" style="width: 200px" alt="logo" />
+                  <h4
+                    class="mt-1 ml-5 mb-5 pb-1"
+                    style="background-color: #070404; width: fit-content"
+                  >
+                    We are Gym Team
+                  </h4>
                 </div>
 
                 <form [formGroup]="forma" (ngSubmit)="loginUser(forma.value)">
@@ -51,15 +52,16 @@
                       >Lozinka</label
                     >
                   </div>
-                  <a class="text-#f8b739">Zaboravili ste šifru?</a>
+                  <a class="text-#FF0000">Zaboravili ste šifru?</a>
                   <div class="text-center pt-1 mb-5 pb-1">
                     <button
                       class="btn btn-primary btn-block"
                       type="submit"
                       style="
-                        background-color: #f8b739;
+                        background-color: #ff0000;
                         color: black;
                         border: black;
+                        font-weight: bold;
                       "
                     >
                       Log in
@@ -75,9 +77,16 @@
                 background-size: cover;
               "
             >
-              <div class="px-3 py-4 p-md-5 mx-md-4" style="color: #f8b739">
-                <h4 class="mb-4">We are more than just a company</h4>
-                <h2 class="small mb-0">Postani dio velike Gym Team familije</h2>
+              <div class="px-3 py-4 p-md-5 mx-md-4" style="color: #ff0000">
+                <h4 class="mb-4" style="background-color: #070404">
+                  We are more than just a company
+                </h4>
+                <h2
+                  class="small mb-0"
+                  style="background-color: #070404; width: fit-content"
+                >
+                  Postani dio velike Gym Team familije
+                </h2>
               </div>
             </div>
           </div>
