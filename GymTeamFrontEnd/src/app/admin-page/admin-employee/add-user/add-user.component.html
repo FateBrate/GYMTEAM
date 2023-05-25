@@ -92,8 +92,15 @@
               <input
                 type="password"
                 class="form-control"
-                [attr.name]="'password_' + randomId"
                 formControlName="lozinka"
+                [ngClass]="{
+                  weak: isWeakPassword(),
+                  medium: isMediumPassword(),
+                  strong: isStrongPassword()
+                }"
+                (ngModelChange)="
+                  checkPasswordStrength(forma.controls['lozinka'])
+                "
               />
               <small
                 class="text-danger"
@@ -103,6 +110,18 @@
               >
                 Polje "lozinka" je obavezno.
               </small>
+              <div
+                *ngIf="
+                  passwordStrength !== '' && forma.get('lozinka')?.value !== ''
+                "
+                [ngClass]="{
+                  weak: isWeakPassword(),
+                  medium: isMediumPassword(),
+                  strong: isStrongPassword()
+                }"
+              >
+                Password Strength: <span>{{ passwordStrength }}</span>
+              </div>
             </div>
             <div class="col-md-12">
               <label class="form-label">Uloga</label>
