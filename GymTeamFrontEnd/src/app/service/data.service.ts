@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 
 import { BehaviorSubject } from 'rxjs';
@@ -18,7 +18,6 @@ export class DataService {
   }
   korisnik: any;
   getUserUpdatedListener() {
-    // console.log('servis');
     return this.prosliejdi.asObservable();
   }
 

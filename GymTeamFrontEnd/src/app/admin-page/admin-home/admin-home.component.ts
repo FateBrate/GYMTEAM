@@ -54,7 +54,7 @@ export class AdminHomeComponent implements OnInit {
         if (!!res) {
           this.snackbar.open('Uspjesno dodana nova obavijest', 'X', {
             duration: 3000,
-            panelClass: ['cacin-caca'],
+            panelClass: ['success-snack'],
           });
           this.loadNews();
           this.success = false;
@@ -77,6 +77,13 @@ export class AdminHomeComponent implements OnInit {
     this.success = !this.success;
   }
   deletePicked(id: number) {
+    const confirmed = confirm(
+      'Da li ste sigurni da želite obrisati obavijest?'
+    );
+    if (!confirmed) {
+      return;
+    }
+
     this.httpClient
       .delete(`${routerpath}/api/Obavijest?id=${id}`)
       .subscribe((res) => {
@@ -84,7 +91,7 @@ export class AdminHomeComponent implements OnInit {
         this.loadNews();
         this.snackbar.open('Uspjesno obrisana obavijest', 'X', {
           duration: 3000,
-          panelClass: ['cacin-caca'],
+          panelClass: ['success-snack'],
         });
       });
   }

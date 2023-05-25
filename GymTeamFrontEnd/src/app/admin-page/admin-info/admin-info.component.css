@@ -12,7 +12,7 @@ a {
   -webkit-transition: 0.3s all ease;
   -o-transition: 0.3s all ease;
   transition: 0.3s all ease;
-  color: #f8b739;
+  color: #ff0000;
   text-decoration: none;
   font-size: 20px;
 }
@@ -89,8 +89,8 @@ a[data-toggle="collapse"] {
 }
 
 .btn.btn-primary {
-  background: #f8b739;
-  border-color: #f8b739;
+  background: #ff0000;
+  border-color: #ff0000;
 }
 .btn.btn-primary.clicked {
   background-color: green;
@@ -105,13 +105,16 @@ router-outlet + * {
 .infocontent {
   background-image: url("../../../assets/background_content.jpg");
   width: 100%;
-  color: #f8b739;
+  color: #ff0000;
   background-size: cover;
 }
 .infocontent h4 {
-  color: #f8b739;
+  color: #ff0000;
 }
 input[type="file"] {
   margin-top: 20%;
   margin-left: 30%;
+}
+.input-group-text {
+  border-radius: 0 5px 5px 0;
 }

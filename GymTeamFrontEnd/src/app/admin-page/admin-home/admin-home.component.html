@@ -17,14 +17,18 @@
       <button
         class="btn btn-primary"
         (click)="readFullContent(o.id)"
-        style="float: right"
+        style="
+          float: right;
+          border-top-right-radius: 0;
+          border: none;
+          background-color: rgba(0, 0, 0, 0.7);
+        "
       >
         Pročitaj više...
       </button>
       <h4
         class="news-title"
         style="
-          color: orange;
           background-color: rgba(0, 0, 0, 0.7);
           width: fit-content;
           padding: 1px;
@@ -146,7 +150,7 @@
 
           <button
             type="button "
-            class="btn-close"
+            class="btn-close bg-white"
             aria-label="Close"
             (click)="show()"
           ></button>

@@ -1,11 +1,10 @@
-﻿using Azure;
+﻿
 using GymTeam.Data;
 using GymTeam.Helper;
 using GymTeam.Models;
 using GymTeam.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata;
+
 
 namespace GymTeam.Controllers
 {
@@ -88,12 +87,15 @@ namespace GymTeam.Controllers
         public ActionResult GetById(int id)
         {
             var korisnik = _dbcontext.Korisnik.Find(id);
-            if (korisnik != null)
-                return Ok(korisnik);
-            else throw new Exception("Korisnik sa tim id-em ne postoji"); 
+            if (korisnik == null)
+            {
+                throw new Exception("Korisnik with the specified ID does not exist");
+            }
+
+            return Ok(korisnik);
         }
         [HttpGet("GetSlikaById")]
-        public ActionResult GetNewsImage(int id)
+        public ActionResult GetSlikaById(int id)
         {
             byte[]? slika = _dbcontext.Korisnik.Find(id)?.slika;
 
@@ -105,48 +107,59 @@ namespace GymTeam.Controllers
         [HttpPut("ChangePhoto")]
         public ActionResult<Korisnik> editPhoto([FromForm] IFormFile file,int id)
         {
-            var thiskorisnik = _dbcontext.Korisnik.Find(id);
-            if (thiskorisnik != null)
+            var korisnik = _dbcontext.Korisnik.Find(id);
+            if (korisnik == null)
             {
-                if (file != null)
-                    thiskorisnik.slika = file.GetImage();
-                else throw new Exception("Greška neispravan file");
+                throw new Exception("Korisnik with the specified ID does not exist");
             }
-            else throw new Exception("Greska sa id-em korisnika");
-            _dbcontext.Korisnik.Update(thiskorisnik);
+
+            if (file == null)
+            {
+                throw new Exception("Invalid file");
+            }
+
+            korisnik.slika = file.GetImage();
+            _dbcontext.Korisnik.Update(korisnik);
             _dbcontext.SaveChanges();
-            return Ok(thiskorisnik);
+
+            return Ok(korisnik);
         }
 
         [HttpPut]
-        public Korisnik Edit(KorisnikUVM korisnik,int id)
+        public Korisnik Edit(int id, KorisnikUVM korisnik)
         {
-            var thiskorisnik=_dbcontext.Korisnik.Find(id);
-            if(thiskorisnik!=null)
+            var thisKorisnik = _dbcontext.Korisnik.Find(id);
+            if (thisKorisnik == null)
             {
-                thiskorisnik.ime = korisnik.ime;
-                thiskorisnik.prezime = korisnik.prezime;
-                thiskorisnik.email = korisnik.email;
-                thiskorisnik.lozinka = korisnik.lozinka;
-                thiskorisnik.datumRodjenja = korisnik.datumRodjenja;
-                thiskorisnik.brojTelefona = korisnik.brojTelefona;              
-                _dbcontext.Korisnik.Update(thiskorisnik);
-                _dbcontext.SaveChanges();
-                return thiskorisnik;
+                throw new Exception("Korisnik with the specified ID does not exist");
             }
-            throw new Exception("Korisnik sa tim id-em ne postoji");
+
+            thisKorisnik.ime = korisnik.ime;
+            thisKorisnik.prezime = korisnik.prezime;
+            thisKorisnik.email = korisnik.email;
+            thisKorisnik.lozinka = korisnik.lozinka;
+            thisKorisnik.datumRodjenja = korisnik.datumRodjenja;
+            thisKorisnik.brojTelefona = korisnik.brojTelefona;
+
+            _dbcontext.Korisnik.Update(thisKorisnik);
+            _dbcontext.SaveChanges();
+
+            return thisKorisnik;
         }
+
         [HttpDelete]
         public ActionResult DeleteById(int id)
         {
-            var thiskorisnik = _dbcontext.Korisnik.Find(id);
-            if(thiskorisnik != null)
+            var korisnik = _dbcontext.Korisnik.Find(id);
+            if (korisnik == null)
             {
-                _dbcontext.Korisnik.Remove(thiskorisnik);
-                _dbcontext.SaveChanges();
-                return Ok(true);
+                throw new Exception("Korisnik with the specified ID does not exist");
             }
-            throw new Exception("Korisnik sa tim id-em ne postoji");
+
+            _dbcontext.Korisnik.Remove(korisnik);
+            _dbcontext.SaveChanges();
+
+            return Ok(true);
         }
 
 

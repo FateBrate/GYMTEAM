@@ -1,7 +1,7 @@
 <div class="container rounded text-black h-90">
   <button
     type="button"
-    class="btn-close btn-close-black position-absolute top-0 end-0 m-3"
+    class="btn-close position-absolute top-0 end-0 m-3"
     aria-label="Close"
     (click)="popUpRef.close()"
   ></button>
@@ -31,6 +31,12 @@
             <div class="col-md-6">
               <label class="form-label">Ime</label>
               <input type="text" class="form-control" formControlName="ime" />
+              <small
+                class="text-danger"
+                *ngIf="forma.get('ime')?.invalid && forma.get('ime')?.touched"
+              >
+                Polje "Ime" je obavezno i treba sadrzavati samo slova i razmak.
+              </small>
             </div>
             <div class="col-md-6">
               <label class="form-label">Prezime</label>
@@ -39,6 +45,15 @@
                 class="form-control"
                 formControlName="prezime"
               />
+              <small
+                class="text-danger"
+                *ngIf="
+                  forma.get('prezime')?.invalid && forma.get('prezime')?.touched
+                "
+              >
+                Polje "Prezime" je obavezno i treba sadrzavati samo slova i
+                razmak.
+              </small>
             </div>
           </div>
           <div class="row mt-3">
@@ -49,10 +64,28 @@
                 class="form-control"
                 formControlName="brojTelefona"
               />
+              <small
+                class="text-danger"
+                *ngIf="
+                  forma.get('brojTelefona')?.invalid &&
+                  forma.get('brojTelefona')?.touched
+                "
+              >
+                Polje "Broj telefona" je obavezno i treba sadrzavati samo
+                brojeve
+              </small>
             </div>
             <div class="col-md-12">
               <label class="form-label">Email</label>
               <input type="text" class="form-control" formControlName="email" />
+              <small
+                class="text-danger"
+                *ngIf="
+                  forma.get('email')?.invalid && forma.get('email')?.touched
+                "
+              >
+                Polje "Email" je obavezno.
+              </small>
             </div>
             <div class="col-md-12">
               <label class="form-label">Lozinka</label>
@@ -60,7 +93,35 @@
                 type="password"
                 class="form-control"
                 formControlName="lozinka"
+                [ngClass]="{
+                  weak: isWeakPassword(),
+                  medium: isMediumPassword(),
+                  strong: isStrongPassword()
+                }"
+                (ngModelChange)="
+                  checkPasswordStrength(forma.controls['lozinka'])
+                "
               />
+              <small
+                class="text-danger"
+                *ngIf="
+                  forma.get('lozinka')?.touched && forma.get('lozinka')?.invalid
+                "
+              >
+                Polje "lozinka" je obavezno.
+              </small>
+              <div
+                *ngIf="
+                  passwordStrength !== '' && forma.get('lozinka')?.value !== ''
+                "
+                [ngClass]="{
+                  weak: isWeakPassword(),
+                  medium: isMediumPassword(),
+                  strong: isStrongPassword()
+                }"
+              >
+                Password Strength: <span>{{ passwordStrength }}</span>
+              </div>
             </div>
             <div class="col-md-12">
               <label class="form-label">Uloga</label>
@@ -74,6 +135,14 @@
                 <option [value]="role.Admin">Admin</option>
                 <option [value]="role.Employee">Radnik</option>
               </select>
+              <small
+                class="text-danger"
+                *ngIf="
+                  forma.get('roleId')?.touched && forma.get('roleId')?.invalid
+                "
+              >
+                Odaberite ulogu korisnika.
+              </small>
             </div>
             <div class="col-md-12">
               <label class="form-label">Datum rođenja</label>
@@ -82,6 +151,15 @@
                 class="form-control"
                 formControlName="datumRodjenja"
               />
+              <small
+                class="text-danger"
+                *ngIf="
+                  forma.get('datumRodjenja')?.touched &&
+                  forma.get('datumRodjenja')?.invalid
+                "
+              >
+                odaberite datum rođenja!
+              </small>
             </div>
             <div class="col-md-12">
               <button class="btn btn-primary mt-3" type="submit">
