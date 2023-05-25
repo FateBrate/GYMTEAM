@@ -42,6 +42,7 @@ export class AddUserComponent implements OnInit {
   photoshow: any;
   fileChange: boolean = false;
   randomId: string = '';
+  passwordStrength: any;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogref: MatDialogRef<AddUserComponent>,
@@ -65,6 +66,21 @@ export class AddUserComponent implements OnInit {
         this.photoshow = e.target.result;
         this.photo = reader.result;
       };
+    }
+  }
+  checkPasswordStrength(control: AbstractControl): void {
+    const password: string = control.value;
+
+    // Reset password strength indicator
+    this.passwordStrength = '';
+
+    // Check password strength based on criteria
+    if (password.length < 8) {
+      this.passwordStrength = 'Weak';
+    } else if (password.length < 12) {
+      this.passwordStrength = 'Medium';
+    } else {
+      this.passwordStrength = 'Strong';
     }
   }
   saveUser(data: Partial<IUser>) {
@@ -95,5 +111,16 @@ export class AddUserComponent implements OnInit {
         panelClass: ['error-snack'],
       });
     }
+  }
+  isWeakPassword(): boolean {
+    return this.passwordStrength === 'Weak';
+  }
+
+  isMediumPassword(): boolean {
+    return this.passwordStrength === 'Medium';
+  }
+
+  isStrongPassword(): boolean {
+    return this.passwordStrength === 'Strong';
   }
 }

@@ -1,0 +1,14 @@
+.weak {
+  border-color: red;
+  color: red;
+}
+
+.medium {
+  border-color: orange;
+  color: orange;
+}
+
+.strong {
+  border-color: green;
+  color: green;
+}
