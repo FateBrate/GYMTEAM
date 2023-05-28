@@ -15,73 +15,50 @@ namespace GymTeam.Controllers
     [Route("[controller]/[action]")]
 
     [ApiController]
-    public class AutentifikacijaController : Controller
+    public class AutentifikacijaController : ControllerBase
     {
         private readonly ApplicationDbContext _dbContext;
+
+
 
         public AutentifikacijaController(ApplicationDbContext dbContext)
         {
             this._dbContext = dbContext;
+            
         }
 
 
         [HttpPost]
         public ActionResult<LoginInformacije> Login([FromBody] LoginVM x)
         {
+
             Korisnik logiraniKorisnik = _dbContext.Korisnik
-        .FirstOrDefault(k =>
-        k.email != null && k.email == x.email && k.lozinka == x.lozinka);
+                    .FirstOrDefault(k =>
+                    k.email != null && k.email == x.email && k.lozinka == x.lozinka);
 
             if (logiraniKorisnik == null)
             {
-                return Unauthorized();
+
+                return new LoginInformacije(null);
             }
 
-            var claims = new[]
-            {
-        new Claim(ClaimTypes.Name, logiraniKorisnik.email),
-        
-             };
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("your-secret-key");
-            var tokenDescriptor = new SecurityTokenDescriptor
+            string randomString = TokenGenerator.Generate(10);
+
+
+            var noviToken = new AutentifikacijaToken()
             {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddDays(7), // Token expiration date
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                ipAdresa = Request.HttpContext.Connection.RemoteIpAddress?.ToString(),
+                vrijednost = randomString,
+                korisnik = logiraniKorisnik,
+                vrijemeEvidentiranja = DateTime.Now
             };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var tokenString = tokenHandler.WriteToken(token);
 
-            return Ok(tokenString);
-            //Korisnik logiraniKorisnik = _dbContext.Korisnik
-            //    .FirstOrDefault(k =>
-            //    k.email != null && k.email == x.email && k.lozinka == x.lozinka);
-
-            //if (logiraniKorisnik == null)
-            //{
-
-            //    return new LoginInformacije(null);
-            //}
+            _dbContext.Add(noviToken);
+            _dbContext.SaveChanges();
 
 
-            //string randomString = TokenGenerator.Generate(10);
-
-
-            //var noviToken = new AutentifikacijaToken()
-            //{
-            //    ipAdresa = Request.HttpContext.Connection.RemoteIpAddress?.ToString(),
-            //    vrijednost = randomString,
-            //    korisnik = logiraniKorisnik,
-            //    vrijemeEvidentiranja = DateTime.Now
-            //};
-
-            //_dbContext.Add(noviToken);
-            //_dbContext.SaveChanges();
-
-
-            //return new LoginInformacije(noviToken);
+            return new LoginInformacije(noviToken);
         }
 
         [HttpPost]
@@ -95,6 +72,20 @@ namespace GymTeam.Controllers
             _dbContext.Remove(autentifikacijaToken);
             _dbContext.SaveChanges();
             return Ok();
+            //string token = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+
+            //if (string.IsNullOrEmpty(token))
+            //    return BadRequest("Token not provided.");
+
+            //AutentifikacijaToken autentifikacijaToken = _dbContext.AutentifikacijaToken.FirstOrDefault(t => t.vrijednost == token);
+
+            //if (autentifikacijaToken == null)
+            //    return NotFound("Token not found.");
+
+            //_dbContext.AutentifikacijaToken.Remove(autentifikacijaToken);
+            //_dbContext.SaveChanges();
+
+            //return Ok("Logout successful.");
         }
 
         [HttpGet]

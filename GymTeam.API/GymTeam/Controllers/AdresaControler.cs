@@ -2,46 +2,53 @@
 using GymTeam.Moduls;
 using GymTeam.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace GymTeam.Controllers
 {
-
     [Route("api/[controller]")]
-
     [ApiController]
-
-    public class AdresaControler : ControllerBase
+    public class AdresaController : ControllerBase
     {
-        private readonly ApplicationDbContext _dbcontext;
-        public AdresaControler(ApplicationDbContext dbcontext)
+        private readonly ApplicationDbContext _dbContext;
+
+        public AdresaController(ApplicationDbContext dbContext)
         {
-            this._dbcontext= dbcontext;
+            _dbContext = dbContext;
         }
+
         [HttpPost]
-     public Adresa Add([FromBody]AdresaAddVM x)
+        public ActionResult<Adresa> Add([FromBody] AdresaAddVM x)
         {
             var adresa = new Adresa
             {
-                NazivUlice= x.NazivUlice,
-                nazivGrada= x.nazivGrada,
-                postanskiBroj= x.postanskiBroj,
+                NazivUlice = x.NazivUlice,
+                nazivGrada = x.nazivGrada,
+                postanskiBroj = x.postanskiBroj
             };
-            _dbcontext.Add(adresa);
-            _dbcontext.SaveChanges();
+
+            _dbContext.Add(adresa);
+            _dbContext.SaveChanges();
+
             return adresa;
         }
+
         [HttpGet]
         public ActionResult GetAll()
         {
-            var data = _dbcontext.Adresa.OrderBy(a => a.id).Select(a => new AdresaGetVM()
-            {
-                id = a.id,
-                nazivGrada = a.nazivGrada,
-                NazivUlice = a.NazivUlice,
-                postanskiBroj = a.postanskiBroj
-            }).Take(100);
-            return Ok(data.ToList());
+            var data = _dbContext.Adresa
+                .OrderBy(a => a.id)
+                .Select(a => new AdresaGetVM
+                {
+                    id = a.id,
+                    nazivGrada = a.nazivGrada,
+                    NazivUlice = a.NazivUlice,
+                    postanskiBroj = a.postanskiBroj
+                })
+                .Take(100)
+                .ToList();
+
+            return Ok(data);
         }
- 
     }
 }
