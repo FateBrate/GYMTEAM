@@ -15,11 +15,12 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
 // JWT authentication configuration
+string jwtSecret = builder.Configuration["JwtSecret"];
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-
 })
 .AddJwtBearer(options =>
 {
@@ -29,9 +30,9 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = "your-issuer",
-        ValidAudience = "your-audience",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your-secret-key"))
+        ValidIssuer = "http://localhost:5164/",
+        ValidAudience = "GymTeam-Frontend",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret))
     };
 });
 
@@ -51,9 +52,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
+app.UseCors("MyPolicy");
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseCors("MyPolicy");
 
 app.MapControllers();
 
