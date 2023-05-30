@@ -53,65 +53,13 @@ h5,
   font-family: "Poppins", Arial, sans-serif;
   color: white;
 }
-
-.ftco-section {
-  padding: 7em 0;
-}
-
-.ftco-no-pt {
-  padding-top: 0;
-}
-
-.ftco-no-pb {
-  padding-bottom: 0;
-}
-
-.heading-section {
-  font-size: 28px;
-  color: #000;
-}
-
-.heading-section small {
-  font-size: 18px;
-}
-
 .img {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
 }
 
-.navbar {
-  padding: 15px 10px;
-  background-color: transparent;
-  border: none;
-  border-radius: 0;
-  margin-bottom: 40px;
-  -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.navbar-btn {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  outline: none !important;
-  border: none;
-}
-
-.line {
-  width: 100%;
-  height: 1px;
-  border-bottom: 1px dashed #ddd;
-  margin: 40px 0;
-}
-
-.wrapper {
-  width: 100%;
-}
-
 #sidebar {
-  min-width: 300px;
-  max-width: 300px;
   background: #1d1919;
   color: #fff;
   -webkit-transition: all 0.3s;
@@ -167,46 +115,8 @@ h5,
   color: #ff0000;
 }
 
-@media (max-width: 991.98px) {
-  #sidebar {
-    margin-left: -300px;
-  }
-
-  #sidebar.active {
-    margin-left: 0;
-  }
-}
-
 a[data-toggle="collapse"] {
   position: relative;
-}
-
-.dropdown-toggle::after {
-  display: block;
-  position: absolute;
-  top: 50%;
-  right: 0;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-
-@media (max-width: 991.98px) {
-  #sidebarCollapse span {
-    display: none;
-  }
-}
-
-#content {
-  width: 100%;
-  padding: 0;
-  min-height: 100vh;
-  -webkit-transition: all 0.3s;
-  -o-transition: all 0.3s;
-  transition: all 0.3s;
-  text-decoration: none;
-  background-image: url("../../../assets/background_content.jpg");
-  background-size: cover;
 }
 
 .btn.btn-primary {
@@ -214,21 +124,25 @@ a[data-toggle="collapse"] {
   border-color: #ff0000;
 }
 
-.btn.btn-primary:hover,
-.btn.btn-primary:focus {
-  background: #ff0000 !important;
-  border-color: #ff0000 !important;
-}
-
 .footer p {
   color: rgba(255, 255, 255, 0.5);
   text-align: center;
 }
 
-nav.navbar {
-  background-color: transparent;
-}
-
 p {
   color: white;
+}
+
+@media (max-width: 991.98px) {
+  #sidebar {
+    position: fixed;
+    top: 0;
+    background: #1d1919;
+    height: 100%;
+    width: 80%;
+    max-width: 300px;
+
+    transition: left 0.3s ease-in;
+    z-index: 9999;
+  }
 }
