@@ -71,10 +71,8 @@ export class AddUserComponent implements OnInit {
   checkPasswordStrength(control: AbstractControl): void {
     const password: string = control.value;
 
-    // Reset password strength indicator
     this.passwordStrength = '';
 
-    // Check password strength based on criteria
     if (password.length < 8) {
       this.passwordStrength = 'Weak';
     } else if (password.length < 12) {
