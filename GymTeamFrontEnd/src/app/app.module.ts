@@ -20,6 +20,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { AdminLocationComponent } from './admin-page/admin-location/admin-location.component';
 import { PriceListComponent } from './admin-page/price-list/price-list.component';
+import { LoadingsvgComponent } from './service/loadingsvg/loadingsvg.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import { PriceListComponent } from './admin-page/price-list/price-list.component
     AddUserComponent,
     AdminLocationComponent,
     PriceListComponent,
+    LoadingsvgComponent,
   ],
   imports: [
     BrowserModule,

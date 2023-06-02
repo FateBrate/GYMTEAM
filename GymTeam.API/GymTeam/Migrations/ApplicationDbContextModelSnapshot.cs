@@ -48,7 +48,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("korisnikId");
 
-                    b.ToTable("AutentifikacijaToken");
+                    b.ToTable("AutentifikacijaToken", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.LoginModels.KorisnickiNalog", b =>
@@ -78,7 +78,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("roleId");
 
-                    b.ToTable("KorisnickiNalog");
+                    b.ToTable("KorisnickiNalog", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.Cjenovnik", b =>
@@ -107,7 +107,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("korisnikId");
 
-                    b.ToTable("Cjenovnik");
+                    b.ToTable("Cjenovnik", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.Clanarina", b =>
@@ -130,7 +130,7 @@ namespace GymTeam.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Clanarina");
+                    b.ToTable("Clanarina", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.ClanarinaPlacanje", b =>
@@ -153,7 +153,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("placanjeID");
 
-                    b.ToTable("ClanarinaPlacanje");
+                    b.ToTable("ClanarinaPlacanje", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.Korisnik", b =>
@@ -202,7 +202,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("roleId");
 
-                    b.ToTable("Korisnik");
+                    b.ToTable("Korisnik", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.Narudzba", b =>
@@ -234,7 +234,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("korisnikID");
 
-                    b.ToTable("Narudzba");
+                    b.ToTable("Narudzba", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.NarudzbaPlacanje", b =>
@@ -257,7 +257,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("placanjeID");
 
-                    b.ToTable("NarudzbaPlacanje");
+                    b.ToTable("NarudzbaPlacanje", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.Obavijest", b =>
@@ -293,7 +293,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("korisnikId");
 
-                    b.ToTable("Obavijest");
+                    b.ToTable("Obavijest", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.Placanje", b =>
@@ -314,7 +314,7 @@ namespace GymTeam.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Placanje");
+                    b.ToTable("Placanje", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.PlanIshrane", b =>
@@ -334,7 +334,7 @@ namespace GymTeam.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("PlanIshrane");
+                    b.ToTable("PlanIshrane", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.PlanIshrane_PrehrambeniArtikal", b =>
@@ -360,7 +360,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("prehrambeniArtikalID");
 
-                    b.ToTable("planIshrane_PrehrambeniArtikal");
+                    b.ToTable("planIshrane_PrehrambeniArtikal", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.PrehrambeniArtikal", b =>
@@ -384,7 +384,7 @@ namespace GymTeam.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("PrehrambeniArtikal");
+                    b.ToTable("PrehrambeniArtikal", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.PrivatniTrener", b =>
@@ -421,7 +421,7 @@ namespace GymTeam.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("PrivatniTrener");
+                    b.ToTable("PrivatniTrener", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.Produkt", b =>
@@ -458,7 +458,7 @@ namespace GymTeam.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Produkt");
+                    b.ToTable("Produkt", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.ProduktNarudzba", b =>
@@ -484,7 +484,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("produktID");
 
-                    b.ToTable("ProduktNarudzba");
+                    b.ToTable("ProduktNarudzba", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.Rezervacija", b =>
@@ -505,7 +505,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("korisnikId");
 
-                    b.ToTable("Rezervacija");
+                    b.ToTable("Rezervacija", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.Role", b =>
@@ -521,7 +521,7 @@ namespace GymTeam.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Role");
+                    b.ToTable("Role", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.Termin", b =>
@@ -551,7 +551,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("rezervacijaId");
 
-                    b.ToTable("Termin");
+                    b.ToTable("Termin", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.VideoTrening", b =>
@@ -576,7 +576,7 @@ namespace GymTeam.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("VideoTrening");
+                    b.ToTable("VideoTrening", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Moduls.Adresa", b =>
@@ -600,7 +600,7 @@ namespace GymTeam.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Adresa");
+                    b.ToTable("Adresa", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Moduls.Lokacija", b =>
@@ -631,7 +631,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("adresaId");
 
-                    b.ToTable("Lokacija");
+                    b.ToTable("Lokacija", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.LoginModels.AutentifikacijaToken", b =>
