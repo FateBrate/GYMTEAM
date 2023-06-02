@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth/auth.service';
 import { IUser } from 'src/app/service/models/user';
 import { DataService } from 'src/app/service/data.service';
+import { take, timer } from 'rxjs';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,6 +22,8 @@ export class LoginComponent implements OnInit {
     private snackbar: MatSnackBar,
     private dataService: DataService
   ) {}
+  isLoading: boolean = false;
+
   ngOnInit(): void {}
 
   // loginUser({ email, lozinka }: Partial<IUser>) {
@@ -37,17 +40,25 @@ export class LoginComponent implements OnInit {
   // }
   loginUser({ email, lozinka }: Partial<IUser>) {
     if (!!email && !!lozinka) {
+      this.isLoading = true; // Set isLoading to true
+
       this.authService.login({ email, lozinka }).subscribe(
         (loggedIn) => {
           if (loggedIn) {
-            this.router.navigate(['admin/home']);
-            this.dataService.updateKorisnik();
+            // Simulate a delay of 2 seconds before navigating to another page
+            timer(4000)
+              .pipe(take(1))
+              .subscribe(() => {
+                this.router.navigate(['admin/home']);
+                this.dataService.updateKorisnik();
+              });
           } else {
             this.snackbar.open('Neispravni podaci za prijavu', 'X', {
               duration: 1000,
               panelClass: ['error-snack'],
             });
           }
+          // Set isLoading to false after login request completes
         },
         (error) => {
           console.error('Login failed:', error);
@@ -55,6 +66,7 @@ export class LoginComponent implements OnInit {
             duration: 1000,
             panelClass: ['error-snack'],
           });
+          // Set isLoading to false if login request fails
         }
       );
     } else {
