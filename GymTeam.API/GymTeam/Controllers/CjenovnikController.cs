@@ -25,7 +25,7 @@ namespace GymTeam.Controllers
                 nazivStavke = x.nazivStavke,
                 opis = x.opis,
                 cijena = x.cijena,
-                korisnikId = x.korisnikId,
+                cjenovnikKorisnikId = x.korisnikId,
 
             };
             _dbContext.Add( cjenovnik );

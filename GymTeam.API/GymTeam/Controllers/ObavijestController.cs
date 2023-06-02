@@ -29,7 +29,7 @@ namespace GymTeam.Controllers
                     datumObjave = DateTime.Now,
                     tip = x.tip,
                     sadrzaj = x.sadrzaj,
-                    korisnikId = x.korisnikId,
+                    obavijestKorisnikId = x.korisnikId,
                     naslov = x.naslov,
                     
                 };    

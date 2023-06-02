@@ -11,8 +11,8 @@ namespace GymTeam.Models
         public DateTime datumObjave { get; set; }
         public string tip { get; set; }
         public string sadrzaj { get; set; }
-        [ForeignKey("korisnikId")]
-        public int korisnikId { get; set; }
+        [ForeignKey("obavijestKorisnikId")]
+        public int obavijestKorisnikId { get; set; }
         public Korisnik korisnik { get; set; }
 
         public byte[]? slika { get; set; }

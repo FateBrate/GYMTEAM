@@ -12,8 +12,8 @@ namespace GymTeam.Models
         
         public float cijena { get; set; }
 
-        [ForeignKey("korisnikId")]
-        public int korisnikId { get; set; } 
+        [ForeignKey("cjenovnikKorisnikId")]
+        public int cjenovnikKorisnikId { get; set; } 
         public Korisnik korisnik { get; set; }
 
 

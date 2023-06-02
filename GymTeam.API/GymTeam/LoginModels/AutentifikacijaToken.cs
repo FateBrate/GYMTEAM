@@ -10,8 +10,8 @@ namespace GymTeam.LoginModels
         public int id { get; set; }
         public string vrijednost { get; set; }
 
-        [ForeignKey("korisnikId")]
-        public int korisnikId { get; set; }
+        [ForeignKey("autentifikacijaTokenKorisnikId")]
+        public int autentifikacijaTokenKorisnikId { get; set; }
         public Korisnik korisnik { get; set; }
         public DateTime vrijemeEvidentiranja { get; set; }
         public string ipAdresa { get; set; }

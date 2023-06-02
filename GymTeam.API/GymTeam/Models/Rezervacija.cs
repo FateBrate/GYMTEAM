@@ -8,8 +8,8 @@ namespace GymTeam.Models
         [Key]
         public int id { get; set; }
         public DateTime datumRezervacije { get; set; }
-        [ForeignKey("korisnikId")]
-        public int korisnikId { get; set; } 
+        [ForeignKey("rezervacijaKorisnikId")]
+        public int rezervacijaKorisnikId { get; set; } 
         public Korisnik korisnik { get; set; }  
 
 

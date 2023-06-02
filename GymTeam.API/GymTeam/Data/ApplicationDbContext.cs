@@ -1,11 +1,13 @@
 ﻿using GymTeam.LoginModels;
 using GymTeam.Models;
 using GymTeam.Moduls;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+
 
 namespace GymTeam.Data
 {
-    public class ApplicationDbContext:DbContext
+    public class ApplicationDbContext: IdentityDbContext<Korisnik>
     {
         public DbSet<Adresa> Adresa{ get; set; }
         public DbSet<Lokacija> Lokacija{ get; set; }
@@ -29,15 +31,6 @@ namespace GymTeam.Data
         public DbSet<PrehrambeniArtikal> PrehrambeniArtikal { get; set; }
         public DbSet<Role> Role { get; set; }
         public DbSet<AutentifikacijaToken> AutentifikacijaToken { get; set; }  
-   
-        public DbSet<KorisnickiNalog> KorisnickiNalog { get; set; }
-
-
-
-
-
-
-
 
         public ApplicationDbContext(
            DbContextOptions options) : base(options)

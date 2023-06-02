@@ -3,7 +3,9 @@ using GymTeam.Data;
 using GymTeam.Helper;
 using GymTeam.Models;
 using GymTeam.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 
 namespace GymTeam.Controllers
@@ -19,6 +21,7 @@ namespace GymTeam.Controllers
             _dbcontext = dbcontext;
         }
         [HttpPost]
+      
         public Korisnik Add([FromBody]KorisnikAddVM x)
         {
 
@@ -51,6 +54,7 @@ namespace GymTeam.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = nameof(RoleDefinition.Admin))]
         public ActionResult<object> GetAll(string? ime_prezime, int page = 1, int pageSize = 5)
         {
 
