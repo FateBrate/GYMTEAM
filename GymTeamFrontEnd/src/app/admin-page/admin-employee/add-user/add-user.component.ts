@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdminEmployeeComponent } from '../../admin-employee/./admin-employee.component';
 import { routerpath } from 'src/app/constants/deafult';
+import { take, timer } from 'rxjs';
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
@@ -36,6 +37,7 @@ export class AddUserComponent implements OnInit {
     roleId: new FormControl(Uloga.GuestUser, Validators.required),
     datumRodjenja: new FormControl('', Validators.required),
   });
+  isLoading: boolean = false;
   role = Uloga;
   selected: boolean = false;
   photo: any;
@@ -85,24 +87,38 @@ export class AddUserComponent implements OnInit {
     if (this.forma.valid) {
       const objekat = { lokacijaId: 0, slika: this.photo };
       data = { ...data, ...objekat };
-      this.klijent
-        .post(`${routerpath}/api/Korisnik`, { ...data })
-        .subscribe((response) => {
+      this.isLoading = true;
+
+      this.klijent.post(`${routerpath}/api/Korisnik`, { ...data }).subscribe(
+        (response) => {
           if (!!response) {
-            this.snackbar.open('Korisnik uspjesno dodan', 'X', {
-              duration: 3000,
-              panelClass: ['success-snack'],
-            });
-            this.dialogref.close();
-            return;
+            timer(4000)
+              .pipe(take(1))
+              .subscribe(() => {
+                this.isLoading = false;
+                this.snackbar.open('Korisnik uspjesno dodan', 'X', {
+                  duration: 3000,
+                  panelClass: ['success-snack'],
+                });
+                this.dialogref.close();
+              });
           } else {
             this.snackbar.open('Greska kod dodavanja', 'X', {
               duration: 3000,
               panelClass: ['error-snack'],
             });
-            return;
+            this.isLoading = false;
           }
-        });
+        },
+        (error) => {
+          console.error('Error:', error);
+          this.snackbar.open('Greska kod dodavanja', 'X', {
+            duration: 3000,
+            panelClass: ['error-snack'],
+          });
+          this.isLoading = false;
+        }
+      );
     } else {
       this.snackbar.open('Popunite ispravno svako polje', 'X', {
         duration: 3000,
@@ -110,6 +126,7 @@ export class AddUserComponent implements OnInit {
       });
     }
   }
+
   isWeakPassword(): boolean {
     return this.passwordStrength === 'Weak';
   }

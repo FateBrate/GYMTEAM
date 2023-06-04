@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { take, timer } from 'rxjs';
 import { routerpath } from 'src/app/constants/deafult';
+import { DataService } from 'src/app/service/data.service';
 
 @Component({
   selector: 'app-admin-home',
@@ -17,7 +19,13 @@ export class AdminHomeComponent implements OnInit {
   success: boolean = false;
   showMore: boolean = false;
   picked: any;
-  constructor(private httpClient: HttpClient, private snackbar: MatSnackBar) {}
+  isLoading: boolean = false;
+  userId: any;
+  constructor(
+    private httpClient: HttpClient,
+    private snackbar: MatSnackBar,
+    private dataService: DataService
+  ) {}
   loadNews() {
     this.httpClient.get(routerpath + '/api/Obavijest').subscribe((res: any) => {
       if (!!res) {
@@ -41,23 +49,30 @@ export class AdminHomeComponent implements OnInit {
     }
   }
   addNew() {
+    this.isLoading = true;
+
     const body = {
       naslov: this.title,
       tip: this.type,
       sadrzaj: this.content,
-      korisnikId: 7,
+      korisnikId: 1,
       slika: this.photo,
     };
     this.httpClient
       .post(routerpath + '/api/Obavijest', body)
       .subscribe((res) => {
         if (!!res) {
-          this.snackbar.open('Uspjesno dodana nova obavijest', 'X', {
-            duration: 3000,
-            panelClass: ['success-snack'],
-          });
-          this.loadNews();
-          this.success = false;
+          timer(3000)
+            .pipe(take(1))
+            .subscribe(() => {
+              this.isLoading = true;
+              this.snackbar.open('Uspjesno dodana nova obavijest', 'X', {
+                duration: 3000,
+                panelClass: ['success-snack'],
+              });
+              this.loadNews();
+              this.success = false;
+            });
         } else
           this.snackbar.open('Greska', 'X', {
             duration: 1000,
@@ -100,5 +115,7 @@ export class AdminHomeComponent implements OnInit {
   }
   ngOnInit() {
     this.loadNews();
+    this.userId = this.dataService.korisnik?.id;
+    console.log(this.userId);
   }
 }

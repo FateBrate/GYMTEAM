@@ -117,6 +117,8 @@
           </form>
         </div>
         <div class="modal-footer">
+          <app-loading *ngIf="isLoading" class="loading-spinner"></app-loading>
+
           <button type="button" class="btn btn-secondary" (click)="openClose()">
             Close
           </button>
