@@ -139,10 +139,19 @@ p {
     top: 0;
     background: #1d1919;
     height: 100%;
-    width: 80%;
+    width: 20%; /* Initial width is set to 25% */
+
     max-width: 300px;
+    transition: width 0.3s ease;
 
     transition: left 0.3s ease-in;
     z-index: 9999;
+  }
+
+  #sidebar.expanded {
+    width: 100%; /* Expanded width set to 100% */
+  }
+  .sidebar-toggle {
+    display: block;
   }
 }

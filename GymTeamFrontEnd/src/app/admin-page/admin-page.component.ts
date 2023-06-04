@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { IUser } from '../service/models/user';
-import { IAuth } from '../service/models/login';
 import { CookieService } from 'ngx-cookie-service';
 import { COOKIE_USER_DATA, routerpath } from '../constants/deafult';
 import { HttpClient } from '@angular/common/http';
@@ -13,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class AdminPageComponent implements OnInit {
   constructor(private cookie: CookieService, private httpClient: HttpClient) {}
   korisnik: any;
+
   ngOnInit(): void {
     const cookieValue = this.cookie.get(COOKIE_USER_DATA);
     if (cookieValue) {

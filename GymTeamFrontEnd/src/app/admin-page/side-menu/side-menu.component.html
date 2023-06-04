@@ -1,6 +1,11 @@
-<nav id="sidebar" *ngIf="korisnik != null">
+<nav
+  id="sidebar"
+  *ngIf="korisnik != null"
+  [ngClass]="{ expanded: isSidebarExpanded }"
+>
   <div class="navi p-4 pt-5">
     <a
+      (click)="toggleSidebar()"
       class="img logo rounded-circle mb-5"
       [style.background-image]="
         slika ? 'url(' + slika + ')' : 'url(' + getSliku(korisnik.id) + '))'
