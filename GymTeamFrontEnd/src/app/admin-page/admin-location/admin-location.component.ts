@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Map } from 'mapbox-gl';
 import * as mapboxgl from 'mapbox-gl';
+import { take, timer } from 'rxjs';
 
 import { routerpath } from 'src/app/constants/deafult';
 import { MAPBOX_ACCESS_TOKEN } from 'src/app/service/mapbox.config';
@@ -78,7 +79,8 @@ export class AdminLocationComponent implements OnInit {
   }
   addNew() {
     this.openNew = true;
-
+    this.forma.controls['name'].reset('');
+    this.isLoading = false;
     setTimeout(() => {
       const map = new Map({
         accessToken: MAPBOX_ACCESS_TOKEN,
@@ -102,6 +104,8 @@ export class AdminLocationComponent implements OnInit {
     }, 0);
   }
   saveChanges() {
+    this.isLoading = true;
+
     const body = {
       naziv: this.forma.value.name,
       adresaId: 2,
@@ -114,16 +118,26 @@ export class AdminLocationComponent implements OnInit {
         .post(routerpath + '/api/Lokacija', body)
         .subscribe((res) => {
           if (!!res) {
-            console.log(res);
-            this.snackbar.open('Uspjesno dodana nova lokacija', 'X', {
-              duration: 3000,
-              panelClass: ['success-snack'],
+            timer(3000)
+              .pipe(take(1))
+              .subscribe(() => {
+                this.isLoading = true;
+                this.snackbar.open('Uspjesno dodana nova lokacija', 'X', {
+                  duration: 3000,
+                  panelClass: ['success-snack'],
+                });
+                this.GetLocations();
+                this.openNew = false;
+              });
+          } else
+            this.snackbar.open('Greska', 'X', {
+              duration: 1000,
+              panelClass: ['error-snack'],
             });
-            this.openNew = false;
-            this.GetLocations();
-          }
         });
     } else {
+      this.isLoading = false;
+
       this.snackbar.open('Popunite sva polja', 'X', {
         duration: 1000,
         panelClass: ['error-snack'],

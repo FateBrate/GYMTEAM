@@ -100,6 +100,10 @@ export class AdminHomeComponent implements OnInit {
       });
   }
   openClose() {
+    this.forma.controls['title'].reset('');
+    this.forma.controls['type'].reset('');
+    this.forma.controls['content'].reset('');
+    this.isLoading = false;
     this.success = !this.success;
   }
   deletePicked(id: number) {

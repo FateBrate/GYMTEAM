@@ -96,6 +96,7 @@
           </form>
         </div>
         <div class="modal-footer">
+          <app-loading *ngIf="isLoading" class="loading-spinner"></app-loading>
           <button
             tyle="button"
             class="btn btn-secondary"
