@@ -11,26 +11,17 @@
   <div class="news">
     <div
       class="newsBox"
+      (click)="readFullContent(o.id)"
       *ngFor="let o of obavijesti"
       [style.background-image]="'url(' + getSliku(o.id) + ')'"
     >
-      <button
-        class="btn btn-primary"
-        (click)="readFullContent(o.id)"
-        style="
-          float: right;
-          border-top-right-radius: 0;
-          border: none;
-          background-color: rgba(0, 0, 0, 0.7);
-        "
-      >
-        Pročitaj više...
-      </button>
       <h4
-        class="news-title"
+        class="news-type"
         style="
+          position: absolute;
+          top: 0;
+          left: 0;
           background-color: rgba(0, 0, 0, 0.7);
-          width: fit-content;
           padding: 1px;
         "
       >
@@ -41,7 +32,8 @@
         style="
           color: white;
           background-color: rgba(0, 0, 0, 0.7);
-          margin-top: 20%;
+          overflow: hidden;
+          text-overflow: ellipsis;
           padding: 1%;
         "
       >
@@ -74,16 +66,23 @@
         </div>
         <div class="modal-body">
           <!-- Form to add new article -->
-          <form>
+          <form [formGroup]="forma">
             <div class="mb-3">
               <label for="article-title" class="form-label">Naslov</label>
               <input
                 type="text"
                 class="form-control"
                 id="article-title"
-                [(ngModel)]="title"
-                [ngModelOptions]="{ standalone: true }"
+                formControlName="title"
               />
+              <div
+                *ngIf="
+                  forma.get('title')?.invalid && forma.get('title')?.touched
+                "
+                class="text-danger"
+              >
+                Naslov je obavezan !
+              </div>
             </div>
             <div class="mb-3">
               <label for="article-type" class="form-label">Tip</label>
@@ -91,9 +90,14 @@
                 class="form-control"
                 type="text"
                 id="article-type"
-                [(ngModel)]="type"
-                [ngModelOptions]="{ standalone: true }"
+                formControlName="type"
               />
+              <div
+                *ngIf="forma.get('type')?.invalid && forma.get('type')?.touched"
+                class="text-danger"
+              >
+                Odaberite tip obavijesti !
+              </div>
             </div>
             <div class="mb-3">
               <label for="article-content" class="form-label">Sadržaj</label>
@@ -101,18 +105,34 @@
                 class="form-control"
                 id="article-content"
                 rows="3"
-                [(ngModel)]="content"
-                [ngModelOptions]="{ standalone: true }"
+                formControlName="content"
               ></textarea>
+              <div
+                *ngIf="
+                  forma.get('content')?.invalid && forma.get('content')?.touched
+                "
+                class="text-danger"
+              >
+                Unesite sadržaj !.
+              </div>
             </div>
             <div class="mb-3">
               <label for="article-photo" class="form-label">Slika</label>
               <input
                 type="file"
                 class="form-control"
+                formControlName="photo"
                 id="article-photo"
                 (change)="onFileChange($event)"
               />
+              <div
+                *ngIf="
+                  forma.get('photo')?.invalid && forma.get('photo')?.touched
+                "
+                class="text-danger"
+              >
+                Odaberite naslovnu sliku.
+              </div>
             </div>
           </form>
         </div>
@@ -167,7 +187,10 @@
             alt="Article Image"
             style="width: 100%"
           />
-          <p class="text-white">
+          <p
+            class="text-white"
+            style="overflow: hidden; text-overflow: ellipsis"
+          >
             {{ picked.sadrzaj }}
           </p>
           <div class="modal-footer border-0">
