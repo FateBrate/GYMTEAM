@@ -101,6 +101,13 @@ h5,
   background-position: center center;
   background-size: cover;
   margin-bottom: 10%;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  height: 30vh;
+  width: 72vh;
 }
 p {
   margin: 0px;

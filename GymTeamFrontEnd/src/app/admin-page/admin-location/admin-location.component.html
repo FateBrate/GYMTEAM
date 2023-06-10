@@ -69,15 +69,16 @@
           ></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form [formGroup]="forma">
             <div class="mb-3">
               <label class="form-label">Naziv objekta</label>
-              <input
-                type="text"
-                class="form-control"
-                [(ngModel)]="name"
-                [ngModelOptions]="{ standalone: true }"
-              />
+              <input type="text" class="form-control" formControlName="name" />
+              <div
+                *ngIf="forma.get('name')?.invalid && forma.get('name')?.touched"
+                class="text-danger"
+              >
+                Naziv je obavezan
+              </div>
             </div>
             <div class="mb-3">
               <label class="form-label">Slika</label>

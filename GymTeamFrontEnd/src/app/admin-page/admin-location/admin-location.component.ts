@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Map } from 'mapbox-gl';
 import * as mapboxgl from 'mapbox-gl';
@@ -12,15 +13,17 @@ import { MAPBOX_ACCESS_TOKEN } from 'src/app/service/mapbox.config';
   styleUrls: ['./admin-location.component.css'],
 })
 export class AdminLocationComponent implements OnInit {
+  forma: FormGroup = new FormGroup({
+    name: new FormControl('', Validators.required),
+  });
   locations: any;
   selectedLocation: any;
   showMore: boolean = false;
   openNew: boolean = false;
-  name: string = '';
   photo: any;
   latitude: number = 0;
   longitude: number = 0;
-
+  isLoading: boolean = false;
   constructor(private httpClient: HttpClient, private snackbar: MatSnackBar) {}
 
   ngOnInit(): void {
@@ -100,25 +103,32 @@ export class AdminLocationComponent implements OnInit {
   }
   saveChanges() {
     const body = {
-      naziv: this.name,
+      naziv: this.forma.value.name,
       adresaId: 2,
       latitude: this.latitude,
       longitude: this.longitude,
       slika: this.photo,
     };
-    this.httpClient
-      .post(routerpath + '/api/Lokacija', body)
-      .subscribe((res) => {
-        if (!!res) {
-          console.log(res);
-          this.snackbar.open('Uspjesno dodana nova lokacija', 'X', {
-            duration: 3000,
-            panelClass: ['success-snack'],
-          });
-          this.openNew = false;
-          this.GetLocations();
-        }
+    if (this.forma.valid) {
+      this.httpClient
+        .post(routerpath + '/api/Lokacija', body)
+        .subscribe((res) => {
+          if (!!res) {
+            console.log(res);
+            this.snackbar.open('Uspjesno dodana nova lokacija', 'X', {
+              duration: 3000,
+              panelClass: ['success-snack'],
+            });
+            this.openNew = false;
+            this.GetLocations();
+          }
+        });
+    } else {
+      this.snackbar.open('Popunite sva polja', 'X', {
+        duration: 1000,
+        panelClass: ['error-snack'],
       });
+    }
   }
   deleteLocation(id: number) {
     const confirmed = confirm(
