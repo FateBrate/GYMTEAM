@@ -14,6 +14,7 @@ import { AdminEmployeeComponent } from './admin-page/admin-employee/admin-employ
 import { AdminLocationComponent } from './admin-page/admin-location/admin-location.component';
 import { PriceListComponent } from './admin-page/price-list/price-list.component';
 import { AuthCookieGuard } from './auth-cookie.guard';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,8 @@ const routes: Routes = [
       },
     ],
   },
+  { path: 'error-page', component: ErrorPageComponent },
+
   { path: 'login', component: LoginComponent },
   {
     path: 'admin',

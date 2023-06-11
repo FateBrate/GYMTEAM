@@ -21,7 +21,7 @@ export class AuthCookieGuard implements CanActivate {
     if (cookieValue) {
       return true;
     } else {
-      return this.router.parseUrl('/login');
+      return this.router.parseUrl('/error-page');
     }
   }
 
