@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Map } from 'mapbox-gl';
 import * as mapboxgl from 'mapbox-gl';
+import { take, timer } from 'rxjs';
 
 import { routerpath } from 'src/app/constants/deafult';
 import { MAPBOX_ACCESS_TOKEN } from 'src/app/service/mapbox.config';
@@ -12,15 +14,17 @@ import { MAPBOX_ACCESS_TOKEN } from 'src/app/service/mapbox.config';
   styleUrls: ['./admin-location.component.css'],
 })
 export class AdminLocationComponent implements OnInit {
+  forma: FormGroup = new FormGroup({
+    name: new FormControl('', Validators.required),
+  });
   locations: any;
   selectedLocation: any;
   showMore: boolean = false;
   openNew: boolean = false;
-  name: string = '';
   photo: any;
   latitude: number = 0;
   longitude: number = 0;
-
+  isLoading: boolean = false;
   constructor(private httpClient: HttpClient, private snackbar: MatSnackBar) {}
 
   ngOnInit(): void {
@@ -75,7 +79,8 @@ export class AdminLocationComponent implements OnInit {
   }
   addNew() {
     this.openNew = true;
-
+    this.forma.controls['name'].reset('');
+    this.isLoading = false;
     setTimeout(() => {
       const map = new Map({
         accessToken: MAPBOX_ACCESS_TOKEN,
@@ -99,26 +104,45 @@ export class AdminLocationComponent implements OnInit {
     }, 0);
   }
   saveChanges() {
+    this.isLoading = true;
+
     const body = {
-      naziv: this.name,
+      naziv: this.forma.value.name,
       adresaId: 2,
       latitude: this.latitude,
       longitude: this.longitude,
       slika: this.photo,
     };
-    this.httpClient
-      .post(routerpath + '/api/Lokacija', body)
-      .subscribe((res) => {
-        if (!!res) {
-          console.log(res);
-          this.snackbar.open('Uspjesno dodana nova lokacija', 'X', {
-            duration: 3000,
-            panelClass: ['success-snack'],
-          });
-          this.openNew = false;
-          this.GetLocations();
-        }
+    if (this.forma.valid) {
+      this.httpClient
+        .post(routerpath + '/api/Lokacija', body)
+        .subscribe((res) => {
+          if (!!res) {
+            timer(3000)
+              .pipe(take(1))
+              .subscribe(() => {
+                this.isLoading = true;
+                this.snackbar.open('Uspjesno dodana nova lokacija', 'X', {
+                  duration: 3000,
+                  panelClass: ['success-snack'],
+                });
+                this.GetLocations();
+                this.openNew = false;
+              });
+          } else
+            this.snackbar.open('Greska', 'X', {
+              duration: 1000,
+              panelClass: ['error-snack'],
+            });
+        });
+    } else {
+      this.isLoading = false;
+
+      this.snackbar.open('Popunite sva polja', 'X', {
+        duration: 1000,
+        panelClass: ['error-snack'],
       });
+    }
   }
   deleteLocation(id: number) {
     const confirmed = confirm(

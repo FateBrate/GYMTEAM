@@ -28,11 +28,7 @@ a:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-.card {
-  margin: 2%;
-  height: 50%;
-  background-color: #1d1919;
-}
+
 .btn {
   width: 50;
   align-items: center;
@@ -81,4 +77,14 @@ input.form-control {
 .btn.btn-warning {
   background-color: #198754;
   border: none;
+}
+@media (max-width: 768px) {
+  .employee {
+    width: 25%;
+    height: 25%;
+  }
+  img {
+    width: "50px";
+    height: "50px";
+  }
 }

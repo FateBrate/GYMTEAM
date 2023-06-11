@@ -66,6 +66,8 @@
                     >
                       Log in
                     </button>
+
+                    <!-- ... Existing code ... -->
                   </div>
                 </form>
               </div>
@@ -87,6 +89,10 @@
                 >
                   Postani dio velike Gym Team familije
                 </h2>
+                <app-loading
+                  *ngIf="isLoading"
+                  class="loading-spinner"
+                ></app-loading>
               </div>
             </div>
           </div>

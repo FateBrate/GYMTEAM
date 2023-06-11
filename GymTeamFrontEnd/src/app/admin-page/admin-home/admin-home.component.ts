@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { take, timer } from 'rxjs';
 import { routerpath } from 'src/app/constants/deafult';
+import { DataService } from 'src/app/service/data.service';
 
 @Component({
   selector: 'app-admin-home',
@@ -9,15 +12,23 @@ import { routerpath } from 'src/app/constants/deafult';
   styleUrls: ['./admin-home.component.css'],
 })
 export class AdminHomeComponent implements OnInit {
-  obavijesti: any;
-  title: string = '';
-  type: string = '';
-  content: string = '';
-  photo: any;
+  forma: FormGroup = new FormGroup({
+    title: new FormControl('', Validators.required),
+    type: new FormControl('', Validators.required),
+    content: new FormControl('', Validators.required),
+    photo: new FormControl(null, Validators.required),
+  });
   success: boolean = false;
+  obavijesti: any;
   showMore: boolean = false;
   picked: any;
-  constructor(private httpClient: HttpClient, private snackbar: MatSnackBar) {}
+  isLoading: boolean = false;
+  userId: any;
+  constructor(
+    private httpClient: HttpClient,
+    private snackbar: MatSnackBar,
+    private dataService: DataService
+  ) {}
   loadNews() {
     this.httpClient.get(routerpath + '/api/Obavijest').subscribe((res: any) => {
       if (!!res) {
@@ -36,34 +47,49 @@ export class AdminHomeComponent implements OnInit {
       reader.readAsDataURL(file);
 
       reader.onload = () => {
-        this.photo = reader.result;
+        this.forma.value.photo = reader.result;
       };
     }
   }
   addNew() {
+    this.isLoading = true;
+
     const body = {
-      naslov: this.title,
-      tip: this.type,
-      sadrzaj: this.content,
-      korisnikId: 7,
-      slika: this.photo,
+      naslov: this.forma.value.title,
+      tip: this.forma.value.type,
+      sadrzaj: this.forma.value.content,
+      korisnikId: 1,
+      slika: this.forma.value.photo,
     };
-    this.httpClient
-      .post(routerpath + '/api/Obavijest', body)
-      .subscribe((res) => {
-        if (!!res) {
-          this.snackbar.open('Uspjesno dodana nova obavijest', 'X', {
-            duration: 3000,
-            panelClass: ['success-snack'],
-          });
-          this.loadNews();
-          this.success = false;
-        } else
-          this.snackbar.open('Greska', 'X', {
-            duration: 1000,
-            panelClass: ['error-snack'],
-          });
+    if (this.forma.valid) {
+      this.httpClient
+        .post(routerpath + '/api/Obavijest', body)
+        .subscribe((res) => {
+          if (!!res) {
+            timer(3000)
+              .pipe(take(1))
+              .subscribe(() => {
+                this.isLoading = true;
+                this.snackbar.open('Uspjesno dodana nova obavijest', 'X', {
+                  duration: 3000,
+                  panelClass: ['success-snack'],
+                });
+                this.loadNews();
+                this.success = false;
+              });
+          } else
+            this.snackbar.open('Greska', 'X', {
+              duration: 1000,
+              panelClass: ['error-snack'],
+            });
+        });
+    } else {
+      this.isLoading = false;
+      this.snackbar.open('Popunite sva polja', 'X', {
+        duration: 1000,
+        panelClass: ['error-snack'],
       });
+    }
   }
   readFullContent(id: number) {
     this.httpClient
@@ -74,6 +100,10 @@ export class AdminHomeComponent implements OnInit {
       });
   }
   openClose() {
+    this.forma.controls['title'].reset('');
+    this.forma.controls['type'].reset('');
+    this.forma.controls['content'].reset('');
+    this.isLoading = false;
     this.success = !this.success;
   }
   deletePicked(id: number) {
@@ -100,5 +130,7 @@ export class AdminHomeComponent implements OnInit {
   }
   ngOnInit() {
     this.loadNews();
+    this.userId = this.dataService.korisnik?.id;
+    console.log(this.userId);
   }
 }

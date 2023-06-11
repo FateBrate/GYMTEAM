@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { CookieService } from 'ngx-cookie-service';
-import { COOKIE_USER_DATA, routerpath } from '../../constants/deafult';
+import { routerpath } from '../../constants/deafult';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
@@ -18,7 +18,7 @@ export class SideMenuComponent implements OnInit {
     private router: Router,
     private httpClient: HttpClient
   ) {}
-
+  isSidebarExpanded: boolean = false;
   korisnik: any;
   slika: any;
   ngOnInit(): void {
@@ -48,5 +48,8 @@ export class SideMenuComponent implements OnInit {
 
   getSliku(id: number) {
     return `${routerpath}/api/Korisnik/GetSlikaById?id=${id}&timestamp=${new Date().getTime()}`;
+  }
+  toggleSidebar() {
+    this.isSidebarExpanded = !this.isSidebarExpanded;
   }
 }

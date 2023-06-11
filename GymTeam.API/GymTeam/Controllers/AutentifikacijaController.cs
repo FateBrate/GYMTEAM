@@ -1,79 +1,64 @@
 ﻿using GymTeam.Data;
+using GymTeam.LoginModels;
+using GymTeam.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using static GymTeam.Helper.AutentifikacijaAutorizacija.MyAuthTokenExtension;
 using GymTeam.Helper.AutentifikacijaAutorizacija;
 using GymTeam.Helper;
-using GymTeam.LoginModels;
-using Microsoft.AspNetCore.Mvc;
-using static GymTeam.Helper.AutentifikacijaAutorizacija.MyAuthTokenExtension;
-using GymTeam.Models;
 
-namespace GymTeam.Controllers
+[Route("[controller]/[action]")]
+[ApiController]
+public class AutentifikacijaController : ControllerBase
 {
-    [Route("[controller]/[action]")]
+    private readonly ApplicationDbContext _dbContext;
+    private readonly IConfiguration _configuration;
 
-    [ApiController]
-    public class AutentifikacijaController : Controller
+    public AutentifikacijaController(ApplicationDbContext dbContext, IConfiguration configuration)
     {
-        private readonly ApplicationDbContext _dbContext;
+        _dbContext = dbContext;
+        _configuration = configuration;
+    }
 
-        public AutentifikacijaController(ApplicationDbContext dbContext)
-        {
-            this._dbContext = dbContext;
-        }
-
-
-        [HttpPost]
-        public ActionResult<LoginInformacije> Login([FromBody] LoginVM x)
-        {
-           
-            Korisnik logiraniKorisnik = _dbContext.Korisnik
-                .FirstOrDefault(k =>
+    [HttpPost]
+    public ActionResult<LoginInformacije> Login([FromBody] LoginVM x)
+    {
+        Korisnik logiraniKorisnik = _dbContext.Korisnik
+            .FirstOrDefault(k =>
                 k.email != null && k.email == x.email && k.lozinka == x.lozinka);
 
-            if (logiraniKorisnik == null)
-            {
-              
-                return new LoginInformacije(null);
-            }
-
-           
-            string randomString = TokenGenerator.Generate(10);
-
-          
-            var noviToken = new AutentifikacijaToken()
-            {
-                ipAdresa = Request.HttpContext.Connection.RemoteIpAddress?.ToString(),
-                vrijednost = randomString,
-                korisnik = logiraniKorisnik,
-                vrijemeEvidentiranja = DateTime.Now
-            };
-
-            _dbContext.Add(noviToken);
-            _dbContext.SaveChanges();
-
-           
-            return new LoginInformacije(noviToken);
-        }
-
-        [HttpPost]
-        public ActionResult Logout()
+        if (logiraniKorisnik == null)
         {
-            AutentifikacijaToken autentifikacijaToken = HttpContext.GetAuthToken();
+            return new LoginInformacije(null);
+        }
+        string randomString = TokenGenerator.Generate(10);
+        var noviToken = new AutentifikacijaToken()
+        {
+            ipAdresa = Request.HttpContext.Connection.RemoteIpAddress?.ToString(),
+            vrijednost = randomString,
+            korisnik = logiraniKorisnik,
+            vrijemeEvidentiranja = DateTime.Now
+        };
 
-            if (autentifikacijaToken == null)
-                return Ok();
+        _dbContext.Add(noviToken);
+        _dbContext.SaveChanges();
 
-            _dbContext.Remove(autentifikacijaToken);
-            _dbContext.SaveChanges();
+
+        return new LoginInformacije(noviToken);
+    }
+
+    [HttpPost]
+    public ActionResult Logout()
+    {
+        AutentifikacijaToken autentifikacijaToken = HttpContext.GetAuthToken();
+
+        if (autentifikacijaToken == null)
             return Ok();
-        }
 
-        [HttpGet]
-        public ActionResult<AutentifikacijaToken> Get()
-        {
-            AutentifikacijaToken autentifikacijaToken = HttpContext.GetAuthToken();
-
-            return autentifikacijaToken;
-        }
+        _dbContext.Remove(autentifikacijaToken);
+        _dbContext.SaveChanges();
+        return Ok();
     }
 }
 
