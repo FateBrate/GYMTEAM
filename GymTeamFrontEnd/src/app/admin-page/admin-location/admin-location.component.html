@@ -1,0 +1,119 @@
+<div id="content" class="p-4 p-md-5" style="margin-left: 16%">
+  <div class="btn btn-success" type="button" (click)="addNew()">
+    <i class="bi bi-plus-circle"></i>
+    Dodaj novu lokaciju
+  </div>
+  <div class="lokacije">
+    <div class="lokBox" *ngFor="let x of locations">
+      <img src="{{ getImage(x.id) }}" class="lokImg" />
+      <h5
+        class="naziv"
+        (click)="viewMore(x.id)"
+        style="color: #ff0000; font-weight: bold; cursor: pointer"
+      >
+        {{ x.naziv }}
+      </h5>
+    </div>
+  </div>
+  <div
+    class="modal mt-5"
+    id="mapModal"
+    tabindex="-1"
+    style="display: block"
+    *ngIf="!!showMore"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-black" id="mapModalLabel">
+            {{ selectedLocation?.naziv }}
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            (click)="openClose()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div id="map"></div>
+        </div>
+        <div class="modal-footer">
+          <button
+            class="btn btn-danger"
+            (click)="deleteLocation(selectedLocation?.id)"
+          >
+            Obriši lokaciju
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- addNEW -->
+  <div
+    class="modal mt-5"
+    id="mapModal"
+    tabindex="-1"
+    style="display: block"
+    *ngIf="!!openNew"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-black" id="mapModalLabel">
+            Dodaj novu lokaciju
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            (click)="openNew = false"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="forma">
+            <div class="mb-3">
+              <label class="form-label">Naziv objekta</label>
+              <input type="text" class="form-control" formControlName="name" />
+              <div
+                *ngIf="forma.get('name')?.invalid && forma.get('name')?.touched"
+                class="text-danger"
+              >
+                Naziv je obavezan
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Slika</label>
+              <input
+                type="file"
+                class="form-control"
+                (change)="onFileChange($event)"
+              />
+            </div>
+            <div id="mapAdd"></div>
+            <div id="coach-mark" class="coach-mark">
+              <span class="arrow"></span>
+              Klikom na mapu odaberite lokaciju
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <app-loading *ngIf="isLoading" class="loading-spinner"></app-loading>
+          <button
+            tyle="button"
+            class="btn btn-secondary"
+            (click)="openNew = false"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            type="submit"
+            (click)="saveChanges()"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

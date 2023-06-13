@@ -34,9 +34,9 @@ namespace GymTeam.Controllers
         [HttpGet]
         public ActionResult GetAll()
         {
-            var podaci = _dbcontext.PrivatniTrener.OrderBy(g => g.ime).Select(g => new PrivatniTrenerGetVM()
+            var podaci = _dbcontext.PrivatniTrener.OrderBy(g => g.ime).Select(g => new PrivatniTrenerAddVM()
             {
-                id= g.id,
+                
                 ime= g.ime,
                 prezime= g.prezime,
                 slika= g.slika,

@@ -1,0 +1,157 @@
+body {
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+  font-weight: normal;
+  background: #fafafa;
+  color: gray;
+}
+
+a {
+  -webkit-transition: 0.3s all ease;
+  -o-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+  color: #ff0000;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+a:hover,
+a:focus {
+  text-decoration: none !important;
+  outline: none !important;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+button {
+  -webkit-transition: 0.3s all ease;
+  -o-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+}
+
+button:hover,
+button:focus {
+  text-decoration: none !important;
+  outline: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5 {
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: "Poppins", Arial, sans-serif;
+  color: white;
+}
+.img {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+#sidebar {
+  background: #1d1919;
+  color: #fff;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  height: 100%;
+}
+
+#sidebar.active {
+  margin-left: -300px;
+}
+
+#sidebar .logo {
+  display: block;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+}
+
+#sidebar .logo span {
+  display: block;
+}
+
+#sidebar ul.components {
+  padding: 0;
+}
+
+#sidebar ul li {
+  font-size: 16px;
+}
+
+#sidebar ul li > ul {
+  margin-left: 10px;
+}
+
+#sidebar ul li > ul li {
+  font-size: 14px;
+}
+
+#sidebar ul li a {
+  padding: 10px 0;
+  display: block;
+  color: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#sidebar ul li a:hover {
+  color: #ff0000;
+}
+
+#sidebar ul li.active > a {
+  background: transparent;
+  color: #ff0000;
+}
+
+a[data-toggle="collapse"] {
+  position: relative;
+}
+
+.btn.btn-primary {
+  background: #ff0000;
+  border-color: #ff0000;
+}
+
+.footer p {
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+}
+
+p {
+  color: white;
+}
+
+@media (max-width: 991.98px) {
+  #sidebar {
+    position: fixed;
+    top: 0;
+    background: #1d1919;
+    height: 100%;
+    width: 20%; /* Initial width is set to 25% */
+
+    max-width: 300px;
+    transition: width 0.3s ease;
+
+    transition: left 0.3s ease-in;
+    z-index: 9999;
+  }
+
+  #sidebar.expanded {
+    width: 100%; /* Expanded width set to 100% */
+  }
+  .sidebar-toggle {
+    display: block;
+  }
+}

@@ -1,0 +1,43 @@
+<nav
+  id="sidebar"
+  *ngIf="korisnik != null"
+  [ngClass]="{ expanded: isSidebarExpanded }"
+>
+  <div class="navi p-4 pt-5">
+    <a
+      (click)="toggleSidebar()"
+      class="img logo rounded-circle mb-5"
+      [style.background-image]="
+        slika ? 'url(' + slika + ')' : 'url(' + getSliku(korisnik.id) + '))'
+      "
+    ></a>
+    <h2 style="color: #ff0000">{{ korisnik.ime }} {{ korisnik.prezime }}</h2>
+    <ul class="list-unstyled components mb-5">
+      <li>
+        <a routerLink="home"><i class="bi bi-house-exclamation"></i> Home</a>
+      </li>
+      <li>
+        <a routerLink="locations"><i class="bi bi-geo-alt"></i> Lokacije</a>
+      </li>
+      <li>
+        <a routerLink="employee"
+          ><i class="bi bi-person-plus"></i> Osoblje/Članovi</a
+        >
+      </li>
+      <li>
+        <a routerLink="price-list"><i class="bi bi-cash-coin"></i> Cjenovnik</a>
+      </li>
+      <li>
+        <a routerLink="info"><i class="bi bi-person-vcard"></i> Račun</a>
+      </li>
+      <li>
+        <a (click)="logout()" style="cursor: pointer"
+          ><i class="bi bi-box-arrow-left"></i> Odjavi se</a
+        >
+      </li>
+    </ul>
+    <div class="footer">
+      <p>Copyright &copy; All rights reserved</p>
+    </div>
+  </div>
+</nav>

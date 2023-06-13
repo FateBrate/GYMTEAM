@@ -1,0 +1,128 @@
+body {
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+  font-weight: normal;
+  background: #fafafa;
+  color: gray;
+  overflow: hidden;
+}
+
+a {
+  -webkit-transition: 0.3s all ease;
+  -o-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+  color: #ff0000;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+a:hover,
+a:focus {
+  text-decoration: none !important;
+  outline: none !important;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+button {
+  -webkit-transition: 0.3s all ease;
+  -o-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5 {
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: "Poppins", Arial, sans-serif;
+  color: white;
+}
+
+.heading-section {
+  font-size: 28px;
+  color: #000;
+}
+
+.heading-section small {
+  font-size: 18px;
+}
+
+.wrapper {
+  width: 100%;
+}
+
+#content {
+  width: 100%;
+  padding: 0;
+  min-height: 100vh;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.btn.btn-primary {
+  background: #ff0000;
+  border-color: #ff0000;
+}
+.btn.btn-primary.clicked {
+  background-color: green;
+  border-color: green;
+}
+
+router-outlet + * {
+  width: 100%;
+  margin: 0;
+  height: 100%;
+}
+.infocontent {
+  background-image: url("../../../assets/background_content.jpg");
+  width: 100%;
+  color: #ff0000;
+  background-size: cover;
+}
+.infocontent h4 {
+  color: #ff0000;
+}
+input[type="file"] {
+  margin-top: 20%;
+  margin-left: 30%;
+}
+.input-group-text {
+  border-radius: 0 5px 5px 0;
+}
+@media (max-width: 991.98px) {
+  .infocontent .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .infocontent .col-md-3,
+  .infocontent .col-md-9 {
+    width: 100%;
+  }
+
+  .infocontent
+    .col-md-3
+    .d-flex.flex-column.align-items-center.text-center.p-3.py-5,
+  .infocontent
+    .col-md-3
+    .d-flex.justify-content-between.align-items-center.mb-3 {
+    width: 100%;
+  }
+
+  .infocontent
+    .col-md-3
+    .d-flex.flex-column.align-items-center.text-center.p-3.py-5
+    img {
+    margin-bottom: 20px;
+  }
+}

@@ -10,8 +10,6 @@ namespace GymTeam.Models
 
         public string ukupnoTrajanje { get; set; }
         public string opis { get; set; }
-        public Videozapis[] videozapisi {get;set;} 
-
-
+        
     }
 }
