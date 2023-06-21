@@ -1,20 +1,37 @@
-*{
-    margin: 0;
+* {
+  margin: 0;
+  overflow-x: hidden;
 }
-body{
+body {
+  height: 100%;
+  width: 100%;
+}
+.sidemenu {
+  height: 100%;
+  position: fixed;
+}
+.wrapper {
+  height: 100%;
+}
+.right {
+  width: 100%;
+  min-height: 100vh;
+}
+@media (max-width: 767px) {
+  body,
+  html {
+    height: 100vh;
+  }
+  .wrapper {
+    flex-direction: column;
+  }
 
-  height: 100%;
-  width: 100%;
-background-color: green;
-}
-.sidemenu{
-  height: 100%;
-  background-color: red;
-}
-.wrapper{
-  background-color: red;
-  height: 100%;
-}
-.right{
-  width: 100%;
+  .sidemenu,
+  .right {
+    flex-basis: auto;
+    height: 100vh;
+  }
+  .right {
+    margin-left: 25%;
+  }
 }

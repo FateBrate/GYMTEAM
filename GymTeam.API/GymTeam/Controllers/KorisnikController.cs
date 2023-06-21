@@ -1,8 +1,10 @@
-﻿using GymTeam.Data;
+﻿
+using GymTeam.Data;
+using GymTeam.Helper;
 using GymTeam.Models;
 using GymTeam.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace GymTeam.Controllers
 {
@@ -28,12 +30,17 @@ namespace GymTeam.Controllers
                 lozinka=x.lozinka,
                 datumRodjenja = x.datumRodjenja,
                 brojTelefona=x.brojTelefona,
-               lokacijaId=x.lokacijaId,
+                lokacijaId=x.lokacijaId,
                 roleId = x.roleID,
-                putanjaSlike=x.putanjaSlike
+               
             };
-        
-                if(korisnik.roleId!=2)
+            if (x.slika != null)
+            {
+                byte[] imageByte = x.slika.GetImage();
+                korisnik.slika = imageByte;
+            }
+
+            if (korisnik.roleId!=2)
                 {
                 korisnik.lokacijaId = null;
                 }
@@ -42,66 +49,117 @@ namespace GymTeam.Controllers
             _dbcontext.SaveChanges();
             return korisnik;
         }
+
         [HttpGet]
-        public ActionResult GetAll()
+        public ActionResult<object> GetAll(string? ime_prezime, int page = 1, int pageSize = 5)
         {
 
-            var data = _dbcontext.Korisnik.OrderBy(k => k.id).Select(k => new KorisnikGetVM()
+            var data = _dbcontext.Korisnik.Where(korisnik =>
+                 string.IsNullOrEmpty(ime_prezime) ||
+                 (korisnik.ime + " " + korisnik.prezime).ToLower().StartsWith(ime_prezime.ToLower()) ||
+                 (korisnik.prezime + " " + korisnik.ime).ToLower().StartsWith(ime_prezime.ToLower())
+             )
+             .OrderByDescending(k => k.id)
+             .AsQueryable();
+
+            int totalCount = data.Count();
+            int totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
+
+            if (page < 1)
+                page = 1;
+            else if (page > totalPages)
+                page = totalPages;
+        
+            data = data.Skip((page - 1) * pageSize).Take(pageSize);
+
+            var result =new
             {
-                id = k.id,
-                ime = k.ime,
-                prezime = k.prezime,
-                email = k.email,
-                brojTelefona = k.brojTelefona,              
-                lokacijaId= k.lokacijaId,
-                roleId=k.roleId,
-                role=k.role.ToString()
-
-            }).Take(100);
-            return Ok(data.ToList());
-
+                TotalCount = totalCount,
+                TotalPages = totalPages,
+                CurrentPage = page,
+                PageSize = pageSize,
+                Data = data.ToList()
+            };
+            return result;
         }
+
         [HttpGet("GetById")]
         public ActionResult GetById(int id)
         {
             var korisnik = _dbcontext.Korisnik.Find(id);
-            if (korisnik != null)
-                return Ok(korisnik);
-            else throw new Exception("Korisnik sa tim id-em ne postoji"); 
+            if (korisnik == null)
+            {
+                throw new Exception("Korisnik with the specified ID does not exist");
+            }
+
+            return Ok(korisnik);
+        }
+        [HttpGet("GetSlikaById")]
+        public ActionResult GetSlikaById(int id)
+        {
+            byte[]? slika = _dbcontext.Korisnik.Find(id)?.slika;
+
+            if (slika == null)
+                return BadRequest();
+
+            return File(slika, "image/*");
+        }
+        [HttpPut("ChangePhoto")]
+        public ActionResult<Korisnik> editPhoto([FromForm] IFormFile file,int id)
+        {
+            var korisnik = _dbcontext.Korisnik.Find(id);
+            if (korisnik == null)
+            {
+                throw new Exception("Korisnik with the specified ID does not exist");
+            }
+
+            if (file == null)
+            {
+                throw new Exception("Invalid file");
+            }
+
+            korisnik.slika = file.GetImage();
+            _dbcontext.Korisnik.Update(korisnik);
+            _dbcontext.SaveChanges();
+
+            return Ok(korisnik);
         }
 
         [HttpPut]
-        public Korisnik Edit(KorisnikUVM korisnik,int id)
+        public Korisnik Edit(int id, KorisnikUVM korisnik)
         {
-            var thiskorisnik=_dbcontext.Korisnik.Find(id);
-            if(thiskorisnik!=null)
+            var thisKorisnik = _dbcontext.Korisnik.Find(id);
+            if (thisKorisnik == null)
             {
-                thiskorisnik.ime = korisnik.ime;
-                thiskorisnik.prezime = korisnik.prezime;
-                thiskorisnik.email = korisnik.email;
-                thiskorisnik.lozinka = korisnik.lozinka;
-                thiskorisnik.datumRodjenja = korisnik.datumRodjenja;
-                thiskorisnik.brojTelefona = korisnik.brojTelefona;
-                thiskorisnik.roleId = korisnik.roleID;
-                thiskorisnik.putanjaSlike = korisnik.putanjaSlike;
-                _dbcontext.Korisnik.Update(thiskorisnik);
-                _dbcontext.SaveChanges();
-                return thiskorisnik;
-
+                throw new Exception("Korisnik with the specified ID does not exist");
             }
-            throw new Exception("Korisnik sa tim id-em ne postoji");
+
+            thisKorisnik.ime = korisnik.ime;
+            thisKorisnik.prezime = korisnik.prezime;
+            thisKorisnik.email = korisnik.email;
+            thisKorisnik.lozinka = korisnik.lozinka;
+            thisKorisnik.datumRodjenja = korisnik.datumRodjenja;
+            thisKorisnik.brojTelefona = korisnik.brojTelefona;
+
+            _dbcontext.Korisnik.Update(thisKorisnik);
+            _dbcontext.SaveChanges();
+
+            return thisKorisnik;
         }
+
         [HttpDelete]
         public ActionResult DeleteById(int id)
         {
-            var thiskorisnik = _dbcontext.Korisnik.Find(id);
-            if(thiskorisnik != null)
+            var korisnik = _dbcontext.Korisnik.Find(id);
+            if (korisnik == null)
             {
-                _dbcontext.Korisnik.Remove(thiskorisnik);
-                _dbcontext.SaveChanges();
-                return Ok("Korisnik je obrisan");
+                throw new Exception("Korisnik with the specified ID does not exist");
             }
-            throw new Exception("Korisnik sa tim id-em ne postoji");
+
+            _dbcontext.Korisnik.Remove(korisnik);
+            _dbcontext.SaveChanges();
+
+            return Ok(true);
         }
 
 

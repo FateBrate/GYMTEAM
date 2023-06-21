@@ -1,0 +1,169 @@
+body {
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+  font-weight: normal;
+  background: #fafafa;
+  color: gray;
+}
+
+a:hover,
+a:focus {
+  text-decoration: none !important;
+  outline: none !important;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+button {
+  -webkit-transition: 0.3s all ease;
+  -o-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+}
+
+button:hover,
+button:focus {
+  text-decoration: none !important;
+  outline: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5 {
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: "Poppins", Arial, sans-serif;
+  color: white;
+}
+
+.heading-section small {
+  font-size: 18px;
+}
+
+.img {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px dashed #ddd;
+  margin: 40px 0;
+}
+
+.wrapper {
+  width: 100%;
+}
+
+@media (max-width: 991.98px) {
+  #sidebar {
+    margin-left: -300px;
+  }
+
+  #sidebar.active {
+    margin-left: 0;
+  }
+}
+
+a[data-toggle="collapse"] {
+  position: relative;
+}
+
+@media (max-width: 991.98px) {
+  #sidebarCollapse span {
+    display: none;
+  }
+}
+
+#content {
+  width: 100%;
+  padding: 0;
+  min-height: 100vh;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  text-decoration: none;
+  background-image: url("../../../assets/background_content.jpg");
+  background-size: cover;
+}
+
+.footer p {
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+}
+
+.lokacije {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 50px;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-right: 20%;
+  margin-left: 1%;
+  padding-top: 4%;
+  padding-bottom: 2%;
+}
+
+.lokBox {
+  align-self: normal;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 300px;
+}
+#map {
+  width: 100%;
+  height: 400px;
+}
+#mapAdd {
+  width: 100%;
+  height: 300px;
+}
+.noviBtn {
+  color: white;
+  padding: 1%;
+  background-color: #ff0000;
+  border-radius: 7px;
+  margin-bottom: 2%;
+  width: 15%;
+  margin-left: 1%;
+}
+.lokBox .lokImg {
+  width: 400px;
+  height: 260px;
+  object-fit: cover;
+}
+.btn.btn-success {
+  margin-bottom: 1%;
+  margin-left: 1%;
+}
+.coach-mark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #00c8ff;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+.arrow {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: solid transparent;
+  border-width: 10px;
+  border-bottom-color: #00c8ff;
+}

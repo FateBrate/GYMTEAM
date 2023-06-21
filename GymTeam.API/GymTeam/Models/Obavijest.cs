@@ -14,5 +14,8 @@ namespace GymTeam.Models
         [ForeignKey("korisnikId")]
         public int korisnikId { get; set; }
         public Korisnik korisnik { get; set; }
+
+        public byte[]? slika { get; set; }
+
     }
 }

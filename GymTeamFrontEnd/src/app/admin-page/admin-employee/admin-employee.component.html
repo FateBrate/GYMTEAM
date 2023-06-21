@@ -1,0 +1,77 @@
+<div class="employeeContent" style="padding-top: 3%">
+  <button
+    class="btn btn-warning me-4 mb-2"
+    type="button"
+    (click)="openAddUserForm()"
+  >
+    <i class="bi bi-plus-circle"></i>
+    Dodaj novog korisnika
+  </button>
+  <input
+    class="form-control"
+    type="text"
+    placeholder="Search..."
+    [(ngModel)]="ime_prezime"
+    (ngModelChange)="Filtriraj()"
+  />
+
+  <div
+    class="cards"
+    style="margin-left: 25%; background-color: rgba(0, 0, 0, 0.5)"
+  >
+    <div class="employee" *ngFor="let radnik of employee">
+      <div class="box">
+        <img
+          src="{{ getSliku(radnik.id) }}"
+          alt=""
+          width="250px"
+          height="250px"
+          style="border-top-right-radius: 10px; border-top-left-radius: 10px"
+        />
+        <h5 style="margin-top: 5%; text-align: center">
+          {{ radnik.ime }} {{ radnik.prezime }}
+        </h5>
+        <p>{{ radnik.lokacijaid }}</p>
+        <div class="buttons" style="width: 100%">
+          <a
+            class="bi bi-info-circle"
+            (click)="openForm(radnik)"
+            type="button"
+            style="
+              background-color: #f8b739;
+              color: white;
+              padding: 8px 16px;
+              margin: 10%;
+              border-radius: 10%;
+            "
+          ></a>
+
+          <a
+            class="bi bi-trash3"
+            (click)="Obrisi(radnik.id)"
+            type="button"
+            style="
+              background-color: red;
+              color: white;
+              padding: 8px 16px;
+              margin: 10%;
+              border-radius: 10%;
+            "
+          ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pagination buttons mb-1 mt-1">
+    <button class="btn btn-sm btn-primary" (click)="previousPage()">
+      Previous
+    </button>
+    <button class="btn btn-sm btn-primary" (click)="page = 1">
+      {{ page }}
+    </button>
+    <button class="btn btn-sm btn-primary" (click)="page = numberOfPages">
+      {{ numberOfPages }}
+    </button>
+    <button class="btn btn-sm btn-primary" (click)="nextPage()">Next</button>
+  </div>
+</div>

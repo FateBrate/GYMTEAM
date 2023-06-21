@@ -48,7 +48,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("korisnikId");
 
-                    b.ToTable("AutentifikacijaToken");
+                    b.ToTable("AutentifikacijaToken", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.LoginModels.KorisnickiNalog", b =>
@@ -78,7 +78,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("roleId");
 
-                    b.ToTable("KorisnickiNalog");
+                    b.ToTable("KorisnickiNalog", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.Cjenovnik", b =>
@@ -89,13 +89,17 @@ namespace GymTeam.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
-                    b.Property<DateTime>("datumObjave")
-                        .HasColumnType("datetime2");
+                    b.Property<float>("cijena")
+                        .HasColumnType("real");
 
                     b.Property<int>("korisnikId")
                         .HasColumnType("int");
 
-                    b.Property<string>("sadržaj")
+                    b.Property<string>("nazivStavke")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("opis")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -103,7 +107,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("korisnikId");
 
-                    b.ToTable("Cjenovnik");
+                    b.ToTable("Cjenovnik", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.Clanarina", b =>
@@ -126,7 +130,7 @@ namespace GymTeam.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Clanarina");
+                    b.ToTable("Clanarina", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.ClanarinaPlacanje", b =>
@@ -149,7 +153,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("placanjeID");
 
-                    b.ToTable("ClanarinaPlacanje");
+                    b.ToTable("ClanarinaPlacanje", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.Korisnik", b =>
@@ -186,11 +190,11 @@ namespace GymTeam.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("putanjaSlike")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("roleId")
                         .HasColumnType("int");
+
+                    b.Property<byte[]>("slika")
+                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("id");
 
@@ -198,7 +202,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("roleId");
 
-                    b.ToTable("Korisnik");
+                    b.ToTable("Korisnik", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.Narudzba", b =>
@@ -230,7 +234,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("korisnikID");
 
-                    b.ToTable("Narudzba");
+                    b.ToTable("Narudzba", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.NarudzbaPlacanje", b =>
@@ -253,7 +257,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("placanjeID");
 
-                    b.ToTable("NarudzbaPlacanje");
+                    b.ToTable("NarudzbaPlacanje", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.Obavijest", b =>
@@ -278,6 +282,9 @@ namespace GymTeam.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("slika")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("tip")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -286,7 +293,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("korisnikId");
 
-                    b.ToTable("Obavijest");
+                    b.ToTable("Obavijest", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.Placanje", b =>
@@ -307,7 +314,7 @@ namespace GymTeam.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Placanje");
+                    b.ToTable("Placanje", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.PlanIshrane", b =>
@@ -327,7 +334,7 @@ namespace GymTeam.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("PlanIshrane");
+                    b.ToTable("PlanIshrane", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.PlanIshrane_PrehrambeniArtikal", b =>
@@ -353,7 +360,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("prehrambeniArtikalID");
 
-                    b.ToTable("planIshrane_PrehrambeniArtikal");
+                    b.ToTable("planIshrane_PrehrambeniArtikal", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.PrehrambeniArtikal", b =>
@@ -377,7 +384,7 @@ namespace GymTeam.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("PrehrambeniArtikal");
+                    b.ToTable("PrehrambeniArtikal", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.PrivatniTrener", b =>
@@ -414,7 +421,7 @@ namespace GymTeam.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("PrivatniTrener");
+                    b.ToTable("PrivatniTrener", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.Produkt", b =>
@@ -451,7 +458,7 @@ namespace GymTeam.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Produkt");
+                    b.ToTable("Produkt", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.ProduktNarudzba", b =>
@@ -477,7 +484,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("produktID");
 
-                    b.ToTable("ProduktNarudzba");
+                    b.ToTable("ProduktNarudzba", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.Rezervacija", b =>
@@ -498,7 +505,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("korisnikId");
 
-                    b.ToTable("Rezervacija");
+                    b.ToTable("Rezervacija", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.Role", b =>
@@ -514,7 +521,7 @@ namespace GymTeam.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Role");
+                    b.ToTable("Role", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.Termin", b =>
@@ -544,7 +551,7 @@ namespace GymTeam.Migrations
 
                     b.HasIndex("rezervacijaId");
 
-                    b.ToTable("Termin");
+                    b.ToTable("Termin", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Models.VideoTrening", b =>
@@ -569,33 +576,7 @@ namespace GymTeam.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("VideoTrening");
-                });
-
-            modelBuilder.Entity("GymTeam.Models.Videozapis", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<string>("opis")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("trajanje")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("videoTreningId")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("videoTreningId");
-
-                    b.ToTable("Videozapis");
+                    b.ToTable("VideoTrening", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Moduls.Adresa", b =>
@@ -619,7 +600,7 @@ namespace GymTeam.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Adresa");
+                    b.ToTable("Adresa", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.Moduls.Lokacija", b =>
@@ -633,15 +614,24 @@ namespace GymTeam.Migrations
                     b.Property<int>("adresaId")
                         .HasColumnType("int");
 
+                    b.Property<double>("latitude")
+                        .HasColumnType("float");
+
+                    b.Property<double>("longitude")
+                        .HasColumnType("float");
+
                     b.Property<string>("naziv")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("slika")
+                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("id");
 
                     b.HasIndex("adresaId");
 
-                    b.ToTable("Lokacija");
+                    b.ToTable("Lokacija", (string)null);
                 });
 
             modelBuilder.Entity("GymTeam.LoginModels.AutentifikacijaToken", b =>
@@ -649,7 +639,7 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Models.Korisnik", "korisnik")
                         .WithMany()
                         .HasForeignKey("korisnikId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("korisnik");
@@ -660,7 +650,7 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Models.Role", "Uloga")
                         .WithMany()
                         .HasForeignKey("roleId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Uloga");
@@ -671,7 +661,7 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Models.Korisnik", "korisnik")
                         .WithMany()
                         .HasForeignKey("korisnikId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("korisnik");
@@ -682,13 +672,13 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Models.Clanarina", "clanarina")
                         .WithMany()
                         .HasForeignKey("clanarinaID")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("GymTeam.Models.Placanje", "placanje")
                         .WithMany()
                         .HasForeignKey("placanjeID")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("clanarina");
@@ -705,7 +695,7 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Models.Role", "role")
                         .WithMany()
                         .HasForeignKey("roleId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("lokacija");
@@ -718,7 +708,7 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Models.Korisnik", "korisnik")
                         .WithMany()
                         .HasForeignKey("korisnikID")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("korisnik");
@@ -729,13 +719,13 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Models.Narudzba", "narudzba")
                         .WithMany()
                         .HasForeignKey("narudzbaID")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("GymTeam.Models.Placanje", "placanje")
                         .WithMany()
                         .HasForeignKey("placanjeID")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("narudzba");
@@ -748,7 +738,7 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Models.Korisnik", "korisnik")
                         .WithMany()
                         .HasForeignKey("korisnikId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("korisnik");
@@ -759,13 +749,13 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Models.PlanIshrane", "planIshrane")
                         .WithMany()
                         .HasForeignKey("planIshraneID")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("GymTeam.Models.PrehrambeniArtikal", "prehrambeniArtikal")
                         .WithMany()
                         .HasForeignKey("prehrambeniArtikalID")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("planIshrane");
@@ -778,13 +768,13 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Models.Narudzba", "narudzba")
                         .WithMany()
                         .HasForeignKey("narudzbaID")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("GymTeam.Models.Produkt", "produkt")
                         .WithMany()
                         .HasForeignKey("produktID")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("narudzba");
@@ -797,7 +787,7 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Models.Korisnik", "korisnik")
                         .WithMany()
                         .HasForeignKey("korisnikId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("korisnik");
@@ -808,13 +798,13 @@ namespace GymTeam.Migrations
                     b.HasOne("GymTeam.Moduls.Lokacija", "lokacija")
                         .WithMany()
                         .HasForeignKey("lokacijaId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("GymTeam.Models.Rezervacija", "rezervacija")
                         .WithMany()
                         .HasForeignKey("rezervacijaId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("lokacija");
@@ -822,29 +812,15 @@ namespace GymTeam.Migrations
                     b.Navigation("rezervacija");
                 });
 
-            modelBuilder.Entity("GymTeam.Models.Videozapis", b =>
-                {
-                    b.HasOne("GymTeam.Models.VideoTrening", null)
-                        .WithMany("videozapisi")
-                        .HasForeignKey("videoTreningId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("GymTeam.Moduls.Lokacija", b =>
                 {
                     b.HasOne("GymTeam.Moduls.Adresa", "adresa")
                         .WithMany()
                         .HasForeignKey("adresaId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("adresa");
-                });
-
-            modelBuilder.Entity("GymTeam.Models.VideoTrening", b =>
-                {
-                    b.Navigation("videozapisi");
                 });
 #pragma warning restore 612, 618
         }
