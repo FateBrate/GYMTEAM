@@ -1,0 +1,22 @@
+#navbar{
+    background-color: black;
+    color: white;
+    
+}
+.nav-item{padding: 2%;}
+.nav-link{
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    
+}
+
+
+#logo{
+    padding-top: 2.2%;
+    font-size: 2em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
