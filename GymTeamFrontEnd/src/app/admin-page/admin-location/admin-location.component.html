@@ -1,7 +1,7 @@
 <div id="content" class="p-4 p-md-5" style="margin-left: 16%">
   <div class="btn btn-success" type="button" (click)="addNew()">
     <i class="bi bi-plus-circle"></i>
-    Dodaj novu lokaciju
+    Register new location
   </div>
   <div class="lokacije">
     <div class="lokBox" *ngFor="let x of locations">
@@ -42,7 +42,7 @@
             class="btn btn-danger"
             (click)="deleteLocation(selectedLocation?.id)"
           >
-            Obriši lokaciju
+            Delete
           </button>
         </div>
       </div>
@@ -60,7 +60,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title text-black" id="mapModalLabel">
-            Dodaj novu lokaciju
+            New location
           </h5>
           <button
             type="button"
@@ -71,17 +71,17 @@
         <div class="modal-body">
           <form [formGroup]="forma">
             <div class="mb-3">
-              <label class="form-label">Naziv objekta</label>
+              <label class="form-label">Object name</label>
               <input type="text" class="form-control" formControlName="name" />
               <div
                 *ngIf="forma.get('name')?.invalid && forma.get('name')?.touched"
                 class="text-danger"
               >
-                Naziv je obavezan
+                Name is required
               </div>
             </div>
             <div class="mb-3">
-              <label class="form-label">Slika</label>
+              <label class="form-label">Photo</label>
               <input
                 type="file"
                 class="form-control"
@@ -91,7 +91,7 @@
             <div id="mapAdd"></div>
             <div id="coach-mark" class="coach-mark">
               <span class="arrow"></span>
-              Klikom na mapu odaberite lokaciju
+              Click on the map to set the cursor
             </div>
           </form>
         </div>
