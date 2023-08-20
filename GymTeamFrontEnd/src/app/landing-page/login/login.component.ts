@@ -25,19 +25,6 @@ export class LoginComponent implements OnInit {
   isLoading: boolean = false;
 
   ngOnInit(): void {}
-
-  // loginUser({ email, lozinka }: Partial<IUser>) {
-  //   if (!!email && !!lozinka) {
-  //     this.authService.login({ email, lozinka });
-
-  //     this.ruter.navigate(['admin/home']);
-  //   } else {
-  //     this.snackbar.open('Neispravni podaci za prijavu', 'X', {
-  //       duration: 1000,
-  //       panelClass: ['error-snack'],
-  //     });
-  //   }
-  // }
   loginUser({ email, lozinka }: Partial<IUser>) {
     if (!!email && !!lozinka) {
       this.isLoading = true; // Set isLoading to true
