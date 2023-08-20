@@ -13,7 +13,7 @@ import { COOKIE_USER_DATA, routerpath } from 'src/app/constants/deafult';
 export class AdminInfoComponent implements OnInit {
   changetype: boolean = true;
   enableEdit: boolean = false;
-  buttonName: string = 'Uredi podatke';
+  buttonName: string = 'Edit data';
   changeData: boolean = false;
   counter: number = 1;
   userId: number = 0;
@@ -55,8 +55,8 @@ export class AdminInfoComponent implements OnInit {
 
   editData() {
     this.enableEdit = !this.enableEdit;
-    if (this.enableEdit == true) this.buttonName = 'Spremi';
-    else this.buttonName = 'Uredi podatke';
+    if (this.enableEdit == true) this.buttonName = 'Save';
+    else this.buttonName = 'Edit data';
     this.counter++;
     if (this.counter == 3) {
       this.saveChanges();

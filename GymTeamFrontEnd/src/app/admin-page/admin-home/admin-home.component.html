@@ -5,9 +5,9 @@
     (click)="openClose()"
   >
     <i class="bi bi-plus-circle"></i>
-    Dodaj obavijest
+    New article
   </button>
-  <h2 class="mb-4" style="margin-left: 1%; width: fit-content">Novosti</h2>
+  <h2 class="mb-4" style="margin-left: 1%; width: fit-content">News</h2>
   <div class="news">
     <div
       class="newsBox"
@@ -54,7 +54,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title text-black" id="exampleModalLabel">
-            Nova obavijest
+            New article
           </h5>
           <button
             type="button"
@@ -68,7 +68,7 @@
           <!-- Form to add new article -->
           <form [formGroup]="forma">
             <div class="mb-3">
-              <label for="article-title" class="form-label">Naslov</label>
+              <label for="article-title" class="form-label">Title</label>
               <input
                 type="text"
                 class="form-control"
@@ -81,11 +81,11 @@
                 "
                 class="text-danger"
               >
-                Naslov je obavezan !
+                Title is required !
               </div>
             </div>
             <div class="mb-3">
-              <label for="article-type" class="form-label">Tip</label>
+              <label for="article-type" class="form-label">Type</label>
               <input
                 class="form-control"
                 type="text"
@@ -96,11 +96,11 @@
                 *ngIf="forma.get('type')?.invalid && forma.get('type')?.touched"
                 class="text-danger"
               >
-                Odaberite tip obavijesti !
+                Choose the type !
               </div>
             </div>
             <div class="mb-3">
-              <label for="article-content" class="form-label">Sadržaj</label>
+              <label for="article-content" class="form-label">Content</label>
               <textarea
                 class="form-control"
                 id="article-content"
@@ -113,11 +113,11 @@
                 "
                 class="text-danger"
               >
-                Unesite sadržaj !.
+                PLease enter content!.
               </div>
             </div>
             <div class="mb-3">
-              <label for="article-photo" class="form-label">Slika</label>
+              <label for="article-photo" class="form-label">Photo</label>
               <input
                 type="file"
                 class="form-control"
@@ -131,7 +131,7 @@
                 "
                 class="text-danger"
               >
-                Odaberite naslovnu sliku.
+                Choose article photo.
               </div>
             </div>
           </form>
@@ -179,7 +179,7 @@
         </div>
         <div class="modal-body">
           <h6 class="text-white">
-            Datum objave: {{ picked.datumObjave | date : "dd/MM/yyyy" }}
+            Date: {{ picked.datumObjave | date : "dd/MM/yyyy" }}
           </h6>
           <img
             src="{{ getSliku(picked.id) }}"
@@ -199,7 +199,7 @@
               class="btn btn-danger"
               (click)="deletePicked(picked.id)"
             >
-              Obriši
+              Delete
             </button>
           </div>
         </div>

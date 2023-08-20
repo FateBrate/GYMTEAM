@@ -26,21 +26,22 @@
     </div>
     <div class="col-md-8">
       <div class="py-4">
-        <h4 class="text-center">Podaci o korisniku</h4>
+        <h4 class="text-center">User data</h4>
         <form [formGroup]="forma" (ngSubmit)="saveUser(forma.value)">
           <div class="row mt-2">
             <div class="col-md-6">
-              <label class="form-label">Ime</label>
+              <label class="form-label">Name</label>
               <input type="text" class="form-control" formControlName="ime" />
               <small
                 class="text-danger"
                 *ngIf="forma.get('ime')?.invalid && forma.get('ime')?.touched"
               >
-                Polje "Ime" je obavezno i treba sadrzavati samo slova i razmak.
+                Field "Name" is required and can only contain letters and
+                spaces.
               </small>
             </div>
             <div class="col-md-6">
-              <label class="form-label">Prezime</label>
+              <label class="form-label">Surname</label>
               <input
                 type="text"
                 class="form-control"
@@ -52,14 +53,14 @@
                   forma.get('prezime')?.invalid && forma.get('prezime')?.touched
                 "
               >
-                Polje "Prezime" je obavezno i treba sadrzavati samo slova i
-                razmak.
+                Field "Surname" is required and can only contain letters and
+                spaces.
               </small>
             </div>
           </div>
           <div class="row mt-3">
             <div class="col-md-12">
-              <label class="form-label">Broj telefona</label>
+              <label class="form-label">Phone nummber</label>
               <input
                 type="text"
                 class="form-control"
@@ -72,8 +73,7 @@
                   forma.get('brojTelefona')?.touched
                 "
               >
-                Polje "Broj telefona" je obavezno i treba sadrzavati samo
-                brojeve
+                Field "Phone nummber" is required and can only contain numbers.
               </small>
             </div>
             <div class="col-md-12">
@@ -85,11 +85,11 @@
                   forma.get('email')?.invalid && forma.get('email')?.touched
                 "
               >
-                Polje "Email" je obavezno.
+                Field "Email" is required.
               </small>
             </div>
             <div class="col-md-12">
-              <label class="form-label">Lozinka</label>
+              <label class="form-label">Password</label>
               <input
                 type="password"
                 class="form-control"
@@ -109,7 +109,7 @@
                   forma.get('lozinka')?.touched && forma.get('lozinka')?.invalid
                 "
               >
-                Polje "lozinka" je obavezno.
+                Field "Password" is required.
               </small>
               <div
                 *ngIf="
@@ -125,16 +125,16 @@
               </div>
             </div>
             <div class="col-md-12">
-              <label class="form-label">Uloga</label>
+              <label class="form-label">Role</label>
               <select
                 name="bilosta"
                 id=""
                 class="form-select"
                 formControlName="roleId"
               >
-                <option [value]="role.GuestUser">Gost</option>
+                <option [value]="role.GuestUser">Guest user/option></option>
                 <option [value]="role.Admin">Admin</option>
-                <option [value]="role.Employee">Radnik</option>
+                <option [value]="role.Employee">Employee</option>
               </select>
               <small
                 class="text-danger"
@@ -142,11 +142,11 @@
                   forma.get('roleId')?.touched && forma.get('roleId')?.invalid
                 "
               >
-                Odaberite ulogu korisnika.
+                Choose a role for user.
               </small>
             </div>
             <div class="col-md-12">
-              <label class="form-label">Datum rođenja</label>
+              <label class="form-label">Birthdate</label>
               <input
                 type="date"
                 class="form-control"
@@ -159,12 +159,12 @@
                   forma.get('datumRodjenja')?.invalid
                 "
               >
-                odaberite datum rođenja!
+                Please enter birthdate!
               </small>
             </div>
             <div class="col-md-12">
               <button class="btn btn-primary mt-3" type="submit">
-                <i class="bi bi-check-circle"></i> Spremi
+                <i class="bi bi-check-circle"></i> Save
               </button>
             </div>
           </div>
