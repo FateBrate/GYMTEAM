@@ -9,6 +9,8 @@ Management of gym employees, including trainers, front desk staff, and managers.
 Management of gym customers, including their personal information, membership plans, and attendance records.
 Dashboard for gym managers to monitor gym performance, attendance, and revenue.
 User authentication and authorization to ensure secure access to the system.
+Administrator side and login is finished .
+Customer/Guest side is in development...  
 
 Login page
 ![LoginPagerm](https://github.com/FateBrate/GYMTEAM/assets/94409838/11ecc8ae-6123-491a-ae69-aafd1c492323)
